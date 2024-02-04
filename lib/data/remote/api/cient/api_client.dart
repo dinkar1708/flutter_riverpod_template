@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod_template/data/api/cient/api_constants.dart';
+import 'package:flutter_riverpod_template/data/remote/api/cient/api_constants.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
 import 'package:retrofit/retrofit.dart';
 
