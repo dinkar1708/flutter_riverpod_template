@@ -7,9 +7,10 @@ part 'repository_list_notifier_provider.g.dart';
 @riverpod
 class RepositoryListNotifier extends _$RepositoryListNotifier {
   final userName = 'dinkar1708';
-  final pageSize = 3;
+  final pageSize = 5;
 
   @override
-  Future<List<RepositoryListModel>> build() async =>
-      await ref.read(userRepositoryProvider).getRepositories(userName, pageSize);
+  Future<List<RepositoryListModel>> build() async => await ref
+      .read(userRepositoryProvider)
+      .getRepositories(userName, pageSize);
 }
