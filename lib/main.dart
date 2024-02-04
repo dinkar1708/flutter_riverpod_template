@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_rivperpod_template/feature/home_page.dart';
+import 'package:flutter_riverpod_template/data/api/api_config.dart';
+import 'package:flutter_riverpod_template/data/api/api_constants.dart';
+import 'package:flutter_riverpod_template/data/sharedProviders/app_provider.dart';
+import 'package:flutter_riverpod_template/feature/home_page.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+     ProviderScope(
+      overrides: [
+        appProvider.overrideWithValue(
+          // pass similar for dev or live
+          // create multiple launch file and do setup todo :
+          ApiConfig(BaseUrl.baseUrlDev, apiKey: BaseUrl.appApiKey),
+        )
+      ],
+      child: const MyApp(),
     ),
   );
 }
