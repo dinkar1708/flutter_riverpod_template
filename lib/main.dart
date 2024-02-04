@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_template/data/api/api_config.dart';
-import 'package:flutter_riverpod_template/data/api/api_constants.dart';
-import 'package:flutter_riverpod_template/data/sharedProviders/app_provider.dart';
+import 'package:flutter_riverpod_template/data/app_providers/app_provider.dart';
+import 'package:flutter_riverpod_template/data/remote/api/cient/api_config.dart';
+import 'package:flutter_riverpod_template/data/remote/api_url_configuration.dart';
 import 'package:flutter_riverpod_template/feature/home_page.dart';
 
 void main() {
   runApp(
-     ProviderScope(
+    ProviderScope(
       overrides: [
         appProvider.overrideWithValue(
-          // pass similar for dev or live
+          // pass similar for dev or prod
           // create multiple launch file and do setup todo :
-          ApiConfig(BaseUrl.baseUrlDev, apiKey: BaseUrl.appApiKey),
+          ApiConfig(DevBaseUrl.baseUrlDev, apiKey: DevBaseUrl.appApiKey),
         )
       ],
       child: const MyApp(),

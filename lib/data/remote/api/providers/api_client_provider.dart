@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod_template/data/api/api_client.dart';
-import 'package:flutter_riverpod_template/data/api/custom_log_interceptor.dart';
-import 'package:flutter_riverpod_template/data/sharedProviders/app_provider.dart';
+import 'package:flutter_riverpod_template/data/app_providers/app_provider.dart';
+import 'package:flutter_riverpod_template/data/remote/api/cient/api_client.dart';
+import 'package:flutter_riverpod_template/data/remote/api/cient/custom_log_interceptor.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'api_client_provider.g.dart';

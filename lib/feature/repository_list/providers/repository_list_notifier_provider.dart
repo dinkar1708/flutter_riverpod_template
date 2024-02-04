@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod_template/data/api/providers/user/user_repository_provider.dart';
+import 'package:flutter_riverpod_template/data/remote/api/providers/user/user_repository_provider.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
