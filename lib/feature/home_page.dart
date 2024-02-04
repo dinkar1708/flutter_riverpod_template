@@ -30,13 +30,6 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
             TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -46,7 +39,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: const Text('Open Entry'))
+                child: const Text('Open Github User API Page')),
+            const SizedBox(
+              height: 60,
+            ),
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ],
         ),
       ),
