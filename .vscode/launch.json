@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_mvvm",
+            "name": "dev_flutter_riverpod",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "flutter_mvvm (profile mode)",
+            "name": "profile_flutter_riverpod",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
