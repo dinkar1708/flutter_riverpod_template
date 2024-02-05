@@ -54,7 +54,7 @@ GitHub API:
 ![Screenshot_1707038579](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7395e57d-bce3-4690-b5d7-2226ceaa5ce7)
 
 # TODOs
-- github apis implement
+- github apis implement via diffrent riverpod library usages
 
 1. **Users:**
    - User Details: `https://api.github.com/users/:username`
@@ -84,7 +84,7 @@ GitHub API:
    - Zen: `https://api.github.com/zen`
    - Rate Limit: `https://api.github.com/rate_limit`
 
-## Example of apis
+## Example of Apis
 
 
 2. **User Repositories:**
