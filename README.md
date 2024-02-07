@@ -52,7 +52,7 @@ GitHub API:
 
 # Features
 ## Home page
-![Screenshot_1707041827](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/3d2aab2a-5868-477d-b0cd-69ba7d7edc2c)
+![Screenshot_1707316780](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c8023d87-4e5a-4e14-a543-c399e3782919)
 
 ## Feature user github repositoy list
 ![Screenshot_1707038579](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7395e57d-bce3-4690-b5d7-2226ceaa5ce7)
