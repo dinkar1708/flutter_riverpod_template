@@ -78,7 +78,8 @@ ProfileRunner - Profile build test
 <img width="376" alt="Screenshot 2024-02-08 at 0 11 00" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/0f5df7c4-75da-4259-95fa-3b82e5c789db">
 
 3. Test iOS device of all configurations Debug, Profile, Release on same device
-
+Highlighted is the different name for apps
+<img width="411" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/9ea058f4-0753-4006-afc4-1b03ba6db06f">
 
 1. **Users:**
    - User Details: `https://api.github.com/users/:username`
