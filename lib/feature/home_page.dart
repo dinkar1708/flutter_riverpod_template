@@ -21,9 +21,11 @@ class HomePage extends HookWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextButton(
                 onPressed: () {
@@ -35,11 +37,10 @@ class HomePage extends HookWidget {
                   );
                 },
                 child: const Text('Open Github User API Page')),
-            const SizedBox(
-              height: 60,
-            ),
+            const Divider(),
+            const Text('Hooks Example'),
             const Text(
-              'You have pushed the button this many times:',
+              'Push plus button to increase counter:',
             ),
             Text(
               '${counterState.value}',
