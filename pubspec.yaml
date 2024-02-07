@@ -19,6 +19,7 @@ dependencies:
   build_runner:
   freezed:
   json_annotation: ^4.8.1
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:
