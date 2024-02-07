@@ -42,7 +42,7 @@ class HomePage extends HookWidget {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$counterState',
+              '${counterState.value}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
