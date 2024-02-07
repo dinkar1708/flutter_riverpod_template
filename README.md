@@ -62,20 +62,24 @@ GitHub API:
 
 
 
-# iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+# iOS Guide
+1. iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 Debug
 Release
 Profile
 <img width="733" alt="Screenshot 2024-02-08 at 0 11 20" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/d19b7c4c-942f-4efc-a3e1-37d97c0ec22e">
 <img width="261" alt="Screenshot 2024-02-08 at 0 11 26" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/3d6e15c5-07c7-4e3d-bdf9-c5e5337215e2">
 
-# Xcode Run configuration - https://cocoacasts.com/tips-and-tricks-managing-build-configurations-in-xocde
+2. Xcode Run configuration - https://cocoacasts.com/tips-and-tricks-managing-build-configurations-in-xocde
 Run Release, Debug, Profile configuration
 ReleaseRunner - Test release build using xcode
 Runner - Test debug build
 ProfileRunner - Profile build test
 <img width="376" alt="Screenshot 2024-02-08 at 0 11 00" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/0f5df7c4-75da-4259-95fa-3b82e5c789db">
 
+3. Test iOS device of all configurations Debug, Profile, Release on same device
+Highlighted is the different name for apps
+<img width="411" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/9ea058f4-0753-4006-afc4-1b03ba6db06f">
 
 1. **Users:**
    - User Details: `https://api.github.com/users/:username`
