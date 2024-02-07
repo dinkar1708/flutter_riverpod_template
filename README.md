@@ -45,6 +45,10 @@ GitHub API:
    - User Repositories: `https://api.github.com/users/:username/repos`
 - Endpoint: `users/dinkar1708/repos?per_page=3`
 
+# DO/DON'T
+1. Use hooks for storing widget local state
+-  https://riverpod.dev/docs/essentials/do_dont
+-  https://riverpod.dev/docs/concepts/about_hooks
 
 # Features
 ## Home page
