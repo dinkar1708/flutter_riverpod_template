@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.dart';
 
 class CounterPage extends HookWidget {
   final String title;
@@ -16,10 +17,7 @@ class CounterPage extends HookWidget {
     final counterState = useState(0);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
+      appBar: SharedAppBar(title: title),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
