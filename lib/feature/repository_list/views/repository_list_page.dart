@@ -4,6 +4,7 @@ import 'package:flutter_riverpod_template/feature/repository_list/models/reposit
 import 'package:flutter_riverpod_template/feature/repository_list/providers/repository_list_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/shared_sliver_app_bar.dart';
 
 class RepositoryListPage extends ConsumerStatefulWidget {
   const RepositoryListPage({super.key});
@@ -13,11 +14,12 @@ class RepositoryListPage extends ConsumerStatefulWidget {
 }
 
 class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
-  RepositoryListNotifier get notifier =>
+  // read just once
+  RepositoryListNotifier get repositoryListNotifier =>
       ref.read(repositoryListNotifierProvider.notifier);
   @override
   Widget build(BuildContext context) {
-    // keep watching
+    // keep watching, contininouse changes observation
     final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
     return SafeArea(
       child: Scaffold(
@@ -39,9 +41,8 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
   Widget _buildListView(List<RepositoryListModel> modelList) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
-          title: Text(' User(${notifier.userName}) Repositories'),
-          floating: true,
+        SharedSliverAppBar(
+          title: repositoryListNotifier.userName,
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(

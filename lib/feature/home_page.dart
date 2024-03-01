@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/counter/counter_page.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/views/repository_list_page.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({
@@ -21,9 +22,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     BuildContext context,
   ) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
+        appBar: SharedAppBar(
+          title: widget.title,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
