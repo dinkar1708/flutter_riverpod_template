@@ -52,10 +52,16 @@ GitHub API:
 
 # Features
 ## Home page
-![Screenshot_1707316780](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c8023d87-4e5a-4e14-a543-c399e3782919)
+- screen navigations
+![Screenshot_1709306131](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/d3f42c2b-f3a5-4869-a26b-0358902a4ecd)
 
 ## Feature user github repositoy list
-![Screenshot_1707038579](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7395e57d-bce3-4690-b5d7-2226ceaa5ce7)
+- future provider example
+![Screenshot_1709306134](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/04d9be93-9838-44e1-9448-c93c008f6c56)
+
+# Feature counter
+- hooks example
+![Screenshot_1709306138](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/3ad4b58c-fdbb-4223-8db9-e1d2342357a6)
 
 # TODOs
 - github apis implement via diffrent riverpod library usages
