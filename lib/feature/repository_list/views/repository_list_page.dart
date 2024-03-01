@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/providers/repository_list_notifier_provider.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 
 class RepositoryListPage extends ConsumerStatefulWidget {
   const RepositoryListPage({super.key});
@@ -56,8 +58,14 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
 
   Widget _buildListRowView(RepositoryListModel model) {
     return ListTile(
-      title: Text(model.name),
-      subtitle: Text(model.description),
+      title: Text(
+        model.name,
+        style: AppTextStyle.labelLarge,
+      ),
+      subtitle: Text(
+        model.description,
+        style: AppTextStyle.bodySmall.copyWith(color: AppColor.mint2),
+      ),
     );
   }
 }
