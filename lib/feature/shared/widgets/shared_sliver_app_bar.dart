@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 
 class SharedSliverAppBar extends StatelessWidget {
   const SharedSliverAppBar({
@@ -11,6 +12,7 @@ class SharedSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      backgroundColor: AppColor.mint2,
       title: Text(' User $title Repositories'),
       floating: true,
     );
