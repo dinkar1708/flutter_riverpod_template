@@ -28,6 +28,7 @@ dart run build_runner watch --delete-conflicting-outputs
 
 ## App navigation
 - follow official documentation https://pub.dev/packages/auto_route
+- must run Generating Code to generate route
 
 ## NOTE POINTS
 - All pages must be suffixed by 'Page' to generate auto router automatically
