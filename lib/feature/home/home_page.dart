@@ -46,7 +46,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
         bottomNavigationBar: Container(
           height: 50,
-          color: AppColor.textSecondayLight,
+          color: context.color.textSeconday,
         ));
   }
 }

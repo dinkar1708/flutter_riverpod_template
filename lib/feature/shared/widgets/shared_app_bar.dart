@@ -15,7 +15,7 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColor.mint2,
+      backgroundColor: context.color.textPrimary,
       title: Text(title),
     );
   }
