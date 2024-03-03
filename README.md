@@ -41,6 +41,11 @@ Wrong - HomeView, HomeWidget, HomeStatefullWidget
 2. Manually delete generated files (`.g` and `.freezed.dart`) before running the build runner commands.
 3. Fix compile issues (except for generated syntax) before running build runner commands again.
 
+# Guide to run code
+## Mock data
+- Guide https://riverpod.dev/docs/essentials/testing#mocking-providers
+- Use mock run configuration to use mock/hard coded data TODO
+- Use actual configuration run actual api data
 
 ## API
 GitHub API:
