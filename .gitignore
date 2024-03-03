@@ -21,3 +21,5 @@ doc/api/
 *.js.map
 *.g.dart
 *.freezed.dart
+*.gr.dart
+.DS_Store

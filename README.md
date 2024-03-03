@@ -26,11 +26,20 @@ Continuous watch:
 dart run build_runner watch --delete-conflicting-outputs
 ```
 
-## Why
-To resolve compile errors, follow these steps:
+## App navigation
+- follow official documentation https://pub.dev/packages/auto_route
+
+## NOTE POINTS
+- All pages must be suffixed by 'Page' to generate auto router automatically
+Exmple 
+Correct - HomePage  // at the end must add Page
+Wrong - HomeView, HomeWidget, HomeStatefullWidget
+
+- To resolve compile errors, follow these steps:
 1. Ensure that generator dependencies are added to `pubspec.yaml` (retrofit_generator, riverpod_generator).
 2. Manually delete generated files (`.g` and `.freezed.dart`) before running the build runner commands.
 3. Fix compile issues (except for generated syntax) before running build runner commands again.
+
 
 ## API
 GitHub API:
@@ -91,7 +100,7 @@ Highlighted is the different name for apps
 
 3. **Search:**
    - Search Repositories: `https://api.github.com/search/repositories?q=:query`
-   - Search Users: `https://api.github.com/search/users?q=:query`
+   - Search Users: `https://api.github.com/search/users?q=:query`(https://api.github.com/search/users?q=dinkar1708)
 
 4. **Events:**
    - Public Events: `https://api.github.com/events`
