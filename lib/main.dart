@@ -6,6 +6,7 @@ import 'package:flutter_riverpod_template/data/remote/api/providers/user/mock_us
 import 'package:flutter_riverpod_template/data/remote/api/providers/user/user_repository_provider.dart';
 import 'package:flutter_riverpod_template/data/remote/api_url_configuration.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_theme.dart';
 
 void main() {
   runApp(
@@ -39,11 +40,10 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Riverpod',
-      theme: ThemeData(
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      // theme settings
+      theme: AppThemes.appTheme(Brightness.light),
+      darkTheme: AppThemes.appTheme(Brightness.dark),
+      themeMode: ThemeMode.light, // TODO base on condtion chage it
       // use auto router to decide widget
       routerConfig: _appRouter.config(),
     );
