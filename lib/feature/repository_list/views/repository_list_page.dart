@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
@@ -6,9 +7,14 @@ import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/shared_sliver_app_bar.dart';
 
-
+@RoutePage()
 class RepositoryListPage extends ConsumerStatefulWidget {
-  const RepositoryListPage({super.key});
+  final String title;
+
+  const RepositoryListPage({
+    required this.title,
+    Key? key,
+  }) : super(key: key);
 
   @override
   ConsumerState<RepositoryListPage> createState() => _RepositoryListPageState();
@@ -43,7 +49,7 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
     return CustomScrollView(
       slivers: <Widget>[
         SharedSliverAppBar(
-          title: repositoryListNotifier.userName,
+          title: widget.title + repositoryListNotifier.userName,
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.dart';
+import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.dart';
 
@@ -33,9 +33,8 @@ class _HomePageState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextButton(
-                  // onPressed: () =>
-                  //     context.router.push(const RepositoryListRoute()),
-                  onPressed: () {  },
+                  onPressed: () => context.router
+                      .push(RepositoryListRoute(title: 'Repository ')),
                   child: const Text('Open Github User API Page')),
               const Divider(),
               TextButton(
