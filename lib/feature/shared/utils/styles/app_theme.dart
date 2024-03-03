@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
-import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 
 class AppThemes {
   static ThemeData appTheme(Brightness brightness) {
