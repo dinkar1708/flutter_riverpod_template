@@ -13,7 +13,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SplashRoute.page, initial: true),
         // other pages routes
         AutoRoute(page: HomeRoute.page),
-        AutoRoute(page: RepositoryListRoute.page),
+        // AutoRoute(page: RepositoryListRoute.page),
         AutoRoute(page: CounterRoute.page)
       ];
 }

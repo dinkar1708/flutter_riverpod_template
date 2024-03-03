@@ -33,8 +33,9 @@ class _HomePageState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextButton(
-                  onPressed: () =>
-                      context.router.push(const RepositoryListRoute()),
+                  // onPressed: () =>
+                  //     context.router.push(const RepositoryListRoute()),
+                  onPressed: () {  },
                   child: const Text('Open Github User API Page')),
               const Divider(),
               TextButton(

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/shared_sliver_app_bar.dart';
 
-@RoutePage()
+
 class RepositoryListPage extends ConsumerStatefulWidget {
   const RepositoryListPage({super.key});
 
