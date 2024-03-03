@@ -21,6 +21,7 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_hooks: ^0.20.5
   hexcolor: ^3.0.1
+  auto_route: ^7.8.4
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,7 @@ dev_dependencies:
   riverpod_generator: ^2.3.9
   # used with freezed model
   json_serializable: ^6.7.1
+  auto_route_generator: ^7.3.2
 
 flutter:
   uses-material-design: true
