@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/data/app_providers/app_provider.dart';
 import 'package:flutter_riverpod_template/data/remote/api/cient/api_config.dart';
+import 'package:flutter_riverpod_template/data/remote/api/providers/user/mock_user_repository_provider.dart';
+import 'package:flutter_riverpod_template/data/remote/api/providers/user/user_repository_provider.dart';
 import 'package:flutter_riverpod_template/data/remote/api_url_configuration.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.dart';
 
@@ -13,7 +15,11 @@ void main() {
           // pass similar for dev or prod
           // create multiple launch file and do setup todo :
           ApiConfig(DevBaseUrl.baseUrlDev, apiKey: DevBaseUrl.appApiKey),
-        )
+        ),
+        // TODO seprate using mock run configuration
+        userRepositoryProvider.overrideWith(
+          (ref) => MockUserRepository(),
+        ),
       ],
       child: const MyApp(),
     ),
