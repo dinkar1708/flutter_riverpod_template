@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_template/feature/counter/counter_page.dart';
-import 'package:flutter_riverpod_template/feature/repository_list/views/repository_list_page.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.dart';
@@ -40,16 +38,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: const Text('Open Github User API Page')),
               const Divider(),
               TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CounterPage(
-                          title: "Counter Example",
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: () => context.router
+                      .push(CounterRoute(title: 'Counter Example')),
                   child: const Text('Counter Example')),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_template/feature/counter/counter_page.dart';
 import 'package:flutter_riverpod_template/feature/home_page.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/splash/splash_page.dart';
 part 'app_router.gr.dart';
@@ -12,6 +13,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SplashRoute.page, initial: true),
         // other pages routes
         AutoRoute(page: HomeRoute.page),
-        AutoRoute(page: RepositoryListRoute.page)
+        AutoRoute(page: RepositoryListRoute.page),
+        AutoRoute(page: CounterRoute.page)
       ];
 }
