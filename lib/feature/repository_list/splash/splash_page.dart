@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod_template/feature/home_page.dart';
+import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.dart';
 
 @RoutePage()
 class SplashPage extends StatefulWidget {
@@ -18,14 +18,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     // Navigate to the next screen after a delay
     Timer(
-      const Duration(seconds: 2), // 2 seconds delay
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage(
-                  title: "ffff",
-                )),
-      ),
+      const Duration(milliseconds: 500), // half second delay
+      () => context.router.replace(HomeRoute(title: 'Home page')),
     );
   }
 
