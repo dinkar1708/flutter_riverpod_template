@@ -12,7 +12,7 @@ class SharedSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: AppColor.mint2,
+      backgroundColor: context.color.divider,
       title: Text(' User $title Repositories'),
       floating: true,
     );
