@@ -26,6 +26,9 @@ Continuous watch:
 dart run build_runner watch --delete-conflicting-outputs
 ```
 
+## App navigation
+- follow official documentation https://pub.dev/packages/auto_route
+
 ## Why
 To resolve compile errors, follow these steps:
 1. Ensure that generator dependencies are added to `pubspec.yaml` (retrofit_generator, riverpod_generator).
@@ -91,7 +94,7 @@ Highlighted is the different name for apps
 
 3. **Search:**
    - Search Repositories: `https://api.github.com/search/repositories?q=:query`
-   - Search Users: `https://api.github.com/search/users?q=:query`
+   - Search Users: `https://api.github.com/search/users?q=:query`(https://api.github.com/search/users?q=dinkar1708)
 
 4. **Events:**
    - Public Events: `https://api.github.com/events`

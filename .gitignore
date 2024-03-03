@@ -22,3 +22,4 @@ doc/api/
 *.g.dart
 *.freezed.dart
 *.gr.dart
+.DS_Store
