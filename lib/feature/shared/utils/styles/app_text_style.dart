@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 
 class AppTextStyle {
   const AppTextStyle._();
@@ -87,9 +86,4 @@ class AppTextStyle {
     fontSize: 13.0,
     fontWeight: FontWeight.bold,
   );
-
-  static final buttonStyle = ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(AppColor.mint2),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))));
 }
