@@ -9,17 +9,10 @@ class AppThemes {
         : AppColor.darkColor;
     return ThemeData(
       // root widget background color
+      // this is very nice to set default colors for all scaffold widget
       scaffoldBackgroundColor: colors.backgroundPrimary,
       // common divider color
       dividerTheme: DividerThemeData(color: colors.divider, thickness: 0.5),
-      appBarTheme: AppBarTheme(
-        centerTitle: false,
-        foregroundColor: colors.divider,
-        backgroundColor: colors.backgroundPrimary,
-        titleTextStyle: AppTextStyle.labelMedium.copyWith(
-          color: colors.textSeconday,
-        ),
-      ),
       fontFamily: null, // set font here later
     );
   }
