@@ -80,13 +80,14 @@ GitHub API:
 # Features
 ## Home page
 - navigation to features page
-![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
+![Screenshot_1709559818](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82ac45d6-c00f-46a7-8f39-17bced9bf84e)
 
 ## Feature user github repositoy list
-![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
+![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
 
 ## Feature Counter 
-![Screenshot_1709559818](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82ac45d6-c00f-46a7-8f39-17bced9bf84e)
+![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
+
 # iOS Guide
 1. iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 Debug
