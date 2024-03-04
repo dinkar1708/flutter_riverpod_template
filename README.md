@@ -4,7 +4,6 @@ A new Flutter project.
 
 ## TODOs
 -  fix comamnd line run -> flutter run --flavor development 
-- fix production run mode using vs code 
 - ios run configurations
 - github apis implement via diffrent riverpod library usages
 
