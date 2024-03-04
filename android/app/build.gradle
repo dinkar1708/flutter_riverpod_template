@@ -56,11 +56,11 @@ android {
             dimension "default"
             applicationIdSuffix ".development"
         }
-    }
     production {
             dimension "default"
         }
     }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
