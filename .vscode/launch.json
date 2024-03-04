@@ -34,7 +34,7 @@
             "type": "dart",
             "program": "lib/main/main_production.dart",
             "flutterMode": "release",
-            "args": ["--flavor", "production", "--target", "lib/main/main_staging.dart" ]
+            "args": ["--flavor", "production", "--target", "lib/main/main_production.dart" ]
         },
         {
             "name": "profile_flutter_riverpod",
