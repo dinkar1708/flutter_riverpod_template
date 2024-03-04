@@ -30,7 +30,7 @@ class CounterPage extends HookWidget {
               'Push plus button to increase counter:',
             ),
             Text(
-              'aa ${counterState.value}',
+              'Value ${counterState.value}',
               style: AppTextStyle.labelMedium
                   .copyWith(color: context.color.textPrimary),
             ),
