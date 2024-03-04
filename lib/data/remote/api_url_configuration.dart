@@ -11,9 +11,9 @@ class ProdBaseUrl {
 }
 
 
-class TestBaseUrl {
-  TestBaseUrl._();
-  static const baseUrlDev = 'https://api.github.com/'; // change test url here
+class StageBaseUrl {
+  StageBaseUrl._();
+  static const baseUrlDev = 'https://api.github.com/'; // change staging url here
   static const appApiKey = 'api key TODO';
 }
 
