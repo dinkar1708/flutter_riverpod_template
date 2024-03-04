@@ -58,6 +58,7 @@ Wrong - HomeView, HomeWidget, HomeStatefullWidget
 ## Run configuration guide
 - https://docs.flutter.dev/testing/build-modes
 - https://docs.flutter.dev/deployment/flavors
+- run config <img width="319" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82f11dca-ad35-40ff-af14-52eca34ad64a">
 
 ## API
 GitHub API:
