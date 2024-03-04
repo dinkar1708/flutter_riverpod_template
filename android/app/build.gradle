@@ -50,6 +50,16 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
+    flavorDimensions "default"
+    productFlavors {
+    development {
+            dimension "default"
+            applicationIdSuffix ".development"
+        }
+    production {
+            dimension "default"
+        }
+    }
 
     buildTypes {
         release {

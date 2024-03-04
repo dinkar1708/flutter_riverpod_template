@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+## TODOs
+-  fix comamnd line run -> flutter run --flavor development 
+- ios run configurations
+- github apis implement via diffrent riverpod library usages
+
+
 ## Getting Started
 
 This Flutter project utilizes the following packages:
@@ -42,10 +48,16 @@ Wrong - HomeView, HomeWidget, HomeStatefullWidget
 3. Fix compile issues (except for generated syntax) before running build runner commands again.
 
 # Guide to run code
+## Run configuration configuration using .launch.json file
 ## Mock data
 - Guide https://riverpod.dev/docs/essentials/testing#mocking-providers
 - Use mock run configuration to use mock/hard coded data TODO
 - Use actual configuration run actual api data
+
+## Run configuration guide
+- https://docs.flutter.dev/testing/build-modes
+- https://docs.flutter.dev/deployment/flavors
+- run config <img width="319" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82f11dca-ad35-40ff-af14-52eca34ad64a">
 
 ## API
 GitHub API:
@@ -71,11 +83,6 @@ GitHub API:
 
 ## Feature user github repositoy list
 ![Screenshot_1707038579](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7395e57d-bce3-4690-b5d7-2226ceaa5ce7)
-
-# TODOs
-- github apis implement via diffrent riverpod library usages
-
-
 
 # iOS Guide
 1. iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
