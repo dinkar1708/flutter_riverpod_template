@@ -89,6 +89,14 @@ GitHub API:
 ![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
 
 # iOS Guide
+# Run using xcode
+## Fix main file path
+Go to 
+Runner -> Target -> All
+search target specify value for each main files
+<img width="1051" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/ff86e605-185c-4e24-9210-be1eff18a4fc">
+<img width="1240" alt="Screenshot 2024-03-05 at 17 51 43" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/2dd37a1b-ecd0-460a-ac1c-7167317b1abd">
+
 1. iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 Debug
 Release
@@ -102,7 +110,11 @@ ReleaseRunner - Test release build using xcode
 Runner - Test debug build
 ProfileRunner - Profile build test
 <img width="376" alt="Screenshot 2024-02-08 at 0 11 00" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/0f5df7c4-75da-4259-95fa-3b82e5c789db">
-
+3. Create mock schema
+- Add mock run configuration
+- <img width="1070" alt="Screenshot 2024-03-05 at 18 13 23" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/4a7c3a7d-620f-4b5a-83fe-88901b5aca95">
+- Add run target 
+<img width="1096" alt="Screenshot 2024-03-05 at 18 12 54" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/639b3dd9-25b7-4880-9546-6c6a57a30724">
 3. Test iOS device of all configurations Debug, Profile, Release on same device
 Highlighted is the different name for apps
 <img width="411" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/9ea058f4-0753-4006-afc4-1b03ba6db06f">
