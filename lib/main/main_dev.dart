@@ -7,11 +7,11 @@ import 'package:flutter_riverpod_template/feature/shared/app_flavour/shared_main
 void main() async {
   // different for each flavours
   final appConfig = AppConfig(
-    environment: AppEnvironment.production,
-    apiBaseUrl: ProdBaseUrl.baseUrlDev,
-    appApiKey: ProdBaseUrl.appApiKey,
-    appName: 'Prod',
-    initializeCrashlytics: true,
+    environment: AppEnvironment.dev,
+    apiBaseUrl: DevBaseUrl.baseUrlDev,
+    appApiKey: DevBaseUrl.appApiKey,
+    launchTitle: 'Staging',
+    initializeCrashlytics: false,
   );
   // different for each flavours
   final List<Override> overrides = [
