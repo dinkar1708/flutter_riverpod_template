@@ -88,6 +88,10 @@ GitHub API:
 ## Feature Counter 
 ![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
 
+## Feature Navigation
+
+- https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
+- ![Simulator Screenshot - iPhone 15 Pro - 2024-03-06 at 21 07 56](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/6e3323c7-40da-4d77-bcc5-c372dd433083)
 # iOS Guide
 # Run using xcode
 ## Fix main file path
