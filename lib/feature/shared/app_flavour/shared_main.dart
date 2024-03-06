@@ -19,7 +19,7 @@ void sharedMain(AppConfig appConfig,
   runApp(
     ProviderScope(
       overrides: allOverrides,
-      child: MyApp(appName: appConfig.launchTitle),
+      child: MyApp(launchTitle: appConfig.launchTitle),
     ),
   );
 }
