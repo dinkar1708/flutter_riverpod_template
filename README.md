@@ -93,11 +93,13 @@ GitHub API:
 
 - https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
 - ![Simulator Screenshot - iPhone 15 Pro - 2024-03-06 at 21 07 56](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/6e3323c7-40da-4d77-bcc5-c372dd433083)
+
 # iOS Guide
 
 # Flavors/ Run Configuration and Build Mode Guide
 
 Reference flavors guide - [YouTube Video](https://www.youtube.com/watch?v=GwAnn1auo8o&t=198s)
+### Only the "dev" and "prod" environments follow the same steps to create a staging environment if needed. Additionally, update the same code in the main folder. Here, too, in the app_config.dart, add a new variable named staging to the AppEnvironment
 
 ## A. iOS - Add Flavor (Schema) using Xcode
 
