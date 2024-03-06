@@ -8,9 +8,9 @@
             "name": "dev_flutter_riverpod",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main/main_development.dart",
+            "program": "lib/main/main_dev.dart",
             "flutterMode": "debug",
-            "args": ["--flavor", "development", "--target", "lib/main/main_development.dart" ]
+            "args": ["--flavor", "dev", "--target", "lib/main/main_dev.dart" ]
         },
         {
             "name": "mock_flutter_riverpod",
@@ -18,31 +18,15 @@
             "type": "dart",
             "program": "lib/main/main_mock_development.dart",
             "flutterMode": "debug",
-            "args": ["--flavor", "development", "--target", "lib/main/main_mock_development.dart" ]
-        },
-        {
-            "name": "stage_flutter_riverpod",
-            "request": "launch",
-            "type": "dart",
-            "program": "lib/main/main_staging.dart",
-            "flutterMode": "debug",
-            "args": ["--flavor", "development", "--target", "lib/main/main_staging.dart" ]
+            "args": ["--flavor", "dev", "--target", "lib/main/main_mock_development.dart" ]
         },
         {
             "name": "prod_flutter_riverpod",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main/main_production.dart",
+            "program": "lib/main/main_prod.dart",
             "flutterMode": "release",
-            "args": ["--flavor", "production", "--target", "lib/main/main_production.dart" ]
+            "args": ["--flavor", "prod", "--target", "lib/main/main_prod.dart" ]
         },
-        {
-            "name": "profile_flutter_riverpod",
-            "request": "launch",
-            "type": "dart",
-            "program": "lib/main/main_staging.dart",
-            "flutterMode": "profile",
-            "args": ["--flavor", "development", "--target", "lib/main/main_staging.dart" ]
-        }
     ]
 }
