@@ -4,7 +4,9 @@ A new Flutter project.
 
 ## TODOs
 -  fix comamnd line run -> flutter run --flavor development 
-- ios run configurations
+   - Target file "lib/main.dart" not found.
+- run using android studio configurations
+   - able to run using android studio
 - github apis implement via diffrent riverpod library usages
 
 
@@ -57,7 +59,6 @@ Wrong - HomeView, HomeWidget, HomeStatefullWidget
 ## Run configuration guide
 - https://docs.flutter.dev/testing/build-modes
 - https://docs.flutter.dev/deployment/flavors
-- run config <img width="319" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82f11dca-ad35-40ff-af14-52eca34ad64a">
 
 ## API
 GitHub API:
@@ -93,36 +94,65 @@ GitHub API:
 - https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
 - ![Simulator Screenshot - iPhone 15 Pro - 2024-03-06 at 21 07 56](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/6e3323c7-40da-4d77-bcc5-c372dd433083)
 # iOS Guide
-# Run using xcode
-## Fix main file path
-Go to 
-Runner -> Target -> All
-search target specify value for each main files
-<img width="1051" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/ff86e605-185c-4e24-9210-be1eff18a4fc">
-<img width="1240" alt="Screenshot 2024-03-05 at 17 51 43" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/2dd37a1b-ecd0-460a-ac1c-7167317b1abd">
 
-1. iOS Build Configurations - https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
-Debug
-Release
-Profile
-<img width="733" alt="Screenshot 2024-02-08 at 0 11 20" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/d19b7c4c-942f-4efc-a3e1-37d97c0ec22e">
-<img width="261" alt="Screenshot 2024-02-08 at 0 11 26" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/3d6e15c5-07c7-4e3d-bdf9-c5e5337215e2">
+# Flavors/ Run Configuration and Build Mode Guide
 
-2. Xcode Run configuration - https://cocoacasts.com/tips-and-tricks-managing-build-configurations-in-xocde
-Run Release, Debug, Profile configuration
-ReleaseRunner - Test release build using xcode
-Runner - Test debug build
-ProfileRunner - Profile build test
-<img width="376" alt="Screenshot 2024-02-08 at 0 11 00" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/0f5df7c4-75da-4259-95fa-3b82e5c789db">
-3. Create mock schema
-- Add mock run configuration
-- <img width="1070" alt="Screenshot 2024-03-05 at 18 13 23" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/4a7c3a7d-620f-4b5a-83fe-88901b5aca95">
-- Add run target 
-<img width="1096" alt="Screenshot 2024-03-05 at 18 12 54" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/639b3dd9-25b7-4880-9546-6c6a57a30724">
-3. Test iOS device of all configurations Debug, Profile, Release on same device
-Highlighted is the different name for apps
-<img width="411" alt="image" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/9ea058f4-0753-4006-afc4-1b03ba6db06f">
+Reference flavors guide - [YouTube Video](https://www.youtube.com/watch?v=GwAnn1auo8o&t=198s)
 
+## A. iOS - Add Flavor (Schema) using Xcode
+
+- **Add/Edit Schema:**
+  ![Add/Edit Schema](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c8c1eeb4-107e-4d1a-a802-9215ad0756c6)
+
+- **Change Schema Build Configuration etc.:**
+  ![Change Schema Build Configuration](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/57cb00e9-9f65-4dd4-8a16-635eebb9d548)
+
+- **Manage Schema Page:**
+  ![Manage Schema Page](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/81fa6d71-e7c7-4ce1-84eb-a1988ae0b8ec)
+
+- **Configuration:**
+  In the image below, all build modes ([Debug, Profile, and Release](https://docs.flutter.dev/testing/build-modes)) have been shown for `dev` and `prod` flavors ([Flavors](https://docs.flutter.dev/deployment/flavors)).
+  ![Configuration](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/07db03af-5436-4b5f-84c4-d94c2bba6dbf)
+
+- **Fix Main File Path:**
+  Go to Runner -> Target -> Build Settings -> All, search for `flutter_target`, specify value for each main file.
+  ![Fix Main File Path](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/3f8cbad1-218b-4ac3-9ed2-48fd98ab7ce9)
+
+- **Fix Display App Name:**
+  Go to Runner -> Target -> Build Settings -> All, search for `product name`, specify value for each main file.
+  ![Fix Display App Name](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/4ddd59b5-a435-4378-b001-d4a789594d39)
+
+- **Fix Bundle Identifier:**
+  Go to Runner -> Signing & Capability -> Build Settings -> All.
+  ![Fix Bundle Identifier](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/9863da62-01e2-474f-81ab-70f7c2d0b903)
+<br>
+
+## B. Android - Add flavor (schema)
+
+- Add in build.gradle (app)
+
+  ![Add in build.gradle](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/d7964b2a-a378-4d2e-8255-5d07d42c1f8b)
+
+## C. Use flavor 
+
+### Run Configuration Setting Using VS Code
+
+Using "dev" and "prod" flavors as examples, with "Debug" and "Release" modes:
+
+![Run configuration for dev and prod flavors](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/a7d5bbba-c77d-4c9f-b6d1-ee74bdad93e6)
+
+![Run configuration for dev and prod flavors](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/4e0ca6c0-d373-4ed0-9ed1-14c5053412f8)
+<br>
+<br>
+
+### Final after run app
+- Test iOS device of all configurations dev and prod
+<img width="427" alt="Screenshot 2024-03-06 at 22 47 48" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/2591585f-224a-4f82-84ca-c372d3bcad51">
+- Same Test for andrdoid device
+<br>
+<br>
+
+# APIs
 1. **Users:**
    - User Details: `https://api.github.com/users/:username`
 
