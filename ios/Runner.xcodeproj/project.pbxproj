@@ -369,7 +369,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_development.dart;
+				FLUTTER_TARGET = lib/main/main_dev.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,7 +495,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_development.dart;
+				FLUTTER_TARGET = lib/main/main_prod.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -589,7 +589,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_production.dart;
+				FLUTTER_TARGET = lib/main/main_proddart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -678,7 +678,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_development.dart;
+				FLUTTER_TARGET = lib/main/main_prod.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -825,7 +825,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_development.dart;
+				FLUTTER_TARGET = lib/main/main_dev.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -849,7 +849,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = AM2A35C3AY;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main/main_production.dart;
+				FLUTTER_TARGET = lib/main/main_dev.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
