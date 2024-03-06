@@ -19,14 +19,14 @@ void sharedMain(AppConfig appConfig,
   runApp(
     ProviderScope(
       overrides: allOverrides,
-      child: MyApp(appName: appConfig.appName),
+      child: MyApp(launchTitle: appConfig.launchTitle),
     ),
   );
 }
 
 Future<void> init(AppConfig appConfig) {
+  debugPrint('sharedMain launch title  ${appConfig.launchTitle}');
   debugPrint('sharedMain environment  ${appConfig.environment}');
-
   debugPrint('sharedMain base url ${appConfig.apiBaseUrl}');
   // TODO initialize others here
   // eg. crashlitics

@@ -9,10 +9,11 @@ import 'package:flutter_riverpod_template/feature/shared/app_flavour/shared_main
 void main() async {
   // different for each flavours
   final appConfig = AppConfig(
-    environment: AppEnvironment.development,
+    // just test with dev
+    environment: AppEnvironment.dev,
     apiBaseUrl: DevBaseUrl.baseUrlDev,
     appApiKey: DevBaseUrl.appApiKey,
-    appName: 'Mock',
+    launchTitle: 'Mock',
     initializeCrashlytics: false,
   );
   // different for each flavours

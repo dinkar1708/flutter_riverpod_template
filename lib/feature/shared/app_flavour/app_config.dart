@@ -1,19 +1,18 @@
 enum AppEnvironment {
-  development,
-  staging,
-  production,
+  dev,
+  prod,
 }
 
 class AppConfig {
   AppConfig({
-    required this.appName,
+    required this.launchTitle,
     required this.environment,
     required this.apiBaseUrl,
     required this.appApiKey,
     this.initializeCrashlytics = true,
   });
 
-  final String appName;
+  final String launchTitle;
   final AppEnvironment environment;
   final String apiBaseUrl;
   final String appApiKey;

@@ -52,12 +52,12 @@ android {
     }
     flavorDimensions "default"
     productFlavors {
-    development {
-            dimension "default"
-            applicationIdSuffix ".development"
+    dev {
+            resValue 'string', 'app_name', 'DevRiverpodTemplate'
+            applicationIdSuffix ".dev"
         }
-    production {
-            dimension "default"
+    prod {
+            resValue 'string', 'app_name', 'RiverpodTemplate'
         }
     }
 
