@@ -41,6 +41,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                   onPressed: () => context.router
                       .push(CounterRoute(title: 'Counter Example')),
                   child: const Text('Counter Example')),
+              const Divider(),
+              TextButton(
+                  onPressed: () => context.router
+                      .push(NavigationRoute(title: 'Navigation Example')),
+                  child: const Text('Counter Example')),
             ],
           ),
         ),

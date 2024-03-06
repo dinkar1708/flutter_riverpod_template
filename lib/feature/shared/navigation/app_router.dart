@@ -11,5 +11,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: RepositoryListRoute.page),
         AutoRoute(page: CounterRoute.page),
+        AutoRoute(page: NavigationRoute.page, children: [
+          AutoRoute(page: NavigationChild1Route.page),
+          AutoRoute(page: NavigationChild2Route.page),
+        ]),
       ];
 }
