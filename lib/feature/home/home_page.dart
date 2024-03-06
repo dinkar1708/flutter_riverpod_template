@@ -45,7 +45,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               TextButton(
                   onPressed: () => context.router
                       .push(NavigationRoute(title: 'Navigation Example')),
-                  child: const Text('Counter Example')),
+                  child: const Text('Navigation Example')),
             ],
           ),
         ),
