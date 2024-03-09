@@ -1,4 +1,4 @@
 class ApiPath {
   ApiPath._();
-  static const users = 'users/';
+  static const users = 'users';
 }

@@ -13,7 +13,7 @@ class RepositoryListModel with _$RepositoryListModel {
     @JsonKey(name: 'private') required bool isPrivate,
     @JsonKey(name: 'owner') required Owner owner,
     @JsonKey(name: 'html_url') required String htmlUrl,
-    @JsonKey(name: 'description') required String description,
+    @JsonKey(name: 'description') required String? description,
     @JsonKey(name: 'fork') required bool isFork,
     @JsonKey(name: 'url') required String? url,
     // Add other fields as needed
