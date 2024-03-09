@@ -71,7 +71,7 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
         style: AppTextStyle.labelLarge,
       ),
       subtitle: Text(
-        model.description,
+        model.description ?? '',
         style:
             AppTextStyle.bodySmall.copyWith(color: context.color.textPrimary),
       ),
