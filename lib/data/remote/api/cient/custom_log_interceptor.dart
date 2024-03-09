@@ -26,7 +26,7 @@ class CustomLoggerInterceptor implements Interceptor {
     debugPrint(
         'API.................... onResponse() - Got response - RESPONSE:'
         'Status Code: ${response.statusCode}'
-        'URL: ${response.requestOptions.baseUrl}${response.requestOptions.path}'
+        'URL: ${response.requestOptions.baseUrl}${response.requestOptions.path} \n'
         'Response Data: ${response.data}');
     return handler.next(response);
   }
