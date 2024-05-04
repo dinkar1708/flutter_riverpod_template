@@ -125,6 +125,34 @@ repositoryListAsync.when(
 ![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
 
 ## Feature Counter 
+
+**Requirement: Maintain widget local state only without netowrk operation**
+
+**How to Use Riverpod in This Case:** Use flutter hooks HookWidget widget
+
+1. Extend HookWidget widget:
+
+```dart
+@RoutePage()
+class CounterPage extends HookWidget {
+```
+
+2. Define state variable and use:
+
+```dart
+// define
+    final counterState = useState(0);
+// use
+ Text(
+              'Value ${counterState.value}',
+              style: AppTextStyle.labelMedium
+                  .copyWith(color: context.color.textPrimary),
+            ),
+// modify
+ onPressed: () {
+          counterState.value = counterState.value + 1;
+        },
+```
 ![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
 
 ## Feature Navigation
