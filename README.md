@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+Using a Reactive Caching and Data-binding Framework Riverpod
+
 ## TODOs
 -  fix comamnd line run -> flutter run --flavor development 
    - Target file "lib/main.dart" not found.
@@ -84,6 +86,42 @@ GitHub API:
 ![Screenshot_1709559818](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82ac45d6-c00f-46a7-8f39-17bced9bf84e)
 
 ## Feature user github repositoy list
+
+**Requirement: Fetch Data from Network**
+
+**How to Use Riverpod in This Case:** User Future Provider
+
+1. Define a future and perform a network call:
+
+```dart
+@riverpod
+class RepositoryListNotifier extends _$RepositoryListNotifier {
+  final userName = 'dinkar1708';
+  final pageSize = 5;
+
+  @override
+  // see Future is used here for future provider
+  Future<List<RepositoryListModel>> build() async => await ref
+      .read(userRepositoryProvider)
+      .getRepositories(userName, pageSize);
+}
+```
+
+2. Utilize the notifier provider to access data and handle loading and error states:
+
+```dart
+final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
+repositoryListAsync.when(
+  data: (data) => _buildListView(data),
+  error: (error, stackTrace) {
+    debugPrint(error.toString());
+    debugPrint(stackTrace.toString());
+    return Text('Error $error');
+  },
+  loading: () => const Center(child: Text('Loading...')),
+);
+```
+
 ![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
 
 ## Feature Counter 
