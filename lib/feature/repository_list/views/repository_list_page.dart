@@ -13,8 +13,8 @@ class RepositoryListPage extends ConsumerStatefulWidget {
 
   const RepositoryListPage({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   ConsumerState<RepositoryListPage> createState() => _RepositoryListPageState();
