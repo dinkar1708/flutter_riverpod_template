@@ -182,6 +182,11 @@ repositoryListAsync.when(
             });
 
 ```
+**Loading State after button is clicked**
+<img width="393" alt="Screenshot 2024-05-07 at 0 23 42" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/b1f458c6-b040-469e-8f8f-2a13d330f06c">
+
+**Loaded State after api call is done**
+<img width="394" alt="Screenshot 2024-05-07 at 0 23 12" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/046e5e38-78b4-4968-b6f2-0b2398c3b746">
 
 ## Feature Counter 
 
