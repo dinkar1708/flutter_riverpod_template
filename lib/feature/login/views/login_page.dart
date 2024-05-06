@@ -69,7 +69,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   loginNotifier
                       .login(loginRequestModel)
                       .then((loginResponse) => {
-                            showSnackBar(context, 'Login success'),
+                            showSnackBar(context, 'Login success ${loginResponse.userName}'),
                             context.router
                                 .replaceAll([HomeRoute(title: 'Home')]),
                           })
