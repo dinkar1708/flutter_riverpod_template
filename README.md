@@ -4,110 +4,53 @@ A new Flutter template project using riverpod library.
 
 Using a Reactive Caching and Data-binding Framework Riverpod
 
-## TODOs
--  fix comamnd line run -> flutter run --flavor development 
-   - Target file "lib/main.dart" not found.
-- run using android studio configurations
-   - able to run using android studio
-- github apis implement via diffrent riverpod library usages
+# Setup
+## Prerequisites
+- Flutter SDK installed - Current tested flutter SDK 3.19.6
+- Android Studio / VS Code installed
+- Emulator / Simulator / Physical device for testing
 
-## Getting Started
-
-**Setup project:**
+## Installation
 - Clone project
-- Setup flutter SDK - Current tested flutter SDK 3.19.6
+- flutter pub get
+- Generating Code - To generate the necessary code, use the following commands:
 
-**This Flutter project utilizes the following packages:**
-- [Riverpod](https://riverpod.dev/docs/introduction/getting_started) - State management
-- Retrofit - API call
-- Dio - HTTP client
-- Build Runner - Code generation
-- Freezed - Code generation for models
-- Freezed Annotations - Annotations for code generation
-
-**Github Actions (CI/CD)**
-
-### First-time User? Follow these steps:
-
-1. Visit [flutter-actions/setup-flutter](https://github.com/flutter-actions/setup-flutter) and copy the provided basic version. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
-
-   <img width="1131" alt="Screenshot 2024-05-06 at 20 20 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c3ee902d-6880-43de-8ab4-cb79b9c790e1">
-
-2. If you have an extra step, add it to the .yml file:
-
-   ```yaml
-   - name: Generate code
-     run: dart run build_runner build --delete-conflicting-outputs
-   ```
-
-3. Now, check if the automatic CI running has passed.
-
-### How to Use This Repository's .yml File:
-- Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
-
-### Guide CI/CD
-- For detailed guidance, refer to: https://docs.github.com/en/actions/quickstart
-
-## Generating Code
-To generate the necessary code, use the following commands:
-
-One-time generation:
+***One-time generation:***
 ```bash
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-Continuous watch:
+***Continuous watch:***
 ```bash
 dart run build_runner watch --delete-conflicting-outputs
 ```
 
-## App navigation
-- follow official documentation https://pub.dev/packages/auto_route
-- must run Generating Code to generate route
-
-## NOTE POINTS
-- All pages must be suffixed by 'Page' to generate auto router automatically
-Exmple 
-Correct - HomePage  // at the end must add Page
-Wrong - HomeView, HomeWidget, HomeStatefullWidget
-
-- To resolve compile errors, follow these steps:
-1. Ensure that generator dependencies are added to `pubspec.yaml` (retrofit_generator, riverpod_generator).
-2. Manually delete generated files (`.g` and `.freezed.dart`) before running the build runner commands.
-3. Fix compile issues (except for generated syntax) before running build runner commands again.
-
 # Guide to run code
-## Run configuration configuration using .launch.json file
-## Mock data
+### Run configuration configuration using .launch.json file
+### Mock data
 - Guide https://riverpod.dev/docs/essentials/testing#mocking-providers
 - Use mock run configuration to use mock/hard coded data TODO
 - Use actual configuration run actual api data
 
-## Run configuration guide
-- https://docs.flutter.dev/testing/build-modes
-- https://docs.flutter.dev/deployment/flavors
+## Final after run app
+- Test iOS device of all configurations dev and prod
+<img width="427" alt="Screenshot 2024-03-06 at 22 47 48" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/2591585f-224a-4f82-84ca-c372d3bcad51">
 
-## API
+- Same as iOS Test for android device
+<br>
+
+# API Used in the project
 GitHub API:
 - Base URL: `https://api.github.com/`
 
 ### Repositories by User Name
-1. **User:**
-   - URL: `https://api.github.com/users/octocat`
-   - Replace `octocat` with the desired GitHub username.
 1. **Users:**
-   - User Details: `https://api.github.com/users/:username`
    - User Repositories: `https://api.github.com/users/:username/repos`
 - Endpoint: `users/dinkar1708/repos?per_page=3`
 
-# DO/DON'T
-1. Use hooks for storing widget local state
--  https://riverpod.dev/docs/essentials/do_dont
--  https://riverpod.dev/docs/concepts/about_hooks
-
 # Features
 ## Home page
-- navigation to features page
+- navigation to features pages
 <img width="415" alt="Screenshot 2024-05-06 at 20 32 01" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c1cd0232-ce33-43f9-809a-2b30dc6a5c2a">
 
 
@@ -227,30 +170,15 @@ class CounterPage extends HookWidget {
 - https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
   <img width="415" alt="Screenshot 2024-05-06 at 20 32 53" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/42f49745-0871-45f0-a38b-5cdc86669ba6">
 
+# Run configuration guide
+## Guide link
+This section provides guidance on setting up flavors, run configurations, and build modes for iOS.
+- https://docs.flutter.dev/testing/build-modes
+- https://docs.flutter.dev/deployment/flavors
 
-# Guide to inspect widget
-**Start widget inspection. See below picture**
-
-<img width="525" alt="Screenshot 2024-05-04 at 12 17 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8e0d7e6d-2ff2-40ce-b969-165fe488a6a1">
-
-**Select mode -> Click button 'Toggele select widget mode'. See below picture**
-
-<img width="239" alt="Screenshot 2024-05-04 at 11 13 49" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8d84eac2-fac1-4d33-a46e-bb0f75340ec1">
-
-**Select widgets - Explore the widget tree to view details. Refer to the following information about the tree:. See below picture**
-
-<img width="974" alt="Screenshot 2024-05-04 at 11 13 24" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/f67a754b-9973-4246-9674-22b6dce165f3">
-
-**End widget inspection. See below picture**
-
-<img width="525" alt="Screenshot 2024-05-04 at 12 17 21" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/29707873-8ce6-4f0a-95cf-6f96c2aa7bdd">
-
-# iOS Guide
-
-# Flavors/ Run Configuration and Build Mode Guide
-
+## Flavors/ Run Configuration and Build Mode Guide
 Reference flavors guide - [YouTube Video](https://www.youtube.com/watch?v=GwAnn1auo8o&t=198s)
-### Only the "dev" and "prod" environments follow the same steps to create a staging environment if needed. Additionally, update the same code in the main folder. Here, too, in the app_config.dart, add a new variable named staging to the AppEnvironment
+***Only the "dev" and "prod" environments follow the same steps to create a staging environment if needed. Additionally, update the same code in the main folder. Here, too, in the app_config.dart, add a new variable named staging to the AppEnvironment***
 
 ## A. iOS - Add Flavor (Schema) using Xcode
 
@@ -298,12 +226,62 @@ Using "dev" and "prod" flavors as examples, with "Debug" and "Release" modes:
 <br>
 <br>
 
-### Final after run app
-- Test iOS device of all configurations dev and prod
-<img width="427" alt="Screenshot 2024-03-06 at 22 47 48" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/2591585f-224a-4f82-84ca-c372d3bcad51">
-- Same Test for andrdoid device
-<br>
-<br>
+# Coding Guide
+
+## App navigation
+- follow official documentation https://pub.dev/packages/auto_route
+- must run Generating Code to generate route
+
+## Package used
+**This Flutter project utilizes the following packages:**
+- [Riverpod](https://riverpod.dev/docs/introduction/getting_started) - State management
+- Retrofit - API call
+- Dio - HTTP client
+- Build Runner - Code generation
+- Freezed - Code generation for models
+- Freezed Annotations - Annotations for code generation
+
+## Guide to inspect widget
+**Start widget inspection. See below picture**
+
+<img width="525" alt="Screenshot 2024-05-04 at 12 17 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8e0d7e6d-2ff2-40ce-b969-165fe488a6a1">
+
+**Select mode -> Click button 'Toggle select widget mode'. See below picture**
+
+<img width="239" alt="Screenshot 2024-05-04 at 11 13 49" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8d84eac2-fac1-4d33-a46e-bb0f75340ec1">
+
+**Select widgets - Explore the widget tree to view details. Refer to the following information about the tree:. See below picture**
+
+<img width="974" alt="Screenshot 2024-05-04 at 11 13 24" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/f67a754b-9973-4246-9674-22b6dce165f3">
+
+**End widget inspection. See below picture**
+
+<img width="525" alt="Screenshot 2024-05-04 at 12 17 21" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/29707873-8ce6-4f0a-95cf-6f96c2aa7bdd">
+
+# Release Guide
+**Guide CI/CD For detailed guidance**
+refer to: https://docs.github.com/en/actions/quickstart
+
+**Github Actions (CI/CD)**
+
+### First-time User? Follow these steps:
+
+1. Visit [flutter-actions/setup-flutter](https://github.com/flutter-actions/setup-flutter) and copy the provided basic version. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
+
+   <img width="1131" alt="Screenshot 2024-05-06 at 20 20 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c3ee902d-6880-43de-8ab4-cb79b9c790e1">
+
+2. If you have an extra step, add it to the .yml file:
+
+   ```yaml
+   - name: Generate code
+     run: dart run build_runner build --delete-conflicting-outputs
+   ```
+
+3. Now, check if the automatic CI running has passed.
+
+### How to Use This Repository's .yml File:
+- Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
+
 
 # APIs
 1. **Users:**
@@ -384,3 +362,27 @@ Using "dev" and "prod" flavors as examples, with "Debug" and "Release" modes:
 13. **Rate Limit:**
     - URL: `https://api.github.com/rate_limit`
     - Retrieves the current rate limit status for your GitHub API token.
+
+# FAQ
+- All pages must be suffixed by 'Page' to generate auto router automatically
+Example 
+Correct - HomePage  // at the end must add Page
+Wrong - HomeView, HomeWidget, HomeStatefullWidget
+
+- To resolve compile errors, follow these steps:
+1. Ensure that generator dependencies are added to `pubspec.yaml` (retrofit_generator, riverpod_generator).
+2. Manually delete generated files (`.g` and `.freezed.dart`) before running the build runner commands.
+3. Fix compile issues (except for generated syntax) before running build runner commands again.
+
+
+# DO/DON'T
+1. Use hooks for storing widget local state
+-  https://riverpod.dev/docs/essentials/do_dont
+-  https://riverpod.dev/docs/concepts/about_hooks
+
+# TODOs
+-  fix comamnd line run -> flutter run --flavor development 
+   - Target file "lib/main.dart" not found.
+- run using android studio configurations
+   - able to run using android studio
+- github apis implement via diffrent riverpod library usages
