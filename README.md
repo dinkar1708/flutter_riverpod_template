@@ -14,21 +14,23 @@ Using a Reactive Caching and Data-binding Framework Riverpod
 ## Getting Started
 
 **Setup project:**
-
 - Clone project
 - Setup flutter SDK - Current tested flutter SDK 3.19.6
 
 **This Flutter project utilizes the following packages:**
-
 - [Riverpod](https://riverpod.dev/docs/introduction/getting_started) - State management
 - Retrofit - API call
 - Dio - HTTP client
 - Build Runner - Code generation
 - Freezed - Code generation for models
 - Freezed Annotations - Annotations for code generation
-**Github Actions(CI/CD)**
-- Follow https://github.com/flutter-actions/setup-flutter
-- Guide https://docs.github.com/en/actions/quickstart
+
+**Github Actions (CI/CD)**
+- First time user? Follow these steps:
+    - Visit https://github.com/flutter-actions/setup-flutter and copy the basic version provided. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
+    [Insert image here]
+
+- For detailed guidance, refer to: https://docs.github.com/en/actions/quickstart
 
 ## Generating Code
 To generate the necessary code, use the following commands:
