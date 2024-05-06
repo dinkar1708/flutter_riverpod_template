@@ -237,6 +237,9 @@ Using "dev" and "prod" flavors as examples, with "Debug" and "Release" modes:
 ![Run configuration for dev and prod flavors](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/4e0ca6c0-d373-4ed0-9ed1-14c5053412f8)
 
 # Coding Guide
+## Riverpod Guide
+
+For detailed information on how Riverpod is used in this project, please refer to the [Features](#features) section, where each feature is accompanied by a guide based on Riverpod's functionality and requirements.
 
 ## App navigation
 - follow official documentation [Auto Route](https://pub.dev/packages/auto_route)
