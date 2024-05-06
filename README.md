@@ -160,6 +160,19 @@ class CounterPage extends HookWidget {
 - https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
 - ![Simulator Screenshot - iPhone 15 Pro - 2024-03-06 at 21 07 56](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/6e3323c7-40da-4d77-bcc5-c372dd433083)
 
+# Guide to inspect widget
+**Start widget inspection**
+<img width="525" alt="Screenshot 2024-05-04 at 12 17 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8e0d7e6d-2ff2-40ce-b969-165fe488a6a1">
+
+**Select mode -> Click button 'Toggele select widget mode'**
+<img width="239" alt="Screenshot 2024-05-04 at 11 13 49" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8d84eac2-fac1-4d33-a46e-bb0f75340ec1">
+
+**Select widgets - Explore the widget tree to view details. Refer to the following information about the tree:"**
+<img width="974" alt="Screenshot 2024-05-04 at 11 13 24" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/f67a754b-9973-4246-9674-22b6dce165f3">
+
+**End widget inspection**
+<img width="525" alt="Screenshot 2024-05-04 at 12 17 21" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/29707873-8ce6-4f0a-95cf-6f96c2aa7bdd">
+
 # iOS Guide
 
 # Flavors/ Run Configuration and Build Mode Guide

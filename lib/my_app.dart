@@ -24,7 +24,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       // theme settings
       theme: AppThemes.appTheme(Brightness.light),
       darkTheme: AppThemes.appTheme(Brightness.dark),
-      themeMode: ThemeMode.light, // TODO base on condtion chage it
+      themeMode: ThemeMode.light, // TODO base on condition chage it
       // use auto router to decide widget
       routerConfig: _appRouter.config(),
     );
