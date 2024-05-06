@@ -154,17 +154,32 @@ repositoryListAsync.when(
 
 **Requirement: Post API with widget local state**
 
-**How to Use Riverpod in This Case:** Use flutter state notifier provider - https://riverpod.dev/docs/essentials/side_effects, https://riverpod.dev/docs/essentials/side_effects
+**How to Use Riverpod in This Case:** Use flutter future notifier provider - https://riverpod.dev/docs/essentials/side_effects, https://riverpod.dev/docs/essentials/side_effects
 
-1. :
+1. Handle UI State: 
 
 ```dart
-
+    // watch all the times
+    final loginState = ref.watch(loginNotifierProvider);
+    // use on ui with condition
+    loginState.value == APIResultState.loading
+                    ? const CircularProgressIndicator()
+                    : const Text('Login'),
 ```
 
-2. Define state variable and use:
+2. Call API as below:
 
 ```dart
+ loginNotifier
+         .login(loginRequestModel)
+         .then((loginResponse) => {
+               showSnackBar(context, 'Login success'),
+               context.router
+                  .replaceAll([HomeRoute(title: 'Home')]),
+            })
+         .catchError((e) => {
+               showSnackBar(context, 'Login failed'),
+            });
 
 ```
 
