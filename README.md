@@ -14,18 +14,39 @@ Using a Reactive Caching and Data-binding Framework Riverpod
 ## Getting Started
 
 **Setup project:**
-
 - Clone project
 - Setup flutter SDK - Current tested flutter SDK 3.19.6
 
 **This Flutter project utilizes the following packages:**
-
 - [Riverpod](https://riverpod.dev/docs/introduction/getting_started) - State management
 - Retrofit - API call
 - Dio - HTTP client
 - Build Runner - Code generation
 - Freezed - Code generation for models
 - Freezed Annotations - Annotations for code generation
+
+**Github Actions (CI/CD)**
+
+### First-time User? Follow these steps:
+
+1. Visit [flutter-actions/setup-flutter](https://github.com/flutter-actions/setup-flutter) and copy the provided basic version. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
+
+   <img width="1131" alt="Screenshot 2024-05-06 at 20 20 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c3ee902d-6880-43de-8ab4-cb79b9c790e1">
+
+2. If you have an extra step, add it to the .yml file:
+
+   ```yaml
+   - name: Generate code
+     run: dart run build_runner build --delete-conflicting-outputs
+   ```
+
+3. Now, check if the automatic CI running has passed.
+
+### How to Use This Repository's .yml File:
+- Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
+
+### Guide CI/CD
+- For detailed guidance, refer to: https://docs.github.com/en/actions/quickstart
 
 ## Generating Code
 To generate the necessary code, use the following commands:
