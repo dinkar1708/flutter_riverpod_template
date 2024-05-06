@@ -21,11 +21,13 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  // read just once
+  LoginNotifier get loginNotifier => ref.read(loginNotifierProvider.notifier);
 
   @override
   Widget build(BuildContext context) {
-    final loginNotifier = ref.watch(loginNotifierProvider.notifier);
-    final state = ref.watch(loginNotifierProvider);
+    // watch all the times
+    final loginState = ref.watch(loginNotifierProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -49,6 +51,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  if (loginState.value == APIResultState.loading) {
+                    debugPrint(
+                        'Previouse click is still in progress...ignoring clicks...');
+                    return;
+                  }
                   final loginRequestModel = LoginRequestModel(
                     userName: _userNameController.text,
                     password: _passwordController.text,
@@ -63,7 +70,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     );
                   }
                 },
-                child: state == APIResultState.loading
+                child: loginState.value == APIResultState.loading
                     ? const CircularProgressIndicator()
                     : const Text('Login'),
               ),

@@ -19,11 +19,11 @@ class LoginNotifier extends _$LoginNotifier {
 
   Future<LoginResponseModel?> login(LoginRequestModel loginRequestModel) async {
     debugPrint('login requested....');
-    _state = APIResultState.loading;
+    state = const AsyncData(APIResultState.loading);
     // Simulate loading delay
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 5));
     debugPrint('login data loaded....');
-    _state = APIResultState.result;
+    state = const AsyncData(APIResultState.result);
     // Return dummy future with dummy response model
     // TODO api call goes here
     return Future.value(
