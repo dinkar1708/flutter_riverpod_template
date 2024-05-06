@@ -43,7 +43,7 @@ Using a Reactive Caching and Data-binding Framework Riverpod
 3. Now, check if the automatic CI running has passed.
 
 ### How to Use This Repository's .yml File:
-- Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, and it will automatically start building.
+- Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
 
 ### Guide CI/CD
 - For detailed guidance, refer to: https://docs.github.com/en/actions/quickstart
