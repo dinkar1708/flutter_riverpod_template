@@ -1,6 +1,6 @@
 # flutter_riverpod_template
 
-A new Flutter project.
+A new Flutter template project using riverpod library.
 
 Using a Reactive Caching and Data-binding Framework Riverpod
 
@@ -11,10 +11,14 @@ Using a Reactive Caching and Data-binding Framework Riverpod
    - able to run using android studio
 - github apis implement via diffrent riverpod library usages
 
-
 ## Getting Started
 
-This Flutter project utilizes the following packages:
+**Setup project:**
+
+- Clone project
+- Setup flutter SDK - Current tested flutter SDK 3.19.6
+
+**This Flutter project utilizes the following packages:**
 
 - [Riverpod](https://riverpod.dev/docs/introduction/getting_started) - State management
 - Retrofit - API call
