@@ -26,9 +26,24 @@ Using a Reactive Caching and Data-binding Framework Riverpod
 - Freezed Annotations - Annotations for code generation
 
 **Github Actions (CI/CD)**
-- First time user? Follow these steps:
-    - Visit https://github.com/flutter-actions/setup-flutter and copy the basic version provided. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
-    [Insert image here]
+Certainly, here's the revised section:
+
+---
+
+**First-time User? Follow these steps:**
+
+1. Visit [flutter-actions/setup-flutter](https://github.com/flutter-actions/setup-flutter) and copy the provided basic version. Paste it into any file, give it a name, commit, push, and create a pull request. This action will automatically begin running. See the example below:
+
+   ![Insert image here](image_link)
+
+2. If you have an extra step, add it to the .yml file:
+
+   ```yaml
+   - name: Generate code
+     run: dart run build_runner build --delete-conflicting-outputs
+   ```
+
+3. Now, check if the automatic CI running has passed.
 
 - For detailed guidance, refer to: https://docs.github.com/en/actions/quickstart
 
