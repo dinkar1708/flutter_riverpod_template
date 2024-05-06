@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/data/remote/api/api_result_state.dart';
 import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
 import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
+import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 
 @RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
@@ -60,15 +62,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     userName: _userNameController.text,
                     password: _passwordController.text,
                   );
-                  final loginResponse =
-                      await loginNotifier.login(loginRequestModel);
-                  if (loginResponse != null) {
-                    // TODO fix later
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login Successful!')),
-                    );
-                  }
+                  loginNotifier
+                      .login(loginRequestModel)
+                      .then((loginResponse) => {
+                            showSnackBar(context, 'Login success'),
+                            context.router
+                                .replaceAll([HomeRoute(title: 'Home')]),
+                          })
+                      .catchError((e) => {
+                            showSnackBar(context, 'Login failed'),
+                          });
                 },
                 child: loginState.value == APIResultState.loading
                     ? const CircularProgressIndicator()

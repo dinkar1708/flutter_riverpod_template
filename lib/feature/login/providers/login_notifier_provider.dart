@@ -8,20 +8,17 @@ part 'login_notifier_provider.g.dart';
 
 @riverpod
 class LoginNotifier extends _$LoginNotifier {
-  APIResultState _state = APIResultState.initial;
-
   @override
   Future<APIResultState> build() async {
     debugPrint('login initial state....');
-
-    return _state;
+    return Future.value(APIResultState.initial);
   }
 
   Future<LoginResponseModel?> login(LoginRequestModel loginRequestModel) async {
     debugPrint('login requested....');
     state = const AsyncData(APIResultState.loading);
     // Simulate loading delay
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     debugPrint('login data loaded....');
     state = const AsyncData(APIResultState.result);
     // Return dummy future with dummy response model
