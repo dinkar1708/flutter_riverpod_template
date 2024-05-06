@@ -108,7 +108,8 @@ GitHub API:
 # Features
 ## Home page
 - navigation to features page
-![Screenshot_1709559818](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/82ac45d6-c00f-46a7-8f39-17bced9bf84e)
+<img width="415" alt="Screenshot 2024-05-06 at 20 32 01" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c1cd0232-ce33-43f9-809a-2b30dc6a5c2a">
+
 
 ## Feature user github repositoy list
 
@@ -147,7 +148,8 @@ repositoryListAsync.when(
 );
 ```
 
-![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
+<img width="416" alt="Screenshot 2024-05-06 at 20 32 19" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/501741e0-1509-4533-bbf6-16be30fdc1a3">
+
 
 ## Feature Counter 
 
@@ -178,24 +180,30 @@ class CounterPage extends HookWidget {
           counterState.value = counterState.value + 1;
         },
 ```
-![Screenshot_1709559907](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/27b2be2f-5577-42d6-94f2-50442450305b)
+
+<img width="406" alt="Screenshot 2024-05-06 at 20 32 38" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7393ac62-fda3-4dfb-9f6c-4694f75c8b98">
 
 ## Feature Navigation
 
 - https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation
-- ![Simulator Screenshot - iPhone 15 Pro - 2024-03-06 at 21 07 56](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/6e3323c7-40da-4d77-bcc5-c372dd433083)
+  <img width="415" alt="Screenshot 2024-05-06 at 20 32 53" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/42f49745-0871-45f0-a38b-5cdc86669ba6">
+
 
 # Guide to inspect widget
-**Start widget inspection**
+**Start widget inspection. See below picture**
+
 <img width="525" alt="Screenshot 2024-05-04 at 12 17 35" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8e0d7e6d-2ff2-40ce-b969-165fe488a6a1">
 
-**Select mode -> Click button 'Toggele select widget mode'**
+**Select mode -> Click button 'Toggele select widget mode'. See below picture**
+
 <img width="239" alt="Screenshot 2024-05-04 at 11 13 49" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/8d84eac2-fac1-4d33-a46e-bb0f75340ec1">
 
-**Select widgets - Explore the widget tree to view details. Refer to the following information about the tree:"**
+**Select widgets - Explore the widget tree to view details. Refer to the following information about the tree:. See below picture**
+
 <img width="974" alt="Screenshot 2024-05-04 at 11 13 24" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/f67a754b-9973-4246-9674-22b6dce165f3">
 
-**End widget inspection**
+**End widget inspection. See below picture**
+
 <img width="525" alt="Screenshot 2024-05-04 at 12 17 21" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/29707873-8ce6-4f0a-95cf-6f96c2aa7bdd">
 
 # iOS Guide
