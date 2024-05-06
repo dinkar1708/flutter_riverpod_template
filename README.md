@@ -26,6 +26,9 @@ Using a Reactive Caching and Data-binding Framework Riverpod
 - Build Runner - Code generation
 - Freezed - Code generation for models
 - Freezed Annotations - Annotations for code generation
+**Github Actions(CI/CD)**
+- Follow https://github.com/flutter-actions/setup-flutter
+- Guide https://docs.github.com/en/actions/quickstart
 
 ## Generating Code
 To generate the necessary code, use the following commands:
