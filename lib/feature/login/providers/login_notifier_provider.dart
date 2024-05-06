@@ -17,7 +17,7 @@ class LoginNotifier extends _$LoginNotifier {
     return _state;
   }
 
-  Future<LoginResponseModel> login(LoginRequestModel loginRequestModel) async {
+  Future<LoginResponseModel?> login(LoginRequestModel loginRequestModel) async {
     debugPrint('login requested....');
     _state = APIResultState.loading;
     // Simulate loading delay

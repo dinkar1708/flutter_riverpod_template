@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_template/data/remote/api/api_result_state.dart';
 import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
 import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
 
@@ -21,11 +22,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Read loginNotifierProvider
-  LoginNotifier get loginNotifier => ref.read(loginNotifierProvider.notifier);
-
   @override
   Widget build(BuildContext context) {
+    final loginNotifier = ref.watch(loginNotifierProvider.notifier);
+    final state = ref.watch(loginNotifierProvider);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -47,14 +48,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 obscureText: true,
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   final loginRequestModel = LoginRequestModel(
                     userName: _userNameController.text,
                     password: _passwordController.text,
                   );
-                  loginNotifier.login(loginRequestModel);
+                  final loginResponse =
+                      await loginNotifier.login(loginRequestModel);
+                  if (loginResponse != null) {
+                    // TODO fix later
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Login Successful!')),
+                    );
+                  }
                 },
-                child: const Text('Login'),
+                child: state == APIResultState.loading
+                    ? const CircularProgressIndicator()
+                    : const Text('Login'),
               ),
             ],
           ),
