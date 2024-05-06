@@ -38,6 +38,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: const Text('Open Github User API Page')),
               const Divider(),
               TextButton(
+                  onPressed: () =>
+                      context.router.push(LoginRoute(title: 'Login Example')),
+                  child: const Text('Login Example')),
+              const Divider(),
+              TextButton(
                   onPressed: () => context.router
                       .push(CounterRoute(title: 'Counter Example')),
                   child: const Text('Counter Example')),

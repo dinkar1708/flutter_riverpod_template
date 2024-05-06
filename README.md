@@ -149,6 +149,25 @@ repositoryListAsync.when(
 
 ![Screenshot_1709559854](https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/50aa9214-653f-4864-8c16-66388c0780f7)
 
+
+## Feature Login
+
+**Requirement: Post API with widget local state**
+
+**How to Use Riverpod in This Case:** Use flutter state notifier provider - https://riverpod.dev/docs/essentials/side_effects, https://riverpod.dev/docs/essentials/side_effects
+
+1. :
+
+```dart
+
+```
+
+2. Define state variable and use:
+
+```dart
+
+```
+
 ## Feature Counter 
 
 **Requirement: Maintain widget local state only without netowrk operation**
