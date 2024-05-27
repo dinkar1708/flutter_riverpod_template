@@ -9,8 +9,8 @@ import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final String title;
 
   @override
@@ -38,9 +38,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: const Text('Open Github User API Page')),
               const Divider(),
               TextButton(
-                  onPressed: () =>
-                      context.router.push(LoginRoute(title: 'Login Example')),
-                  child: const Text('Login Example')),
+                  onPressed: () => context.router
+                      .push(UsersRoute(title: 'Search Users Example')),
+                  child: const Text('Search users Example')),
               const Divider(),
               TextButton(
                   onPressed: () => context.router
