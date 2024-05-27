@@ -11,8 +11,8 @@ class NavigationChild2Page extends StatelessWidget {
 
   const NavigationChild2Page({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(

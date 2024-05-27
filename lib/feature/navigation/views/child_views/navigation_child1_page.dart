@@ -10,8 +10,8 @@ class NavigationChild1Page extends StatelessWidget {
 
   const NavigationChild1Page({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(

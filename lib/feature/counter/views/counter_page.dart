@@ -11,8 +11,8 @@ class CounterPage extends HookWidget {
 
   const CounterPage({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(

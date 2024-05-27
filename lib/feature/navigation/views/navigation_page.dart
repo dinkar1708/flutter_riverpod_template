@@ -10,8 +10,8 @@ class NavigationPage extends HookWidget {
 
   const NavigationPage({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
