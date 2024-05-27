@@ -1,1 +1,1 @@
-enum APIResultState { initial, loading, result }
+enum APIResultState { initial, loading, result, error }

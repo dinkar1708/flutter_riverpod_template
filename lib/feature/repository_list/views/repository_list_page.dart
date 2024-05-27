@@ -26,41 +26,41 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
       ref.read(repositoryListNotifierProvider.notifier);
   @override
   Widget build(BuildContext context) {
-    // keep watching, contininouse changes observation
-    final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          child: repositoryListAsync.when(
-            data: (data) => _buildListView(data),
-            error: (error, stackTrace) {
-              debugPrint(error.toString());
-              debugPrint(stackTrace.toString());
-              return Text('Error $error');
-            },
-            loading: () => const Center(child: Text('Loading...')),
-          ),
+          body: CustomScrollView(slivers: [
+        SharedSliverAppBar(
+          title: widget.title + repositoryListNotifier.userName,
         ),
-      ),
+        _buildListRootView(),
+      ])),
+    );
+  }
+
+  Widget _buildListRootView() {
+    // keep watching, contininouse changes observation
+    final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
+    return repositoryListAsync.when(
+      data: (data) => _buildListView(data),
+      error: (error, stackTrace) {
+        debugPrint(error.toString());
+        debugPrint(stackTrace.toString());
+        return SliverToBoxAdapter(child: Text('Error $error'));
+      },
+      loading: () =>
+          const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
     );
   }
 
   Widget _buildListView(List<RepositoryListModel> modelList) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SharedSliverAppBar(
-          title: widget.title + repositoryListNotifier.userName,
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              final entry = modelList[index];
-              return _buildListRowView(entry);
-            },
-            childCount: modelList.length,
-          ),
-        ),
-      ],
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          final entry = modelList[index];
+          return _buildListRowView(entry);
+        },
+        childCount: modelList.length,
+      ),
     );
   }
 

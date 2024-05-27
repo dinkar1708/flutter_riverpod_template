@@ -6,7 +6,7 @@ import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.g
 
 @RoutePage()
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -18,8 +18,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     // Navigate to the next screen after a delay
     Timer(
-      const Duration(milliseconds: 500), // half second delay
-      () => context.router.replace(HomeRoute(title: 'Home page')),
+      const Duration(milliseconds: 1000), // half second delay
+      () => context.router.replace(LoginRoute(title: "Login")),
     );
   }
 
