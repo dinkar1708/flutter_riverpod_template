@@ -15,8 +15,10 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="gradleJvm" value="Embedded JDK" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/../../../../Dpm/SDK/flutter/packages/flutter_tools/gradle" />

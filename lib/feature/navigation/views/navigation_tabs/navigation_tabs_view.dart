@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NavigationTabsView extends StatelessWidget {
   final TabsRouter tabsRouter;
 
-  const NavigationTabsView(this.tabsRouter, {Key? key}) : super(key: key);
+  const NavigationTabsView(this.tabsRouter, {super.key});
 
   @override
   Widget build(BuildContext context) {

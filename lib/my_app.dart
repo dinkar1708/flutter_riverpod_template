@@ -7,8 +7,8 @@ import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_theme.
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({
     required this.launchTitle,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final String launchTitle;
 
   @override

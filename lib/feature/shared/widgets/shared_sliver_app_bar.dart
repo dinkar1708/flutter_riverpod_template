@@ -3,9 +3,9 @@ import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.
 
 class SharedSliverAppBar extends StatelessWidget {
   const SharedSliverAppBar({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   final String title;
 
