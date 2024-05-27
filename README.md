@@ -110,7 +110,7 @@ final isSearchingNotifier = useState(false);
       loading: () => const Center(child: Text('Loading...')),
     );
 ```
-- <img width="400" alt="Search Users" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/501741e0-1509-4533-bbf6-16be30fdc1a3">
+- <img width="400" alt="Search Users" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/545b38ce-4e9f-4085-9f2b-9e338cfbcb35">
 
 ### Feature: User GitHub Repository List - GET API
 
