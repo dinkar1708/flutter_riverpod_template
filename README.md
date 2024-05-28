@@ -11,9 +11,11 @@ A new Flutter template project using the Riverpod library for state management.
 6. [Coding Guide](#coding-guide)
 7. [Release Guide](#release-guide)
 8. [APIs](#apis)
-9. [FAQ](#faq)
-10. [DO/DON'T](#dodont)
-11. [TODOs](#todos)
+9. [Riverpod Library Guide](#riverpod-library-guide)
+10. [FAQ](#faq)
+11. [DO/DON'T](#dodont)
+12. [TODOs](#todos)
+
 
 ## Setup
 
@@ -67,11 +69,96 @@ dart run build_runner watch --delete-conflicting-outputs
 - Navigation to feature pages
 - <img width="400" alt="Home Page" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c1cd0232-ce33-43f9-809a-2b30dc6a5c2a">
 
-### Feature: Search Users and Handle widget local state - GET API + widget local state(clear button in search box)
 
-**Requirement: Get Data from Network and handle local state of widget**
+### Feature: Navigation
+- [Auto Route](https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation)
+- <img width="400" alt="Navigation Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/42f49745-0871-45f0-a38b-5cdc86669ba6">
 
-**How to Use Riverpod in This Case:** User Future Provider
+### Feature: Counter without API
+
+**API-TYPE: No API**
+
+**Requirement: Maintain widget local state only without network operation**
+
+**How to Use Riverpod in This Case:** Use flutter hooks HookWidget widget
+
+1. Define parent class:
+
+```dart
+// see parent class
+
+@RoutePage()
+class CounterPage extends HookWidget {
+```
+
+2. Use notifier provider on UI
+
+```dart
+// define
+    final counterState = useState(0);
+// use variable
+ Text(
+              'Value ${counterState.value}',
+              style: AppTextStyle.labelMedium
+                  .copyWith(color: context.color.textPrimary),
+            ),
+// modify variable
+ onPressed: () {
+          counterState.value = counterState.value + 1;
+        },
+```
+- <img width="400" alt="Counter Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7393ac62-fda3-4dfb-9f6c-4694f75c8b98">
+
+
+### Feature: User GitHub Repository List
+
+**API-TYPE: GET**
+
+**Requirement: Fetch Data from Network**
+
+**How to Use Riverpod in This Case:** User Future Provider - https://riverpod.dev/docs/providers/future_provider
+
+1. Define a future and perform a network call:
+
+```dart
+@riverpod
+class RepositoryListNotifier extends _$RepositoryListNotifier {
+// below is the future provider
+  @override
+  Future<List<RepositoryListModel>> build() async => await ref
+      .read(userRepositoryProvider)
+      .getRepositories(userName, pageSize);
+}
+```
+
+2. Define parent class:
+
+```dart
+// see parent class 
+class RepositoryListPage extends ConsumerStatefulWidget {
+````
+
+3. Use notifier provider on UI
+
+```dart
+final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
+return switch (repositoryListAsync) {
+  AsyncError(:final error) =>
+    SliverToBoxAdapter(child: Text('Error $error')),
+  AsyncData(:final value) => _buildListView(value),
+  _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
+};
+```
+- <img width="400" alt="Repository List" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/501741e0-1509-4533-bbf6-16be30fdc1a3">
+
+
+### Feature: Search Users and Handle widget local state
+
+**API-TYPE: GET**
+
+**Requirement: Fetch Data from Network and handle widget local state(clear button in search box)**
+
+**How to Use Riverpod in This Case:** User Future Provider with hooks - https://riverpod.dev/docs/essentials/side_effects#going-further-showing-a-spinner--error-handling
 
 1. Define a future and perform a network call:
 
@@ -79,7 +166,7 @@ dart run build_runner watch --delete-conflicting-outputs
 // TODO later
 ```
 
-2. Utilize the notifier provider to access data and handle loading and error states:
+2. Define parent class:
 
 ```dart
 // see parent class is StatefulHookConsumerWidget which is special using via 'hooks_riverpod' library
@@ -90,6 +177,9 @@ dart run build_runner watch --delete-conflicting-outputs
 class UsersPage extends StatefulHookConsumerWidget {
 ````
 
+3. Use notifier provider on UI
+
+// use widget local state variable
 ```dart
 final isSearchingNotifier = useState(false);
 // Change the value
@@ -100,67 +190,41 @@ final isSearchingNotifier = useState(false);
 
 ```dart
 // load user list data
-    return usersListAsync.when(
-      data: (data) => _buildListView(data),
-      error: (error, stackTrace) {
-        debugPrint(error.toString());
-        debugPrint(stackTrace.toString());
-        return Text('Error $error');
-      },
-      loading: () => const Center(child: Text('Loading...')),
-    );
+    final usersListAsync = ref.watch(usersNotifierProviderProvider);
+    return switch (usersListAsync) {
+      AsyncError(:final error) => SliverToBoxAdapter(
+          child: SliverToBoxAdapter(child: Text('Error $error'))),
+      AsyncData(:final value) => _buildListView(value),
+      _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
+    };
 ```
 - <img width="400" alt="Search Users" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/545b38ce-4e9f-4085-9f2b-9e338cfbcb35">
 
-### Feature: User GitHub Repository List - GET API
 
-**Requirement: Get Data from Network**
+### Feature: Login
 
-**How to Use Riverpod in This Case:** User Future Provider
+**API-TYPE: POST**
+
+**Requirement: Send data to network**
+
+**How to Use Riverpod in This Case:**
+
+To use the Flutter Future Notifier Provider, we can follow the guidelines provided in the Riverpod documentation. For a more comprehensive guide on handling side effects, such as showing a spinner and error handling, refer to [this section](https://riverpod.dev/docs/essentials/side_effects#going-further-showing-a-spinner--error-handling) of the Riverpod documentation. 
+However, for simplicity and to maintain clean code, you can handle error messages and loading states using the [FutureProvider](https://riverpod.dev/docs/providers/future_provider) in Riverpod.
 
 1. Define a future and perform a network call:
 
 ```dart
 @riverpod
-class RepositoryListNotifier extends _$RepositoryListNotifier {
-  final userName = 'dinkar1708';
-  final pageSize = 5;
-
+class LoginNotifier extends _$LoginNotifier {
   @override
-  Future<List<RepositoryListModel>> build() async => await ref
-      .read(userRepositoryProvider)
-      .getRepositories(userName, pageSize);
-}
+  Future<LoginStateModel> build() async {
+    debugPrint('login initial state....');
+    return Future.value(const LoginStateModel());
+  }
 ```
 
-2. Utilize the notifier provider to access data and handle loading and error states:
-
-```dart
-// see parent class 
-class RepositoryListPage extends ConsumerStatefulWidget {
-````
-
-```dart
-final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
-repositoryListAsync.when(
-  data: (data) => _buildListView(data),
-  error: (error, stackTrace) {
-    debugPrint(error.toString());
-    debugPrint(stackTrace.toString());
-    return Text('Error $error');
-  },
-  loading: () => const Center(child: Text('Loading...')),
-);
-```
-- <img width="400" alt="Repository List" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/501741e0-1509-4533-bbf6-16be30fdc1a3">
-
-### Feature: Login - POST API
-
-**Requirement: Post API with widget local state**
-
-**How to Use Riverpod in This Case:** Use flutter future notifier provider - [Essential Side Effects](https://riverpod.dev/docs/essentials/side_effects)
-
-1. Handle UI State: 
+2. Define parent class:
 
 ```dart
 // see parent class 
@@ -168,6 +232,8 @@ class LoginPage extends ConsumerStatefulWidget {
 
 ````
 
+3. Use notifier provider on UI
+// use to handle progress indicator
 ```dart
     // watch all the times
     final loginState = ref.watch(loginNotifierProvider);
@@ -177,6 +243,7 @@ class LoginPage extends ConsumerStatefulWidget {
           : const Text('Login'),
 ```
 
+// use to show error message
 ```dart
       // use error message on UI
         const SizedBox(
@@ -186,8 +253,7 @@ class LoginPage extends ConsumerStatefulWidget {
           Text(loginState.value!.errorMessage),
 ```
 
-2. Call API as below:
-
+// use to do network request
 ```dart
 // call api and handle error such as snack bar or alert etc.
          loginNotifier.login(loginRequestModel).then((loginStateModel) => {
@@ -214,42 +280,48 @@ class LoginPage extends ConsumerStatefulWidget {
 **Loaded State after the API call is done**
 - <img width="400" alt="Loaded State" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/046e5e38-78b4-4968-b6f2-0b2398c3b746">
 
-### Feature: Counter without API
 
-**Requirement: Maintain widget local state only without network operation**
+### Feature TODO: Complex Widget local state
 
-**How to Use Riverpod in This Case:** Use flutter hooks HookWidget widget
+**API-TYPE: No api**
 
-1. Extend HookWidget widget:
+**Requirement: Manage complext widget local state**
 
-```dart
-// see parent class
+**How to Use Riverpod in This Case:** State notifier provider https://riverpod.dev/docs/providers/state_notifier_provider
+1. Define state model class
+StateModel {
 
-@RoutePage()
-class CounterPage extends HookWidget {
-```
+}
 
-2. Define state variable and use:
+2. Define a state notifier and define initial state:
 
 ```dart
-// define
-    final counterState = useState(0);
-// use
- Text(
-              'Value ${counterState.value}',
-              style: AppTextStyle.labelMedium
-                  .copyWith(color: context.color.textPrimary),
-            ),
-// modify
- onPressed: () {
-          counterState.value = counterState.value + 1;
-        },
+@riverpod
+class ABCNotifier extends _$ABCNotifier {
+  @override
+  // note here not using future
+  StateModel build() async {
+    return StateModel();
+  }
 ```
-- <img width="400" alt="Counter Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7393ac62-fda3-4dfb-9f6c-4694f75c8b98">
 
-### Feature: Navigation
-- [Auto Route](https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation)
-- <img width="400" alt="Navigation Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/42f49745-0871-45f0-a38b-5cdc86669ba6">
+3. Use notifier provider on UI
+
+```dart
+//
+```
+
+### Feature TODO: Combination of POST, GET, or Widget Local State
+
+Define the parent `StatefulHookConsumerWidget`, which allows you to use `useState` and `ref` to access the provider in the desired manner.
+
+**Examples:**
+
+- **POST + Local State:** Follow the login example, but define the parent `StatefulHookConsumerWidget` to use `useState`.
+  
+- **POST + GET:** Follow the login example and the repository list example.
+  
+- **POST + GET + Widget Local State:** Follow the login example, the repository list example, and define the parent as `StatefulHookConsumerWidget` to use `useState`.
 
 # Run Configuration Guide
 
@@ -362,6 +434,23 @@ refer to: [GitHub Actions Quickstart](https://docs.github.com/en/actions/quickst
 
 ### How to Use This Repository's .yml File:
 - Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
+
+# Riverpod Library Guide
+- Main library
+```
+  flutter_riverpod: ^2.2.0
+  riverpod_annotation: ^2.3.3
+```
+
+- Use flutter hooks to manage state of variables
+```
+flutter_hooks
+```
+
+- StatefulHookConsumerWidget which offers HookWidget and ConsumerStatefulWidget both features.
+```
+hooks_riverpod
+```
 
 # APIs
 For example API usage, refer to the list below:
