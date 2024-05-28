@@ -77,16 +77,12 @@ class _UsersPage extends ConsumerState<UsersPage> {
   Widget _buildListRootView() {
     final usersListAsync = ref.watch(usersNotifierProviderProvider);
 
-    return usersListAsync.when(
-      data: (data) => _buildListView(data),
-      error: (error, stackTrace) {
-        debugPrint(error.toString());
-        debugPrint(stackTrace.toString());
-        return SliverToBoxAdapter(child: Text('Error $error'));
-      },
-      loading: () =>
-          const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
-    );
+    return switch (usersListAsync) {
+      AsyncError(:final error) => SliverToBoxAdapter(
+          child: SliverToBoxAdapter(child: Text('Error $error'))),
+      AsyncData(:final value) => _buildListView(value),
+      _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
+    };
   }
 
   Widget _buildListView(List<UserModel> modelList) {
