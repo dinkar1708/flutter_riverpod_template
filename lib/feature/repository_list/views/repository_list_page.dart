@@ -40,16 +40,12 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
   Widget _buildListRootView() {
     // keep watching, contininouse changes observation
     final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
-    return repositoryListAsync.when(
-      data: (data) => _buildListView(data),
-      error: (error, stackTrace) {
-        debugPrint(error.toString());
-        debugPrint(stackTrace.toString());
-        return SliverToBoxAdapter(child: Text('Error $error'));
-      },
-      loading: () =>
-          const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
-    );
+    return switch (repositoryListAsync) {
+      AsyncError(:final error) =>
+        SliverToBoxAdapter(child: Text('Error $error')),
+      AsyncData(:final value) => _buildListView(value),
+      _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
+    };
   }
 
   Widget _buildListView(List<RepositoryListModel> modelList) {
