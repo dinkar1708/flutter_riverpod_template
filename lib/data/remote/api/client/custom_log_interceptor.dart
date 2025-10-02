@@ -13,8 +13,7 @@ class CustomLoggerInterceptor implements Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    debugPrint(
-        'API.................... onRequest() - Sending network request');
+    debugPrint('API.................... onRequest() - Sending network request');
     debugPrint('URL: ${options.baseUrl}${options.path}');
     debugPrint('Headers: ${options.headers}');
     debugPrint('Query paramters: ${options.queryParameters}');
@@ -24,10 +23,11 @@ class CustomLoggerInterceptor implements Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     debugPrint(
-        'API.................... onResponse() - Got response - RESPONSE:'
-        'Status Code: ${response.statusCode}'
-        'URL: ${response.requestOptions.baseUrl}${response.requestOptions.path} \n'
-        'Response Data: ${response.data}');
+      'API.................... onResponse() - Got response - RESPONSE:'
+      'Status Code: ${response.statusCode}'
+      'URL: ${response.requestOptions.baseUrl}${response.requestOptions.path} \n'
+      'Response Data: ${response.data}',
+    );
     return handler.next(response);
   }
 }
