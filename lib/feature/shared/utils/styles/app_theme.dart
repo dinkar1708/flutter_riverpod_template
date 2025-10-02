@@ -59,6 +59,59 @@ class AppThemes {
         textColor: Colors.white,
         iconColor: Colors.white70,
       ),
+      // Inputs: improve hint/label contrast on gradient
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: const TextStyle(color: Colors.white70),
+        hintStyle: const TextStyle(color: Colors.white54),
+        filled: true,
+        fillColor: Colors.black.withValues(alpha: 0.05),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          borderSide: BorderSide(
+            color: Colors.white.withValues(alpha: 0.35),
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          borderSide: BorderSide(
+            color: Colors.white.withValues(alpha: 0.85),
+            width: 1.2,
+          ),
+        ),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(28)),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
+      ),
+      // Common elevated button style reusable across app
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return Colors.white.withValues(alpha: 0.4);
+            }
+            return Colors.white.withValues(alpha: 0.9);
+          }),
+          foregroundColor: WidgetStateProperty.all(const Color(0xFF2D3748)),
+          overlayColor: WidgetStateProperty.all(
+            Colors.white.withValues(alpha: 0.2),
+          ),
+          elevation: WidgetStateProperty.all(3),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
     );
 
     // Make all default text/icons readable on gradients
