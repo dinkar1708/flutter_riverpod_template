@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod_template/data/remote/api/cient/mock_api_client.dart';
+import 'package:flutter_riverpod_template/data/remote/api/client/mock_api_client.dart';
 import 'package:flutter_riverpod_template/data/remote/api/providers/user/user_repository.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
 
@@ -7,7 +7,9 @@ class MockUserRepository extends UserRepository {
 
   @override
   Future<List<RepositoryListModel>> getRepositories(
-      String userName, int pageSize) async {
+    String userName,
+    int pageSize,
+  ) async {
     return hardCodedData;
   }
 }

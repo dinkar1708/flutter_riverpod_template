@@ -27,6 +27,15 @@ class _MyAppState extends ConsumerState<MyApp> {
       themeMode: ThemeMode.light, // TODO base on condition chage it
       // use auto router to decide widget
       routerConfig: _appRouter.config(),
+      builder: (context, child) {
+        final brightness = Theme.of(context).brightness;
+        return Container(
+          decoration: BoxDecoration(
+            gradient: AppThemes.appBackgroundGradient(brightness),
+          ),
+          child: child,
+        );
+      },
     );
   }
 }

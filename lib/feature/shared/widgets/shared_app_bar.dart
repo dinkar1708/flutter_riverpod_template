@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SharedAppBar({
-    super.key,
-    required this.title,
-  });
+  const SharedAppBar({super.key, required this.title});
 
   final String title;
 
@@ -15,8 +11,8 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: context.color.backgroundPrimary, // background color
-      foregroundColor: context.color.textPrimary, // text color
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
       title: Text(title),
     );
   }
