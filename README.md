@@ -63,6 +63,16 @@ dart run build_runner watch --delete-conflicting-outputs
    - User Repositories: `https://api.github.com/users/:username/repos`
 - Endpoint: `users/dinkar1708/repos?per_page=3`
 
+## Latest screen shots
+
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 34" src="https://github.com/user-attachments/assets/623a3366-fd6c-4bef-8725-30ef30b53194" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 30" src="https://github.com/user-attachments/assets/f917e2ad-6663-4af7-a6bc-f6ddf2924f59" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 26" src="https://github.com/user-attachments/assets/6cf4b8a6-6b83-4832-b951-c241384cd08e" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 19" src="https://github.com/user-attachments/assets/4d8086dd-cfe4-4ab3-8dfe-77906e0cb4a4" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 16" src="https://github.com/user-attachments/assets/515485c9-0ee8-429a-9ccc-e87b5b4904ff" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 07" src="https://github.com/user-attachments/assets/84e94b20-1482-4b5a-bbfd-e4b8869b39bc" />
+<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 05" src="https://github.com/user-attachments/assets/e44b8fe4-fa85-4658-8c59-30e4f185fc29" />
+
 ## Features
 
 ### Home Page
