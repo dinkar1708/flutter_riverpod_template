@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/shared_sliver_app_bar.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 import 'package:flutter_riverpod_template/feature/users/models/user_model.dart';
@@ -40,11 +41,8 @@ class _UsersPage extends ConsumerState<UsersPage> {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              backgroundColor: context.color.backgroundPrimary,
-              foregroundColor: context.color.textPrimary,
-              title: Text(' User ${widget.title} Repositories'),
-              floating: true,
+            SharedSliverAppBar(
+              title: widget.title,
               actions: [
                 IconButton(
                   icon: Icon(isSearching ? Icons.close : Icons.search),

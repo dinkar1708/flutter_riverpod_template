@@ -19,23 +19,59 @@ class AppThemes {
           : Brightness.dark,
     );
 
-    return ThemeData(
+    final ThemeData base = ThemeData(
       // Let the global gradient show through
       scaffoldBackgroundColor: Colors.transparent,
       // common divider color
       dividerTheme: DividerThemeData(color: colors.divider, thickness: 0.5),
       fontFamily: null, // set font here later
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
-        foregroundColor: colors.textPrimary,
-        elevation: 0,
+        backgroundColor: const Color(
+          0xFF667eea,
+        ).withValues(alpha: 0.8), // Semi-transparent blue from gradient
+        foregroundColor: Colors.white, // White text for contrast against blue
+        elevation: 2,
+        shadowColor: Colors.black.withValues(alpha: 0.1),
+        surfaceTintColor: Colors.transparent,
         systemOverlayStyle: overlay,
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+        iconTheme: const IconThemeData(color: Colors.white, size: 24),
       ),
       // Apply a color scheme so default text/icon colors have proper contrast
       colorScheme: ColorScheme.fromSeed(
         seedColor: colors.textPrimary,
         brightness: brightness,
         surface: colors.backgroundPrimary,
+      ),
+      // Improve bottom navigation visibility
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.black.withValues(alpha: 0.05),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        elevation: 2,
+        type: BottomNavigationBarType.fixed,
+      ),
+      listTileTheme: const ListTileThemeData(
+        textColor: Colors.white,
+        iconColor: Colors.white70,
+      ),
+    );
+
+    // Make all default text/icons readable on gradients
+    return base.copyWith(
+      textTheme: base.textTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+        decorationColor: Colors.white,
+      ),
+      iconTheme: const IconThemeData(color: Colors.white),
+      colorScheme: base.colorScheme.copyWith(
+        onSurface: Colors.white,
+        onPrimary: Colors.white,
       ),
     );
   }

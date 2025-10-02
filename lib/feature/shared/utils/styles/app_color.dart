@@ -21,17 +21,17 @@ class AppColor {
   final Color red;
 
   static const lightColor = AppColor(
-    // High-contrast text on light backgrounds
-    textPrimary: Color(0xFF0F172A),
+    // High-contrast text for gradient backgrounds
+    textPrimary: Color(0xFF2D3748),
     // Subtle divider for light theme
-    divider: Color(0xFFE5E7EB),
+    divider: Color(0xFFE2E8F0),
     // Secondary text
-    textSeconday: Color(0xFF6B7280),
-    gray: Color(0xFF9CA3AF),
-    // Soft, pleasant light background (not pure white)
-    backgroundPrimary: Color(0xFFF3F6FA),
-    backgroundSecondary: Color(0xFFEAF0F6),
-    red: Color(0xFFFF4D4F),
+    textSeconday: Color(0xFF718096),
+    gray: Color(0xFFA0AEC0),
+    // These won't be used since we have gradient background
+    backgroundPrimary: Color(0xFFF7FAFC),
+    backgroundSecondary: Color(0xFFEDF2F7),
+    red: Color(0xFFE53E3E),
   );
 
   static const darkColor = AppColor(
