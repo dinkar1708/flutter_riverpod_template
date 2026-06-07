@@ -160,6 +160,27 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
         const SizedBox(height: 16),
 
+        // Guest Login Button
+        OutlinedButton(
+          onPressed: _handleGuestLogin,
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 50),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.person_outline,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const SizedBox(width: 8),
+              const Text('Continue as Guest'),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
         // Forgot Password
         TextButton(
           onPressed: () {
@@ -215,7 +236,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         context,
         'Welcome ${loginStateModel.loginResponseModel!.userName}!',
       );
-      context.router.replaceAll([HomeRoute(title: 'Home')]);
+      context.router.replaceAll([const HomeWithTabsRoute()]);
     } else {
       showSnackBar(
         context,
@@ -224,5 +245,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             : 'Login failed. Please try again.',
       );
     }
+  }
+
+  void _handleGuestLogin() {
+    showSnackBar(context, 'Welcome Guest!');
+    context.router.replaceAll([const HomeWithTabsRoute()]);
   }
 }

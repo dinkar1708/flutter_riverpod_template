@@ -5,6 +5,7 @@ import 'package:flutter_riverpod_template/feature/repository_list/models/reposit
 import 'package:flutter_riverpod_template/feature/repository_list/providers/repository_list_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/error_view.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/shared_sliver_app_bar.dart';
 
 @RoutePage()
@@ -41,8 +42,12 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
     // keep watching, contininouse changes observation
     final repositoryListAsync = ref.watch(repositoryListProvider);
     return switch (repositoryListAsync) {
-      AsyncError(:final error) =>
-        SliverToBoxAdapter(child: Text('Error $error')),
+      AsyncError(:final error) => SliverFillRemaining(
+          child: ErrorView(
+            error: error,
+            onRetry: () => ref.invalidate(repositoryListProvider),
+          ),
+        ),
       AsyncData(:final value) => _buildListView(value),
       _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
     };

@@ -22,6 +22,7 @@ dependencies:
   hooks_riverpod: ^3.3.1
   riverpod: ^3.2.1
   webview_flutter: ^4.10.0
+  package_info_plus: ^8.1.1
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 enum AppEnvironment {
   dev,
   prod,
@@ -18,3 +20,8 @@ class AppConfig {
   final String appApiKey;
   final bool initializeCrashlytics;
 }
+
+// Provider for AppConfig
+final appConfigProvider = Provider<AppConfig>((ref) {
+  throw UnimplementedError('appConfigProvider must be overridden');
+});

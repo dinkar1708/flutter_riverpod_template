@@ -43,41 +43,6 @@ class SettingsPage extends ConsumerWidget {
             ),
           ),
 
-          // Account Section
-          _buildSectionHeader(context, 'Account'),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Icon(
-                    Icons.person_outline,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  title: const Text('Profile Settings'),
-                  subtitle: const Text('Update your personal information'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    // Navigate to profile
-                  },
-                ),
-                const Divider(height: 1),
-                ListTile(
-                  leading: Icon(
-                    Icons.notifications_outlined,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  title: const Text('Notifications'),
-                  subtitle: const Text('Manage notification preferences'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    // Navigate to notifications settings
-                  },
-                ),
-              ],
-            ),
-          ),
-
           // Help & Support Section
           _buildSectionHeader(context, 'Help & Support'),
           Card(
@@ -173,26 +138,6 @@ class SettingsPage extends ConsumerWidget {
             ),
           ),
 
-          const SizedBox(height: 16),
-
-          // Logout Button
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton.icon(
-              onPressed: () {
-                // Show logout confirmation
-                _showLogoutDialog(context);
-              },
-              icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.error,
-                foregroundColor: Colors.white,
-                minimumSize: const Size(double.infinity, 50),
-              ),
-            ),
-          ),
-
           const SizedBox(height: 32),
         ],
       ),
@@ -208,32 +153,6 @@ class SettingsPage extends ConsumerWidget {
               color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w600,
             ),
-      ),
-    );
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to logout?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // Perform logout
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-            child: const Text('Logout'),
-          ),
-        ],
       ),
     );
   }
