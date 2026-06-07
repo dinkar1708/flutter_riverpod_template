@@ -94,15 +94,6 @@ class SettingsPage extends ConsumerWidget {
               children: [
                 ListTile(
                   leading: Icon(
-                    Icons.info_outline,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  title: const Text('App Version'),
-                  subtitle: const Text('1.0.0'),
-                ),
-                const Divider(height: 1),
-                ListTile(
-                  leading: Icon(
                     Icons.privacy_tip_outlined,
                     color: Theme.of(context).colorScheme.primary,
                   ),

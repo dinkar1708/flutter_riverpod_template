@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/shared/app_flavour/app_config.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class ProfilePage extends ConsumerStatefulWidget {
@@ -114,17 +115,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           const SizedBox(height: 8),
 
           _buildNotificationCard(context),
-          const SizedBox(height: 8),
-
-          _buildMenuCard(
-            context,
-            icon: Icons.security_outlined,
-            title: 'Privacy & Security',
-            subtitle: 'Control your privacy settings',
-            onTap: () {
-              // Navigate to privacy settings
-            },
-          ),
 
           const SizedBox(height: 24),
 
@@ -154,9 +144,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             icon: Icons.help_outline,
             title: 'Help & Support',
             subtitle: 'Get help and contact support',
-            onTap: () {
-              // Navigate to help
-            },
+            onTap: () => _showHelpSupportBottomSheet(context),
           ),
 
           const SizedBox(height: 24),
@@ -229,6 +217,212 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
       return 'Version $version ($buildNumber)';
     } else {
       return 'Version $version';
+    }
+  }
+
+  void _showHelpSupportBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.support_agent_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Contact Support',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Choose your preferred method',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withValues(alpha: 0.6),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+
+            // Phone Option
+            _buildSupportOption(
+              context,
+              icon: Icons.phone,
+              title: 'Phone Call',
+              subtitle: '+1 (555) 123-4567',
+              color: Colors.green,
+              onTap: () => _launchPhone('+15551234567'),
+            ),
+            const SizedBox(height: 12),
+
+            // WhatsApp Option
+            _buildSupportOption(
+              context,
+              icon: Icons.chat_bubble,
+              title: 'WhatsApp',
+              subtitle: 'Chat with us on WhatsApp',
+              color: Colors.green.shade600,
+              onTap: () => _launchWhatsApp('+15551234567'),
+            ),
+            const SizedBox(height: 12),
+
+            // Email Option
+            _buildSupportOption(
+              context,
+              icon: Icons.email,
+              title: 'Email',
+              subtitle: 'support@example.com',
+              color: Colors.blue,
+              onTap: () => _launchEmail('support@example.com'),
+            ),
+
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSupportOption(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _launchPhone(String phoneNumber) async {
+    final uri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not launch phone app')),
+        );
+      }
+    }
+  }
+
+  Future<void> _launchWhatsApp(String phoneNumber) async {
+    final uri = Uri.parse('https://wa.me/$phoneNumber');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not launch WhatsApp')),
+        );
+      }
+    }
+  }
+
+  Future<void> _launchEmail(String email) async {
+    final uri = Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {
+        'subject': 'Support Request',
+      },
+    );
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not launch email app')),
+        );
+      }
     }
   }
 
