@@ -23,12 +23,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   // read just once
-  LoginNotifier get loginNotifier => ref.read(loginNotifierProvider.notifier);
+  LoginNotifier get loginNotifier => ref.read(loginProvider.notifier);
 
   @override
   Widget build(BuildContext context) {
     // watch all the times
-    final loginState = ref.watch(loginNotifierProvider);
+    final loginState = ref.watch(loginProvider);
 
     return SafeArea(
       child: Scaffold(

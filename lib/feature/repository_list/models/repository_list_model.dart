@@ -4,7 +4,7 @@ part 'repository_list_model.freezed.dart';
 part 'repository_list_model.g.dart';
 
 @freezed
-class RepositoryListModel with _$RepositoryListModel {
+abstract class RepositoryListModel with _$RepositoryListModel {
   factory RepositoryListModel({
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'node_id') required String nodeId,
@@ -24,7 +24,7 @@ class RepositoryListModel with _$RepositoryListModel {
 }
 
 @freezed
-class Owner with _$Owner {
+abstract class Owner with _$Owner {
   factory Owner({
     @JsonKey(name: 'login') required String login,
     @JsonKey(name: 'id') required int id,

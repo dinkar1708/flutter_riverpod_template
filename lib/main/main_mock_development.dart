@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/shared/app_flavour/app_config.dart';
 
 import 'package:flutter_riverpod_template/data/remote/api/providers/user/mock_user_repository_provider.dart';
@@ -17,7 +16,7 @@ void main() async {
     initializeCrashlytics: false,
   );
   // different for each flavours
-  final List<Override> overrides = [
+  final overrides = [
     // override any specific depedency needed
     // override any specific depedency needed for mock
     // override for testing with hard coded data

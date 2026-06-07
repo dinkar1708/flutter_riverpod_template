@@ -6,7 +6,7 @@ part 'login_state_model.freezed.dart';
 part 'login_state_model.g.dart';
 
 @freezed
-class LoginStateModel with _$LoginStateModel {
+abstract class LoginStateModel with _$LoginStateModel {
   const factory LoginStateModel({
     @Default(APIResultState.initial) APIResultState apiResultState,
     @Default("") String errorMessage,

@@ -4,7 +4,7 @@ part 'login_request_model.freezed.dart';
 part 'login_request_model.g.dart';
 
 @freezed
-class LoginRequestModel with _$LoginRequestModel {
+abstract class LoginRequestModel with _$LoginRequestModel {
   const factory LoginRequestModel({
     @JsonKey(name: 'user_name') required String userName,
     @JsonKey(name: 'password') required String password,

@@ -23,7 +23,7 @@ class RepositoryListPage extends ConsumerStatefulWidget {
 class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
   // read just once
   RepositoryListNotifier get repositoryListNotifier =>
-      ref.read(repositoryListNotifierProvider.notifier);
+      ref.read(repositoryListProvider.notifier);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +39,7 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
 
   Widget _buildListRootView() {
     // keep watching, contininouse changes observation
-    final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
+    final repositoryListAsync = ref.watch(repositoryListProvider);
     return switch (repositoryListAsync) {
       AsyncError(:final error) =>
         SliverToBoxAdapter(child: Text('Error $error')),

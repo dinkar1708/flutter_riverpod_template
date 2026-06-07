@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod_template/feature/users/models/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod_template/feature/users/providers/users_filter_parameter_notifier.dart';
-import 'package:riverpod/riverpod.dart';
 
 part 'users_notifier_provider.g.dart';
 
@@ -20,7 +19,7 @@ class UsersNotifierProvider extends _$UsersNotifierProvider {
 /// Exposes the filtered users list based on filter parameter notifier
 @riverpod
 AsyncValue<List<UserModel>> filteredUsers(Ref ref) {
-  final filter = ref.watch(usersFilterParameterNotifierProvider);
+  final filter = ref.watch(usersFilterParameterProvider);
   final query = filter.query.trim().toLowerCase();
   final usersAsync = ref.watch(usersNotifierProviderProvider);
 

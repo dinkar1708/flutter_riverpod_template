@@ -8,19 +8,19 @@ import 'package:flutter_riverpod_template/my_app.dart';
 
 void sharedMain(
   AppConfig appConfig, {
-  List<Override> overrides = const [],
+  List overrides = const [],
 }) async {
   await init(appConfig);
 
-  final List<Override> allOverrides = [
+  final allOverrides = [
     appProvider.overrideWithValue(
       ApiConfig(appConfig.apiBaseUrl, apiKey: appConfig.appApiKey),
     ),
+    ...overrides,
   ];
-  allOverrides.addAll(overrides);
   runApp(
     ProviderScope(
-      overrides: allOverrides,
+      overrides: allOverrides.cast(),
       child: MyApp(launchTitle: appConfig.launchTitle),
     ),
   );
