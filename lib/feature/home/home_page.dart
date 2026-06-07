@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
-import 'package:flutter_riverpod_template/feature/shared/widgets/shared_app_bar.dart';
 
 @RoutePage()
 class HomePage extends ConsumerStatefulWidget {
@@ -17,45 +16,189 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SharedAppBar(title: widget.title),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextButton(
-              onPressed: () => context.router.push(
-                RepositoryListRoute(title: 'Repository '),
-              ),
-              child: const Text('Open Github User API Page'),
-            ),
-            const Divider(),
-            TextButton(
-              onPressed: () => context.router.push(
-                UsersRoute(title: 'Search Users Example'),
-              ),
-              child: const Text('Search users Example'),
-            ),
-            const Divider(),
-            TextButton(
-              onPressed: () =>
-                  context.router.push(CounterRoute(title: 'Counter Example')),
-              child: const Text('Counter Example'),
-            ),
-            const Divider(),
-            TextButton(
-              onPressed: () => context.router.push(
-                NavigationRoute(title: 'Navigation Example'),
-              ),
-              child: const Text('Navigation Example'),
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () => context.router.push(const SettingsRoute()),
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: 'Settings',
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // Welcome Card
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.home_rounded,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 32,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Welcome!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            Text(
+                              'Explore the app features below',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          // Features Section Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Text(
+              'Features',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // Feature Cards
+          _buildFeatureCard(
+            context,
+            icon: Icons.code_rounded,
+            title: 'GitHub Repositories',
+            description: 'Browse GitHub repositories with API',
+            onTap: () => context.router.push(
+              RepositoryListRoute(title: 'Repositories'),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          _buildFeatureCard(
+            context,
+            icon: Icons.search_rounded,
+            title: 'Search Users',
+            description: 'Search and filter user examples',
+            onTap: () => context.router.push(
+              UsersRoute(title: 'Search Users'),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          _buildFeatureCard(
+            context,
+            icon: Icons.add_circle_outline_rounded,
+            title: 'Counter Example',
+            description: 'State management demonstration',
+            onTap: () => context.router.push(
+              CounterRoute(title: 'Counter'),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          _buildFeatureCard(
+            context,
+            icon: Icons.navigation_rounded,
+            title: 'Navigation Example',
+            description: 'Advanced routing and navigation',
+            onTap: () => context.router.push(
+              NavigationRoute(title: 'Navigation'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeatureCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primary
+                      .withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

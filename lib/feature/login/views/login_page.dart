@@ -7,7 +7,7 @@ import 'package:flutter_riverpod_template/feature/login/models/login_state_model
 import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
-import 'package:flutter_riverpod_template/feature/shared/widgets/primary_button.dart';
+import 'package:flutter_riverpod_template/feature/shared/widgets/common_text_field.dart';
 
 @RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
@@ -22,19 +22,67 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // read just once
+  bool _obscurePassword = true;
+
   LoginNotifier get loginNotifier => ref.read(loginProvider.notifier);
 
   @override
-  Widget build(BuildContext context) {
-    // watch all the times
-    final loginState = ref.watch(loginProvider);
+  void dispose() {
+    _userNameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.all(20.0),
-          child: _buildLoginFormView(loginState),
+  @override
+  Widget build(BuildContext context) {
+    final loginState = ref.watch(loginProvider);
+    final colors = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // App Logo/Icon
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: colors.primary.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.lock_outline_rounded,
+                    size: 50,
+                    color: colors.primary,
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Welcome Text
+                Text(
+                  'Welcome Back!',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Sign in to continue',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                ),
+                const SizedBox(height: 48),
+
+                // Login Form
+                _buildLoginFormView(loginState),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -42,28 +90,83 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Widget _buildLoginFormView(AsyncValue<LoginStateModel> loginState) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.app_registration_rounded,
-          size: 56,
-          color: Colors.white,
-        ),
-        const SizedBox(height: 100),
-        if (loginState.value?.errorMessage != null)
-          Text(loginState.value!.errorMessage),
-        TextField(
+        // Error Message
+        if (loginState.value?.errorMessage != null &&
+            loginState.value!.errorMessage.isNotEmpty)
+          Container(
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.error.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    loginState.value!.errorMessage,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        // Username Field
+        CommonTextField(
           controller: _userNameController,
-          decoration: const InputDecoration(labelText: 'Username'),
+          hintText: 'Enter your username',
+          labelText: 'Username',
+          prefixIcon: const Icon(Icons.person_outline),
+          textInputAction: TextInputAction.next,
         ),
-        const SizedBox(height: 8),
-        TextField(
+        const SizedBox(height: 16),
+
+        // Password Field
+        CommonTextField(
           controller: _passwordController,
-          decoration: const InputDecoration(labelText: 'Password'),
-          obscureText: true,
+          hintText: 'Enter your password',
+          labelText: 'Password',
+          obscureText: _obscurePassword,
+          prefixIcon: const Icon(Icons.lock_outline),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscurePassword ? Icons.visibility_off : Icons.visibility,
+            ),
+            onPressed: () {
+              setState(() {
+                _obscurePassword = !_obscurePassword;
+              });
+            },
+          ),
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => _handleLogin(),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 24),
+
+        // Login Button
         _buildLoginButtonView(loginState),
+
+        const SizedBox(height: 16),
+
+        // Forgot Password
+        TextButton(
+          onPressed: () {
+            // Handle forgot password
+          },
+          child: const Text('Forgot Password?'),
+        ),
       ],
     );
   }
@@ -71,37 +174,55 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget _buildLoginButtonView(AsyncValue<LoginStateModel> loginState) {
     final isLoading =
         loginState.value?.apiResultState == APIResultState.loading;
-    return PrimaryButton(
-      label: 'Login',
-      icon: Icons.login,
-      isLoading: isLoading,
-      expanded: false,
-      onPressed: () async {
-        if (loginState.value?.apiResultState == APIResultState.loading) {
-          debugPrint(
-            'Previouse click is still in progress...ignoring clicks...',
-          );
-          return;
-        }
-        final loginRequestModel = LoginRequestModel(
-          userName: _userNameController.text,
-          password: _passwordController.text,
-        );
-        final loginStateModel = await loginNotifier.login(loginRequestModel);
-        if (!mounted) return;
-        if (loginStateModel.apiResultState == APIResultState.result &&
-            loginStateModel.loginResponseModel != null) {
-          showSnackBar(
-            context,
-            'Login success '
-            '${loginStateModel.loginResponseModel!.userName}',
-          );
-          context.router.replaceAll([HomeRoute(title: 'Home')]);
-        } else {
-          // show error message as snack bar or dailog anything
-          showSnackBar(context, 'Login failed ${loginStateModel.errorMessage}');
-        }
-      },
+
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : _handleLogin,
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : const Text('Sign In'),
+      ),
     );
+  }
+
+  Future<void> _handleLogin() async {
+    final loginState = ref.read(loginProvider);
+    if (loginState.value?.apiResultState == APIResultState.loading) {
+      debugPrint('Previous click is still in progress...ignoring clicks...');
+      return;
+    }
+
+    final loginRequestModel = LoginRequestModel(
+      userName: _userNameController.text,
+      password: _passwordController.text,
+    );
+
+    final loginStateModel = await loginNotifier.login(loginRequestModel);
+    if (!mounted) return;
+
+    if (loginStateModel.apiResultState == APIResultState.result &&
+        loginStateModel.loginResponseModel != null) {
+      showSnackBar(
+        context,
+        'Welcome ${loginStateModel.loginResponseModel!.userName}!',
+      );
+      context.router.replaceAll([HomeRoute(title: 'Home')]);
+    } else {
+      showSnackBar(
+        context,
+        loginStateModel.errorMessage.isNotEmpty
+            ? loginStateModel.errorMessage
+            : 'Login failed. Please try again.',
+      );
+    }
   }
 }

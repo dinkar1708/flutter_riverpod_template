@@ -13,6 +13,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: UsersRoute.page),
         AutoRoute(page: RepositoryListRoute.page),
         AutoRoute(page: CounterRoute.page),
+        AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: NavigationRoute.page, children: [
           AutoRoute(page: NavigationChild1Route.page),
           AutoRoute(page: NavigationChild2Route.page),

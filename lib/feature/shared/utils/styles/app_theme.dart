@@ -2,157 +2,149 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter/services.dart';
 
+/// Professional app theme inspired by top apps like Zomato, Swiggy
 class AppThemes {
   static ThemeData appTheme(Brightness brightness) {
     final colors = brightness == Brightness.light
         ? AppColor.lightColor
         : AppColor.darkColor;
+
     final SystemUiOverlayStyle overlay = SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      // Android
       statusBarIconBrightness: brightness == Brightness.light
           ? Brightness.dark
           : Brightness.light,
-      // iOS
       statusBarBrightness: brightness == Brightness.light
           ? Brightness.light
           : Brightness.dark,
     );
 
-    final ThemeData base = ThemeData(
-      // Let the global gradient show through
-      scaffoldBackgroundColor: Colors.transparent,
-      // common divider color
+    return ThemeData(
+      useMaterial3: true,
+      brightness: brightness,
+      scaffoldBackgroundColor: colors.backgroundPrimary,
       dividerTheme: DividerThemeData(color: colors.divider, thickness: 0.5),
-      fontFamily: null, // set font here later
+
+      // App Bar - Clean and modern
       appBarTheme: AppBarTheme(
-        backgroundColor: const Color(
-          0xFF667eea,
-        ).withValues(alpha: 0.8), // Semi-transparent blue from gradient
-        foregroundColor: Colors.white, // White text for contrast against blue
-        elevation: 2,
-        shadowColor: Colors.black.withValues(alpha: 0.1),
+        backgroundColor: colors.backgroundPrimary,
+        foregroundColor: colors.textPrimary,
+        elevation: 0,
         surfaceTintColor: Colors.transparent,
         systemOverlayStyle: overlay,
-        titleTextStyle: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
+        titleTextStyle: TextStyle(
+          color: colors.textPrimary,
+          fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
-        iconTheme: const IconThemeData(color: Colors.white, size: 24),
+        iconTheme: IconThemeData(color: colors.textPrimary, size: 24),
       ),
-      // Apply a color scheme so default text/icon colors have proper contrast
+
+      // Color Scheme
       colorScheme: ColorScheme.fromSeed(
-        seedColor: colors.textPrimary,
+        seedColor: colors.primaryColor,
         brightness: brightness,
         surface: colors.backgroundPrimary,
+        primary: colors.primaryColor,
+        secondary: colors.accentColor,
+        error: colors.errorColor,
       ),
-      // Improve bottom navigation visibility
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.black.withValues(alpha: 0.05),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
+
+      // Card Theme
+      cardTheme: CardThemeData(
+        color: colors.cardBackground,
         elevation: 2,
+        shadowColor: Colors.black.withValues(alpha: 0.1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+
+      // Bottom Navigation
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colors.surfaceColor,
+        selectedItemColor: colors.primaryColor,
+        unselectedItemColor: colors.gray,
+        elevation: 8,
         type: BottomNavigationBarType.fixed,
       ),
-      listTileTheme: const ListTileThemeData(
-        textColor: Colors.white,
-        iconColor: Colors.white70,
+
+      // List Tile Theme
+      listTileTheme: ListTileThemeData(
+        textColor: colors.textPrimary,
+        iconColor: colors.textSecondary,
       ),
-      // Inputs: improve hint/label contrast on gradient
+
+      // Input Decoration - ChatGPT style
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: const TextStyle(color: Colors.white70),
-        hintStyle: const TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: colors.textSecondary, fontSize: 14),
+        hintStyle: TextStyle(color: colors.gray, fontSize: 14),
         filled: true,
-        fillColor: Colors.black.withValues(alpha: 0.05),
+        fillColor: colors.surfaceColor,
         enabledBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          borderSide: BorderSide(
-            color: Colors.white.withValues(alpha: 0.35),
-            width: 1,
-          ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colors.divider, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          borderSide: BorderSide(
-            color: Colors.white.withValues(alpha: 0.85),
-            width: 1.2,
-          ),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colors.primaryColor, width: 2),
         ),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(28)),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colors.errorColor, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colors.errorColor, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 14,
+          vertical: 16,
         ),
       ),
-      // Common elevated button style reusable across app
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return Colors.white.withValues(alpha: 0.4);
-            }
-            return Colors.white.withValues(alpha: 0.9);
-          }),
-          foregroundColor: WidgetStateProperty.all(const Color(0xFF2D3748)),
-          overlayColor: WidgetStateProperty.all(
-            Colors.white.withValues(alpha: 0.2),
-          ),
-          elevation: WidgetStateProperty.all(3),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-          ),
-          padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          ),
-          textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ),
-    );
 
-    // Make all default text/icons readable on gradients
-    return base.copyWith(
-      textTheme: base.textTheme.apply(
-        bodyColor: Colors.white,
-        displayColor: Colors.white,
-        decorationColor: Colors.white,
+      // Elevated Button - Modern style
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colors.primaryColor,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
-      iconTheme: const IconThemeData(color: Colors.white),
-      colorScheme: base.colorScheme.copyWith(
-        onSurface: Colors.white,
-        onPrimary: Colors.white,
+
+      // Text Button
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: colors.primaryColor,
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+
+      // Floating Action Button
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: colors.primaryColor,
+        foregroundColor: Colors.white,
+        elevation: 4,
       ),
     );
   }
 
-  static LinearGradient appBackgroundGradient(Brightness brightness) {
-    if (brightness == Brightness.light) {
-      // More vibrant blue to purple gradient
-      return const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color(0xFF667eea), // vibrant blue
-          Color(0xFF764ba2), // purple
-          Color(0xFFf093fb), // pink accent
-        ],
-        stops: [0.0, 0.5, 1.0],
-      );
-    }
-    // Dark gradient with blue tones
-    return const LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        Color(0xFF1e3c72), // dark blue
-        Color(0xFF2a5298), // medium blue
-        Color(0xFF1e3c72), // dark blue
-      ],
-      stops: [0.0, 0.5, 1.0],
-    );
+  // Simple clean background - no gradients
+  static Color appBackgroundColor(Brightness brightness) {
+    return brightness == Brightness.light
+        ? AppColor.lightColor.backgroundPrimary
+        : AppColor.darkColor.backgroundPrimary;
   }
 }
