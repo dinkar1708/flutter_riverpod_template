@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_riverpod_template/feature/login/models/login_state_model.dart';
 // import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
+import 'package:flutter_riverpod_template/feature/shared/providers/user_session_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/common_text_field.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,6 +51,38 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Default Username Info Banner
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: colors.primaryContainer,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: colors.primary.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        color: colors.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Demo Mode: Default username is "google"',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: colors.onPrimaryContainer,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+
                 // App Logo/Icon
                 Container(
                   width: 100,
@@ -130,8 +163,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         // Username Field
         CommonTextField(
           controller: _userNameController,
-          hintText: 'Enter your username',
+          hintText: 'Enter username',
           labelText: 'Username',
+          helperText: 'Default: google | Try: facebook, microsoft, apple, or any GitHub username',
           prefixIcon: const Icon(Icons.person_outline),
           textInputAction: TextInputAction.next,
         ),
@@ -140,8 +174,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         // Password Field
         CommonTextField(
           controller: _passwordController,
-          hintText: 'Enter your password',
+          hintText: 'Enter password',
           labelText: 'Password',
+          helperText: 'Nothing, just for demo',
           obscureText: _obscurePassword,
           prefixIcon: const Icon(Icons.lock_outline),
           suffixIcon: IconButton(
@@ -210,6 +245,30 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               const SizedBox(width: 12),
               const Text('Continue with Google'),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 12),
+
+        // Apple Login Button
+        ElevatedButton(
+          onPressed: _handleAppleLogin,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 50),
+            backgroundColor: Colors.black,
+            foregroundColor: Colors.white,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.apple,
+                color: Colors.white,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              const Text('Continue with Apple'),
             ],
           ),
         ),
@@ -317,10 +376,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Validate username and password fields
     // TODO: Call actual login API
 
-    // For demo: directly navigate to home
+    // For demo: Store user session and navigate to home
+    // Default to 'google' if no username entered (valid GitHub username for demo)
+    final username = _userNameController.text.isNotEmpty
+        ? _userNameController.text
+        : 'google';
+
+    ref.read(userSessionProvider.notifier).login(
+      username: username,
+      email: '${username.toLowerCase().replaceAll(' ', '')}@example.com',
+      loginMethod: 'email',
+    );
+
     showSnackBar(
       context,
-      'Welcome ${_userNameController.text.isNotEmpty ? _userNameController.text : 'User'}!',
+      'Welcome $username!',
       type: SnackBarType.success,
     );
     context.router.replaceAll([const HomeWithTabsRoute()]);
@@ -365,7 +435,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Set guest user flag in local storage
     // TODO: Track guest analytics
 
-    showSnackBar(context, 'Welcome Guest!', type: SnackBarType.success);
+    // For demo: Store guest session
+    // Use entered username or default to 'google' for valid GitHub repos
+    final username = _userNameController.text.isNotEmpty
+        ? _userNameController.text
+        : 'google';
+
+    ref.read(userSessionProvider.notifier).login(
+      username: username,
+      email: '${username.toLowerCase().replaceAll(' ', '')}@example.com',
+      loginMethod: 'guest',
+    );
+
+    showSnackBar(context, 'Welcome $username!', type: SnackBarType.success);
     context.router.replaceAll([const HomeWithTabsRoute()]);
   }
 
@@ -376,10 +458,50 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Handle authentication flow and token exchange
     // TODO: Store user credentials securely
 
-    // For demo: directly navigate to home
+    // For demo: Store Google user session
+    // Use entered username or default to 'google' for valid GitHub repos
+    final username = _userNameController.text.isNotEmpty
+        ? _userNameController.text
+        : 'google';
+
+    ref.read(userSessionProvider.notifier).login(
+      username: username,
+      email: '${username.toLowerCase().replaceAll(' ', '')}@gmail.com',
+      loginMethod: 'google',
+    );
+
     showSnackBar(
       context,
-      'Welcome Google User!',
+      'Welcome $username!',
+      type: SnackBarType.success,
+    );
+    context.router.replaceAll([const HomeWithTabsRoute()]);
+  }
+
+  void _handleAppleLogin() {
+    // TODO: Implement Apple Sign-In
+    // TODO: Add sign_in_with_apple package
+    // TODO: Configure Apple Sign In capabilities in Xcode
+    // TODO: Add Sign in with Apple capability in Apple Developer Portal
+    // TODO: Handle authentication flow and token exchange
+    // TODO: Store user credentials securely
+    // TODO: Request user's name and email if needed
+
+    // For demo: Store Apple user session
+    // Use entered username or default to 'google' for valid GitHub repos
+    final username = _userNameController.text.isNotEmpty
+        ? _userNameController.text
+        : 'google';
+
+    ref.read(userSessionProvider.notifier).login(
+      username: username,
+      email: '${username.toLowerCase().replaceAll(' ', '')}@icloud.com',
+      loginMethod: 'apple',
+    );
+
+    showSnackBar(
+      context,
+      'Welcome $username!',
       type: SnackBarType.success,
     );
     context.router.replaceAll([const HomeWithTabsRoute()]);

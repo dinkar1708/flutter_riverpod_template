@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/my_app.dart' show themeModeProvider;
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
+import 'package:flutter_riverpod_template/feature/shared/providers/user_session_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 
 @RoutePage()
@@ -154,7 +155,7 @@ class SettingsPage extends ConsumerWidget {
                     Icons.chevron_right,
                     color: Theme.of(context).colorScheme.error,
                   ),
-                  onTap: () => _showDeleteAccountDialog(context),
+                  onTap: () => _showDeleteAccountDialog(context, ref),
                 ),
               ],
             ),
@@ -179,7 +180,7 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  void _showDeleteAccountDialog(BuildContext context) {
+  void _showDeleteAccountDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -204,7 +205,7 @@ class SettingsPage extends ConsumerWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              _handleDeleteAccount(context);
+              _handleDeleteAccount(context, ref);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,
@@ -217,11 +218,14 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  void _handleDeleteAccount(BuildContext context) {
+  void _handleDeleteAccount(BuildContext context, WidgetRef ref) {
     // TODO: Implement actual account deletion logic
     // TODO: Call API to delete account
     // TODO: Clear local data and preferences
     // TODO: Logout user and navigate to login screen
+
+    // Clear demo user session
+    ref.read(userSessionProvider.notifier).logout();
 
     showSnackBar(
       context,

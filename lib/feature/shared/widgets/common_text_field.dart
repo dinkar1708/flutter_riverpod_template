@@ -7,6 +7,7 @@ class CommonTextField extends StatelessWidget {
     required this.controller,
     this.hintText,
     this.labelText,
+    this.helperText,
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
@@ -22,6 +23,7 @@ class CommonTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
   final String? labelText;
+  final String? helperText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
@@ -48,6 +50,7 @@ class CommonTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         labelText: labelText,
+        helperText: helperText,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),

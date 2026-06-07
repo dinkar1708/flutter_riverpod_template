@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/models/repository_list_model.dart';
 import 'package:flutter_riverpod_template/feature/repository_list/providers/repository_list_notifier_provider.dart';
+import 'package:flutter_riverpod_template/feature/shared/providers/user_session_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_color.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/styles/app_text_style.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/error_view.dart';
@@ -22,16 +23,16 @@ class RepositoryListPage extends ConsumerStatefulWidget {
 }
 
 class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
-  // read just once
-  RepositoryListNotifier get repositoryListNotifier =>
-      ref.read(repositoryListProvider.notifier);
   @override
   Widget build(BuildContext context) {
+    final userSession = ref.watch(userSessionProvider);
+    final userName = userSession?.username ?? 'google';
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SharedSliverAppBar(
-            title: widget.title + repositoryListNotifier.userName,
+            title: '${widget.title} ($userName)',
           ),
           _buildListRootView(),
         ],
