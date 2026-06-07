@@ -25,11 +25,14 @@ class LoginNotifier extends _$LoginNotifier {
       debugPrint('login data loaded....');
       // TODO api call goes here
       // Return dummy future with dummy response model
-      const loginStateModel = LoginStateModel(
+      final loginStateModel = LoginStateModel(
           apiResultState: APIResultState.result,
-          loginResponseModel:
-              LoginResponseModel(id: 1, userName: 'dinkar1708@gmail.com'));
-      state = const AsyncData(loginStateModel);
+          loginResponseModel: LoginResponseModel(
+              id: 1,
+              userName: loginRequestModel.userName.isNotEmpty
+                  ? loginRequestModel.userName
+                  : 'user@example.com'));
+      state = AsyncData(loginStateModel);
       // throw error to test
       // throw Exception("Login id is incorrect from api!!");
       // return actual value to test correct case

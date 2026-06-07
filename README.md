@@ -5,16 +5,17 @@ A new Flutter template project using the Riverpod library for state management.
 ## Table of Contents
 1. [Setup](#setup)
 2. [Guide to Run Code](#guide-to-run-code)
-3. [API Used](#api-used-in-the-project)
-4. [Features](#features)
-5. [Run Configuration Guide](#run-configuration-guide)
-6. [Coding Guide](#coding-guide)
-7. [Release Guide](#release-guide)
-8. [APIs](#apis)
-9. [Riverpod Library Guide](#riverpod-library-guide)
-10. [FAQ](#faq)
-11. [DO/DON'T](#dodont)
-12. [TODOs](#todos)
+3. [Testing](#testing)
+4. [API Used](#api-used-in-the-project)
+5. [Features](#features)
+6. [Run Configuration Guide](#run-configuration-guide)
+7. [Coding Guide](#coding-guide)
+8. [Release Guide](#release-guide)
+9. [APIs](#apis)
+10. [Riverpod Library Guide](#riverpod-library-guide)
+11. [FAQ](#faq)
+12. [DO/DON'T](#dodont)
+13. [TODOs](#todos)
 
 
 ## Setup
@@ -46,6 +47,28 @@ dart run build_runner watch --delete-conflicting-outputs
 - Guide: [Mocking Providers](https://riverpod.dev/docs/essentials/testing#mocking-providers)
 - Use mock run configuration to use mock/hard-coded data TODO
 - Use actual configuration run actual API data
+
+## Testing
+
+### Quick Start
+Run all tests:
+```bash
+flutter test
+```
+
+Run specific test file:
+```bash
+flutter test test/login_page_test.dart
+```
+
+### Test Documentation
+For detailed testing guide, including:
+- Test cases and descriptions
+- Coverage information
+- Writing new tests
+- Best practices
+
+Please refer to: [Testing Guide](documentation/TESTING.md)
 
 ## Final after running the app
 - Test iOS device of all configurations dev and prod

@@ -16,6 +16,7 @@ void sharedMain(
     appProvider.overrideWithValue(
       ApiConfig(appConfig.apiBaseUrl, apiKey: appConfig.appApiKey),
     ),
+    appConfigProvider.overrideWithValue(appConfig),
     ...overrides,
   ];
   runApp(

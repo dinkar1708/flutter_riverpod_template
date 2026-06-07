@@ -4,20 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 
 @RoutePage()
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({required this.title, super.key});
+class ExplorePage extends ConsumerWidget {
+  const ExplorePage({required this.title, super.key});
   final String title;
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends ConsumerState<HomePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         actions: [
           IconButton(
             onPressed: () => context.router.push(const SettingsRoute()),
@@ -29,7 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Welcome Card
+          // Explore Header Card
           Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -43,13 +38,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                         decoration: BoxDecoration(
                           color: Theme.of(context)
                               .colorScheme
-                              .primary
+                              .secondary
                               .withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
-                          Icons.home_rounded,
-                          color: Theme.of(context).colorScheme.primary,
+                          Icons.explore_rounded,
+                          color: Theme.of(context).colorScheme.secondary,
                           size: 32,
                         ),
                       ),
@@ -59,7 +54,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Welcome Back!',
+                              'Discover More',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
@@ -68,7 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   ),
                             ),
                             Text(
-                              'Ready to explore? Check out the features below',
+                              'Explore additional features and demos',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
@@ -83,11 +78,11 @@ class _HomePageState extends ConsumerState<HomePage> {
 
           const SizedBox(height: 24),
 
-          // Features Section Header
+          // Trending Section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              'Features',
+              'Trending',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -95,47 +90,38 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           const SizedBox(height: 12),
 
-          // Feature Cards
-          _buildFeatureCard(
+          _buildTrendingCard(
             context,
-            icon: Icons.code_rounded,
-            title: 'API Integration',
-            description: 'Real-time GitHub API with Retrofit & Dio',
+            icon: Icons.trending_up_rounded,
+            title: 'Popular Repositories',
+            description: 'Check out trending GitHub repos',
+            color: Colors.orange,
             onTap: () => context.router.push(
               RepositoryListRoute(title: 'Repositories'),
             ),
           ),
           const SizedBox(height: 12),
 
-          _buildFeatureCard(
+          _buildTrendingCard(
             context,
-            icon: Icons.search_rounded,
-            title: 'Search & Filter',
-            description: 'Dynamic search with Riverpod state management',
+            icon: Icons.people_outline_rounded,
+            title: 'Active Users',
+            description: 'Discover active community members',
+            color: Colors.purple,
             onTap: () => context.router.push(
               UsersRoute(title: 'Search Users'),
             ),
           ),
           const SizedBox(height: 12),
 
-          _buildFeatureCard(
+          _buildTrendingCard(
             context,
-            icon: Icons.add_circle_outline_rounded,
-            title: 'State Management',
-            description: 'Reactive state with Riverpod providers',
+            icon: Icons.star_outline_rounded,
+            title: 'Featured Projects',
+            description: 'Handpicked projects to explore',
+            color: Colors.amber,
             onTap: () => context.router.push(
-              CounterRoute(title: 'Counter'),
-            ),
-          ),
-          const SizedBox(height: 12),
-
-          _buildFeatureCard(
-            context,
-            icon: Icons.navigation_rounded,
-            title: 'Auto Route Navigation',
-            description: 'Type-safe routing with nested navigation',
-            onTap: () => context.router.push(
-              NavigationRoute(title: 'Navigation'),
+              RepositoryListRoute(title: 'Featured'),
             ),
           ),
         ],
@@ -143,11 +129,12 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-  Widget _buildFeatureCard(
+  Widget _buildTrendingCard(
     BuildContext context, {
     required IconData icon,
     required String title,
     required String description,
+    required Color color,
     required VoidCallback onTap,
   }) {
     return Card(
@@ -161,15 +148,12 @@ class _HomePageState extends ConsumerState<HomePage> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primary
-                      .withValues(alpha: 0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
                   icon,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: color,
                   size: 28,
                 ),
               ),
