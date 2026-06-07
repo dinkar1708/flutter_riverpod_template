@@ -71,7 +71,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Demo Mode: Default username is "google"',
+                          'Demo Mode: Default username is "dinkar1708"',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 color: colors.onPrimaryContainer,
                                 fontWeight: FontWeight.w500,
@@ -377,10 +377,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Call actual login API
 
     // For demo: Store user session and navigate to home
-    // Default to 'google' if no username entered (valid GitHub username for demo)
+    // Default to 'dinkar1708' if no username entered (valid GitHub username for demo)
     final username = _userNameController.text.isNotEmpty
         ? _userNameController.text
-        : 'google';
+        : 'dinkar1708';
 
     ref.read(userSessionProvider.notifier).login(
       username: username,
@@ -436,10 +436,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Track guest analytics
 
     // For demo: Store guest session
-    // Use entered username or default to 'google' for valid GitHub repos
+    // Use entered username or default to 'dinkar1708' for valid GitHub repos
     final username = _userNameController.text.isNotEmpty
         ? _userNameController.text
-        : 'google';
+        : 'dinkar1708';
 
     ref.read(userSessionProvider.notifier).login(
       username: username,
@@ -459,10 +459,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Store user credentials securely
 
     // For demo: Store Google user session
-    // Use entered username or default to 'google' for valid GitHub repos
+    // Use entered username or default to 'dinkar1708' for valid GitHub repos
     final username = _userNameController.text.isNotEmpty
         ? _userNameController.text
-        : 'google';
+        : 'dinkar1708';
 
     ref.read(userSessionProvider.notifier).login(
       username: username,
@@ -488,10 +488,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // TODO: Request user's name and email if needed
 
     // For demo: Store Apple user session
-    // Use entered username or default to 'google' for valid GitHub repos
+    // Use entered username or default to 'dinkar1708' for valid GitHub repos
     final username = _userNameController.text.isNotEmpty
         ? _userNameController.text
-        : 'google';
+        : 'dinkar1708';
 
     ref.read(userSessionProvider.notifier).login(
       username: username,
