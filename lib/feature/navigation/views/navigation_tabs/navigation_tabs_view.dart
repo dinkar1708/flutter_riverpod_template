@@ -15,12 +15,12 @@ class NavigationTabsView extends StatelessWidget {
       },
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.ac_unit_sharp),
-          label: 'Child1',
+          icon: Icon(Icons.home_outlined),
+          label: 'Feed',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance_sharp),
-          label: 'child2',
+          icon: Icon(Icons.person_outline),
+          label: 'Profile',
         ),
       ],
     );

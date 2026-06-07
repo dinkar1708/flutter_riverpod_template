@@ -59,7 +59,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Welcome!',
+                              'Welcome Back!',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
@@ -68,7 +68,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   ),
                             ),
                             Text(
-                              'Explore the app features below',
+                              'Ready to explore? Check out the features below',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
@@ -99,8 +99,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           _buildFeatureCard(
             context,
             icon: Icons.code_rounded,
-            title: 'GitHub Repositories',
-            description: 'Browse GitHub repositories with API',
+            title: 'API Integration',
+            description: 'Real-time GitHub API with Retrofit & Dio',
             onTap: () => context.router.push(
               RepositoryListRoute(title: 'Repositories'),
             ),
@@ -110,8 +110,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           _buildFeatureCard(
             context,
             icon: Icons.search_rounded,
-            title: 'Search Users',
-            description: 'Search and filter user examples',
+            title: 'Search & Filter',
+            description: 'Dynamic search with Riverpod state management',
             onTap: () => context.router.push(
               UsersRoute(title: 'Search Users'),
             ),
@@ -121,8 +121,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           _buildFeatureCard(
             context,
             icon: Icons.add_circle_outline_rounded,
-            title: 'Counter Example',
-            description: 'State management demonstration',
+            title: 'State Management',
+            description: 'Reactive state with Riverpod providers',
             onTap: () => context.router.push(
               CounterRoute(title: 'Counter'),
             ),
@@ -132,8 +132,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           _buildFeatureCard(
             context,
             icon: Icons.navigation_rounded,
-            title: 'Navigation Example',
-            description: 'Advanced routing and navigation',
+            title: 'Auto Route Navigation',
+            description: 'Type-safe routing with nested navigation',
             onTap: () => context.router.push(
               NavigationRoute(title: 'Navigation'),
             ),

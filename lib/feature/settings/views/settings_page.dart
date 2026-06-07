@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/my_app.dart' show themeModeProvider;
+import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 
 @RoutePage()
 class SettingsPage extends ConsumerWidget {
@@ -53,8 +54,8 @@ class SettingsPage extends ConsumerWidget {
                     Icons.person_outline,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  title: const Text('Profile'),
-                  subtitle: const Text('Manage your profile'),
+                  title: const Text('Profile Settings'),
+                  subtitle: const Text('Update your personal information'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
                     // Navigate to profile
@@ -67,10 +68,53 @@ class SettingsPage extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   title: const Text('Notifications'),
-                  subtitle: const Text('Configure notifications'),
+                  subtitle: const Text('Manage notification preferences'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
                     // Navigate to notifications settings
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          // Help & Support Section
+          _buildSectionHeader(context, 'Help & Support'),
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(
+                    Icons.help_outline,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  title: const Text('Help Center'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    context.router.push(
+                      CommonWebviewRoute(
+                        title: 'Help Center',
+                        url: 'https://www.google.com',
+                      ),
+                    );
+                  },
+                ),
+                const Divider(height: 1),
+                ListTile(
+                  leading: Icon(
+                    Icons.contact_support_outlined,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  title: const Text('Contact Support'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    context.router.push(
+                      CommonWebviewRoute(
+                        title: 'Contact Support',
+                        url: 'https://www.google.com',
+                      ),
+                    );
                   },
                 ),
               ],
@@ -100,7 +144,12 @@ class SettingsPage extends ConsumerWidget {
                   title: const Text('Privacy Policy'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // Navigate to privacy policy
+                    context.router.push(
+                      CommonWebviewRoute(
+                        title: 'Privacy Policy',
+                        url: 'https://www.google.com',
+                      ),
+                    );
                   },
                 ),
                 const Divider(height: 1),
@@ -112,7 +161,12 @@ class SettingsPage extends ConsumerWidget {
                   title: const Text('Terms of Service'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // Navigate to terms
+                    context.router.push(
+                      CommonWebviewRoute(
+                        title: 'Terms of Service',
+                        url: 'https://www.google.com',
+                      ),
+                    );
                   },
                 ),
               ],
