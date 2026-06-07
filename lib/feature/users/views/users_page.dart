@@ -98,7 +98,7 @@ class _UsersPage extends ConsumerState<UsersPage> {
   void _clearSearch(ValueNotifier<bool> isSearchingNotifier) {
     _searchController.clear();
     isSearchingNotifier.value = false;
-    ref.read(usersFilterParameterNotifierProvider.notifier).clear();
+    ref.read(usersFilterParameterProvider.notifier).clear();
   }
 
   Widget _buildListRootView() {
@@ -116,7 +116,7 @@ class _UsersPage extends ConsumerState<UsersPage> {
   void _onQueryChanged(String value) {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 250), () {
-      ref.read(usersFilterParameterNotifierProvider.notifier).setQuery(value);
+      ref.read(usersFilterParameterProvider.notifier).setQuery(value);
     });
   }
 
