@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -39,6 +40,27 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final themeMode = ref.watch(themeModeProvider);
+    final brightness = themeMode == ThemeMode.light
+        ? Brightness.light
+        : (themeMode == ThemeMode.dark
+            ? Brightness.dark
+            : MediaQuery.platformBrightnessOf(context));
+
+    // Set system UI overlay style globally
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness:
+            brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        statusBarBrightness:
+            brightness == Brightness.light ? Brightness.light : Brightness.dark,
+        systemNavigationBarColor: brightness == Brightness.light
+            ? Colors.white
+            : const Color(0xFF121212),
+        systemNavigationBarIconBrightness:
+            brightness == Brightness.light ? Brightness.dark : Brightness.light,
+      ),
+    );
 
     return MaterialApp.router(
       title: widget.launchTitle,

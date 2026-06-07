@@ -27,14 +27,15 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
       ref.read(repositoryListProvider.notifier);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: CustomScrollView(slivers: [
-        SharedSliverAppBar(
-          title: widget.title + repositoryListNotifier.userName,
-        ),
-        _buildListRootView(),
-      ])),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SharedSliverAppBar(
+            title: widget.title + repositoryListNotifier.userName,
+          ),
+          _buildListRootView(),
+        ],
+      ),
     );
   }
 
@@ -66,16 +67,147 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
   }
 
   Widget _buildListRowView(RepositoryListModel model) {
-    return ListTile(
-      title: Text(
-        model.name,
-        style: AppTextStyle.labelLarge,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: InkWell(
+        onTap: () {
+          // TODO: Navigate to repository details
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Repository Name with Icon
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.folder_rounded,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      model.name,
+                      style: AppTextStyle.labelLarge.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+
+              // Description
+              if (model.description != null &&
+                  model.description!.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Text(
+                  model.description!,
+                  style: AppTextStyle.bodySmall.copyWith(
+                    color: context.color.textPrimary.withValues(alpha: 0.7),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+
+              const SizedBox(height: 12),
+
+              // Stats Row
+              Row(
+                children: [
+                  // Stars
+                  _buildStat(
+                    context,
+                    Icons.star_outline,
+                    model.stargazersCount?.toString() ?? '0',
+                    Colors.amber,
+                  ),
+                  const SizedBox(width: 16),
+
+                  // Forks
+                  _buildStat(
+                    context,
+                    Icons.fork_right,
+                    model.forksCount?.toString() ?? '0',
+                    Colors.blue,
+                  ),
+                  const SizedBox(width: 16),
+
+                  // Language
+                  if (model.language != null) ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        model.language!,
+                        style: AppTextStyle.bodySmall.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+
+                  const Spacer(),
+
+                  // Arrow Icon
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: context.color.textSecondary,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
-      subtitle: Text(
-        model.description ?? '',
-        style:
-            AppTextStyle.bodySmall.copyWith(color: context.color.textPrimary),
-      ),
+    );
+  }
+
+  Widget _buildStat(
+    BuildContext context,
+    IconData icon,
+    String count,
+    Color color,
+  ) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 16, color: color),
+        const SizedBox(width: 4),
+        Text(
+          count,
+          style: AppTextStyle.bodySmall.copyWith(
+            color: context.color.textPrimary,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }

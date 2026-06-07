@@ -235,6 +235,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       showSnackBar(
         context,
         'Welcome ${loginStateModel.loginResponseModel!.userName}!',
+        type: SnackBarType.success,
       );
       context.router.replaceAll([const HomeWithTabsRoute()]);
     } else {
@@ -243,12 +244,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         loginStateModel.errorMessage.isNotEmpty
             ? loginStateModel.errorMessage
             : 'Login failed. Please try again.',
+        type: SnackBarType.error,
       );
     }
   }
 
   void _handleGuestLogin() {
-    showSnackBar(context, 'Welcome Guest!');
+    showSnackBar(context, 'Welcome Guest!', type: SnackBarType.success);
     context.router.replaceAll([const HomeWithTabsRoute()]);
   }
 }

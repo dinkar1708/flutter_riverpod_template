@@ -138,6 +138,24 @@ class AppThemes {
         foregroundColor: Colors.white,
         elevation: 4,
       ),
+
+      // SnackBar Theme - Modern and colorful
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: brightness == Brightness.light
+            ? const Color(0xFF323232)
+            : const Color(0xFF404040),
+        contentTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        behavior: SnackBarBehavior.floating,
+        elevation: 6,
+        actionTextColor: colors.primaryColor,
+      ),
     );
   }
 

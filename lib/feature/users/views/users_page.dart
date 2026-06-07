@@ -38,31 +38,29 @@ class _UsersPage extends ConsumerState<UsersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SharedSliverAppBar(
-              title: widget.title,
-              actions: [
-                IconButton(
-                  icon: Icon(isSearching ? Icons.close : Icons.search),
-                  onPressed: () {
-                    setState(() {
-                      isSearching = !isSearching;
-                    });
-                    if (!isSearching) {
-                      _clearSearch(ValueNotifier(false));
-                    }
-                  },
-                ),
-              ],
-            ),
-            const SliverPadding(padding: EdgeInsets.symmetric(vertical: 8)),
-            if (isSearching) _buildSearchView(),
-            _buildListRootView(),
-          ],
-        ),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SharedSliverAppBar(
+            title: widget.title,
+            actions: [
+              IconButton(
+                icon: Icon(isSearching ? Icons.close : Icons.search),
+                onPressed: () {
+                  setState(() {
+                    isSearching = !isSearching;
+                  });
+                  if (!isSearching) {
+                    _clearSearch(ValueNotifier(false));
+                  }
+                },
+              ),
+            ],
+          ),
+          const SliverPadding(padding: EdgeInsets.symmetric(vertical: 8)),
+          if (isSearching) _buildSearchView(),
+          _buildListRootView(),
+        ],
       ),
     );
   }

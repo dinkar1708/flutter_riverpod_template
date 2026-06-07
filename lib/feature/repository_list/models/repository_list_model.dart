@@ -16,6 +16,9 @@ abstract class RepositoryListModel with _$RepositoryListModel {
     @JsonKey(name: 'description') required String? description,
     @JsonKey(name: 'fork') required bool isFork,
     @JsonKey(name: 'url') required String? url,
+    @JsonKey(name: 'language') String? language,
+    @JsonKey(name: 'stargazers_count') int? stargazersCount,
+    @JsonKey(name: 'forks_count') int? forksCount,
     // Add other fields as needed
   }) = _RepositoryListModel;
 

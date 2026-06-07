@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SharedAppBar({super.key, required this.title});
@@ -10,10 +11,19 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
     return AppBar(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
       title: Text(title),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness:
+            brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        statusBarBrightness:
+            brightness == Brightness.light ? Brightness.light : Brightness.dark,
+      ),
     );
   }
 }

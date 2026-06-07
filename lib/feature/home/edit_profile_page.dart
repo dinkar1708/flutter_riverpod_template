@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 
 @RoutePage()
 class EditProfilePage extends ConsumerStatefulWidget {
@@ -179,11 +180,10 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   void _saveProfile() {
     if (_formKey.currentState!.validate()) {
       // TODO: Save profile data
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Profile updated successfully'),
-          backgroundColor: Colors.green,
-        ),
+      showSnackBar(
+        context,
+        'Profile updated successfully',
+        type: SnackBarType.success,
       );
       context.router.maybePop();
     }
