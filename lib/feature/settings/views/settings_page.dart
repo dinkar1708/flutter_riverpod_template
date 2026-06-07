@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/my_app.dart' show themeModeProvider;
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
+import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 
 @RoutePage()
 class SettingsPage extends ConsumerWidget {
@@ -129,6 +130,36 @@ class SettingsPage extends ConsumerWidget {
             ),
           ),
 
+          // Danger Zone Section
+          _buildSectionHeader(context, 'Danger Zone'),
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            color: Theme.of(context).colorScheme.errorContainer.withValues(alpha: 0.3),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(
+                    Icons.delete_forever_outlined,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  title: Text(
+                    'Delete Account',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: const Text('Permanently delete your account and data'),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  onTap: () => _showDeleteAccountDialog(context),
+                ),
+              ],
+            ),
+          ),
+
           const SizedBox(height: 32),
         ],
       ),
@@ -146,5 +177,63 @@ class SettingsPage extends ConsumerWidget {
             ),
       ),
     );
+  }
+
+  void _showDeleteAccountDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(
+              Icons.warning_rounded,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            const SizedBox(width: 12),
+            const Text('Delete Account'),
+          ],
+        ),
+        content: const Text(
+          'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('No, Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _handleDeleteAccount(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Yes, Delete'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleDeleteAccount(BuildContext context) {
+    // TODO: Implement actual account deletion logic
+    // TODO: Call API to delete account
+    // TODO: Clear local data and preferences
+    // TODO: Logout user and navigate to login screen
+
+    showSnackBar(
+      context,
+      'Account deleted successfully',
+      type: SnackBarType.success,
+    );
+
+    // Navigate to login after a delay
+    Future.delayed(const Duration(seconds: 2), () {
+      if (context.mounted) {
+        context.router.replaceAll([LoginRoute(title: 'Login')]);
+      }
+    });
   }
 }

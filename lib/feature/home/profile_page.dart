@@ -153,9 +153,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           Card(
             color: Theme.of(context).colorScheme.errorContainer,
             child: InkWell(
-              onTap: () {
-                // Handle logout
-              },
+              onTap: () => _showLogoutDialog(context),
               borderRadius: BorderRadius.circular(16),
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -424,6 +422,42 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         );
       }
     }
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Logout'),
+        content: const Text('Are you sure you want to logout?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _handleLogout(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleLogout(BuildContext context) {
+    // TODO: Clear user session/token
+    // TODO: Clear local storage/preferences
+    // TODO: Clear any cached data
+
+    // Navigate to login and clear all previous routes
+    context.router.replaceAll([LoginRoute(title: 'Login')]);
   }
 
   Widget _buildNotificationCard(BuildContext context) {

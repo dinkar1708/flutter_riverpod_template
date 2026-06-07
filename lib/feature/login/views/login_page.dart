@@ -1,13 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_template/data/remote/api/api_result_state.dart';
-import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
-import 'package:flutter_riverpod_template/feature/login/models/login_state_model.dart';
-import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
+// Commented for demo - uncomment for real implementation:
+// import 'package:flutter_riverpod_template/data/remote/api/api_result_state.dart';
+// import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
+// import 'package:flutter_riverpod_template/feature/login/models/login_state_model.dart';
+// import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
 import 'package:flutter_riverpod_template/feature/shared/widgets/common_text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
@@ -24,7 +26,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
-  LoginNotifier get loginNotifier => ref.read(loginProvider.notifier);
+  // Commented for demo - uncomment for real implementation:
+  // LoginNotifier get loginNotifier => ref.read(loginProvider.notifier);
 
   @override
   void dispose() {
@@ -35,7 +38,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.watch(loginProvider);
+    // Commented for demo - uncomment for real implementation:
+    // final loginState = ref.watch(loginProvider);
     final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -79,7 +83,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(height: 48),
 
                 // Login Form
-                _buildLoginFormView(loginState),
+                _buildLoginFormView(),
               ],
             ),
           ),
@@ -88,40 +92,40 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  Widget _buildLoginFormView(AsyncValue<LoginStateModel> loginState) {
+  Widget _buildLoginFormView() {
     return Column(
       children: [
-        // Error Message
-        if (loginState.value?.errorMessage != null &&
-            loginState.value!.errorMessage.isNotEmpty)
-          Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.error.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.error,
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    loginState.value!.errorMessage,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        // Error Message (commented for demo - uncomment for real implementation)
+        // if (loginState.value?.errorMessage != null &&
+        //     loginState.value!.errorMessage.isNotEmpty)
+        //   Container(
+        //     padding: const EdgeInsets.all(12),
+        //     margin: const EdgeInsets.only(bottom: 16),
+        //     decoration: BoxDecoration(
+        //       color: Theme.of(context).colorScheme.error.withValues(alpha: 0.1),
+        //       borderRadius: BorderRadius.circular(12),
+        //       border: Border.all(
+        //         color: Theme.of(context).colorScheme.error,
+        //       ),
+        //     ),
+        //     child: Row(
+        //       children: [
+        //         Icon(
+        //           Icons.error_outline,
+        //           color: Theme.of(context).colorScheme.error,
+        //         ),
+        //         const SizedBox(width: 12),
+        //         Expanded(
+        //           child: Text(
+        //             loginState.value!.errorMessage,
+        //             style: TextStyle(
+        //               color: Theme.of(context).colorScheme.error,
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
 
         // Username Field
         CommonTextField(
@@ -156,7 +160,81 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         const SizedBox(height: 24),
 
         // Login Button
-        _buildLoginButtonView(loginState),
+        _buildLoginButtonView(),
+
+        const SizedBox(height: 16),
+
+        // Divider with OR
+        Row(
+          children: [
+            const Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'OR',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.6),
+                    ),
+              ),
+            ),
+            const Expanded(child: Divider()),
+          ],
+        ),
+
+        const SizedBox(height: 16),
+
+        // Google Login Button
+        OutlinedButton(
+          onPressed: _handleGoogleLogin,
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 50),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.outline,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.network(
+                'https://www.google.com/favicon.ico',
+                width: 20,
+                height: 20,
+                errorBuilder: (context, error, stackTrace) => Icon(
+                  Icons.login,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Text('Continue with Google'),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // Divider with OR
+        Row(
+          children: [
+            const Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'OR',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.6),
+                    ),
+              ),
+            ),
+            const Expanded(child: Divider()),
+          ],
+        ),
 
         const SizedBox(height: 16),
 
@@ -188,34 +266,66 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           },
           child: const Text('Forgot Password?'),
         ),
+
+        const SizedBox(height: 24),
+
+        // Contact Support Button
+        TextButton.icon(
+          onPressed: _handleContactSupport,
+          icon: const Icon(Icons.email_outlined, size: 18),
+          label: const Text('Contact Support'),
+          style: TextButton.styleFrom(
+            foregroundColor: Theme.of(context)
+                .colorScheme
+                .onSurface
+                .withValues(alpha: 0.6),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _buildLoginButtonView(AsyncValue<LoginStateModel> loginState) {
-    final isLoading =
-        loginState.value?.apiResultState == APIResultState.loading;
+  Widget _buildLoginButtonView() {
+    // Commented for demo - uncomment for real implementation:
+    // final isLoading =
+    //     loginState.value?.apiResultState == APIResultState.loading;
 
     return SizedBox(
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: isLoading ? null : _handleLogin,
-        child: isLoading
-            ? const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              )
-            : const Text('Sign In'),
+        onPressed: _handleLogin,
+        child: const Text('Sign In'),
+        // For real implementation with loading state:
+        // onPressed: isLoading ? null : _handleLogin,
+        // child: isLoading
+        //     ? const SizedBox(
+        //         width: 24,
+        //         height: 24,
+        //         child: CircularProgressIndicator(
+        //           strokeWidth: 2,
+        //           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        //         ),
+        //       )
+        //     : const Text('Sign In'),
       ),
     );
   }
 
   Future<void> _handleLogin() async {
+    // TODO: Implement real login validation
+    // TODO: Validate username and password fields
+    // TODO: Call actual login API
+
+    // For demo: directly navigate to home
+    showSnackBar(
+      context,
+      'Welcome ${_userNameController.text.isNotEmpty ? _userNameController.text : 'User'}!',
+      type: SnackBarType.success,
+    );
+    context.router.replaceAll([const HomeWithTabsRoute()]);
+
+    /* Real implementation (commented for demo):
     final loginState = ref.read(loginProvider);
     if (loginState.value?.apiResultState == APIResultState.loading) {
       debugPrint('Previous click is still in progress...ignoring clicks...');
@@ -247,10 +357,53 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         type: SnackBarType.error,
       );
     }
+    */
   }
 
   void _handleGuestLogin() {
+    // TODO: Implement guest session tracking
+    // TODO: Set guest user flag in local storage
+    // TODO: Track guest analytics
+
     showSnackBar(context, 'Welcome Guest!', type: SnackBarType.success);
     context.router.replaceAll([const HomeWithTabsRoute()]);
+  }
+
+  void _handleGoogleLogin() {
+    // TODO: Implement Google Sign-In
+    // TODO: Add google_sign_in package
+    // TODO: Configure Google OAuth credentials (Firebase/Google Cloud Console)
+    // TODO: Handle authentication flow and token exchange
+    // TODO: Store user credentials securely
+
+    // For demo: directly navigate to home
+    showSnackBar(
+      context,
+      'Welcome Google User!',
+      type: SnackBarType.success,
+    );
+    context.router.replaceAll([const HomeWithTabsRoute()]);
+  }
+
+  Future<void> _handleContactSupport() async {
+    final uri = Uri(
+      scheme: 'mailto',
+      path: 'support@example.com',
+      queryParameters: {
+        'subject': 'Login Support Request',
+      },
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      if (mounted) {
+        showSnackBar(
+          context,
+          'Could not launch email app',
+          type: SnackBarType.error,
+        );
+      }
+    }
   }
 }
