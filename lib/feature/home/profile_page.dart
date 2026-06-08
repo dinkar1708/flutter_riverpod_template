@@ -95,7 +95,11 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           const SizedBox(height: 24),
 
           // Profile Menu
-          Padding(
+          Semantics(
+            identifier: 'profile_account_header',
+            header: true,
+            label: 'Account',
+            child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
               'Account',
@@ -104,10 +108,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ),
             ),
           ),
+          ),
           const SizedBox(height: 12),
 
           _buildMenuCard(
             context,
+            semanticsId: 'profile_edit_profile',
             icon: Icons.person_outline,
             title: 'Edit Profile',
             subtitle: 'Update your personal information',
@@ -135,6 +141,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
           _buildMenuCard(
             context,
+            semanticsId: 'profile_settings_menu',
             icon: Icons.settings_outlined,
             title: 'Settings',
             subtitle: 'App preferences and configuration',
@@ -153,7 +160,11 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           const SizedBox(height: 24),
 
           // Logout Button
-          Card(
+          Semantics(
+            identifier: 'profile_logout',
+            label: 'Logout',
+            button: true,
+            child: Card(
             color: Theme.of(context).colorScheme.errorContainer,
             child: InkWell(
               onTap: () => _showLogoutDialog(context),
@@ -182,6 +193,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 ),
               ),
             ),
+          ),
           ),
 
           const SizedBox(height: 24),
@@ -528,12 +540,17 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
   Widget _buildMenuCard(
     BuildContext context, {
+    String? semanticsId,
     required IconData icon,
     required String title,
     required String subtitle,
     required VoidCallback onTap,
   }) {
-    return Card(
+    return Semantics(
+      identifier: semanticsId,
+      label: title,
+      button: true,
+      child: Card(
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -588,6 +605,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           ),
         ),
       ),
+    ),
     );
   }
 }

@@ -26,8 +26,12 @@ class CounterPage extends HookWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            const Text(
-              'Push plus button to increase counter:',
+            Semantics(
+              identifier: 'counter_hint',
+              label: 'Push plus button to increase counter:',
+              child: const Text(
+                'Push plus button to increase counter:',
+              ),
             ),
             Text(
               'Value ${counterState.value}',

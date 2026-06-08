@@ -1,0 +1,24 @@
+appId: com.example.flutter_rivperpod_template.dev
+---
+# Mirrors appium HomePage.return_to_home_tab()
+- repeat:
+    times: 6
+    commands:
+      - runFlow:
+          when:
+            notVisible:
+              id: "home_welcome_card"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible:
+              id: "home_welcome_card"
+          commands:
+            - tapOn:
+                point: "17%, 94%"
+
+- extendedWaitUntil:
+    visible:
+      id: "home_welcome_card"
+    timeout: 10000

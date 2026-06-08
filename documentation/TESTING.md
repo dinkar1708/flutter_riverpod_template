@@ -8,6 +8,18 @@ This document provides detailed information about testing in the Flutter Riverpo
 3. [Test Coverage](#test-coverage)
 4. [Writing New Tests](#writing-new-tests)
 
+## User Journeys (Appium E2E)
+
+Canonical user flows live in **[USER_JOURNEYS.md](USER_JOURNEYS.md)** with one file per journey under `documentation/journeys/`.
+
+Automated tests implement those journeys in `appium/tests/test_user_journeys.py` using `appium/journey_specs.py`.
+
+```bash
+cd appium && source .venv/bin/activate && pytest tests/test_user_journeys.py -v
+```
+
+See [appium/README.md](../appium/README.md) for device setup.
+
 ## Running Tests
 
 ### Run All Tests

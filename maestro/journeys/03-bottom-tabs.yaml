@@ -1,0 +1,48 @@
+# Spec ID: bottom_tabs
+# Doc: documentation/journeys/03-bottom-tabs.md
+# Appium: TestBottomTabsJourney::test_guest_navigates_bottom_tabs_round_trip
+appId: com.example.flutter_rivperpod_template.dev
+---
+- runFlow: ../subflows/launch_and_login_as_guest.yaml
+
+# Step 1: Verify home dashboard
+- assertVisible:
+    id: "home_welcome_card"
+
+# Step 2–3: Explore tab (center bottom nav item)
+- tapOn:
+    point: "50%, 94%"
+- extendedWaitUntil:
+    visible:
+      id: "explore_discover_header"
+    timeout: 10000
+- assertVisible:
+    id: "explore_discover_header"
+- assertVisible:
+    id: "explore_trending_header"
+- assertVisible:
+    id: "explore_trending_popular_repositories"
+- assertVisible:
+    id: "explore_trending_active_users"
+- assertVisible:
+    id: "explore_trending_featured_projects"
+
+# Step 4–5: Profile tab (right bottom nav item)
+- tapOn:
+    point: "83%, 94%"
+- extendedWaitUntil:
+    visible:
+      id: "profile_account_header"
+    timeout: 10000
+- assertVisible:
+    id: "profile_account_header"
+- assertVisible:
+    id: "profile_edit_profile"
+
+# Step 6–7: Home tab round trip (left bottom nav item)
+- tapOn:
+    point: "17%, 94%"
+- assertVisible:
+    id: "home_welcome_card"
+- assertVisible:
+    id: "home_features_header"

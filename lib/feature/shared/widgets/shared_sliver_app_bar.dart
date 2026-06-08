@@ -14,7 +14,7 @@ class SharedSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
-      title: Text(' User $title Repositories'),
+      title: Text(title),
       floating: true,
       actions: actions,
       systemOverlayStyle: SystemUiOverlayStyle(

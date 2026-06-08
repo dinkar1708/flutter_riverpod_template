@@ -3,20 +3,26 @@
 A new Flutter template project using the Riverpod library for state management.
 
 ## Table of Contents
-1. [Setup](#setup)
-2. [Guide to Run Code](#guide-to-run-code)
-3. [Testing](#testing)
-4. [API Used](#api-used-in-the-project)
-5. [Features](#features)
-6. [Run Configuration Guide](#run-configuration-guide)
-7. [Coding Guide](#coding-guide)
-8. [Release Guide](#release-guide)
-9. [APIs](#apis)
-10. [Riverpod Library Guide](#riverpod-library-guide)
-11. [FAQ](#faq)
-12. [DO/DON'T](#dodont)
-13. [TODOs](#todos)
+1. [Demo](#demo)
+2. [Setup](#setup)
+3. [Guide to Run Code](#guide-to-run-code)
+4. [Testing](#testing)
+5. [API Used](#api-used-in-the-project)
+6. [Features](#features)
+7. [Run Configuration Guide](#run-configuration-guide)
+8. [Coding Guide](#coding-guide)
+9. [Release Guide](#release-guide)
+10. [APIs](#apis)
+11. [Riverpod Library Guide](#riverpod-library-guide)
+12. [FAQ](#faq)
+13. [DO/DON'T](#dodont)
+14. [TODOs](#todos)
 
+## Demo
+
+Maestro automated test run on the Android emulator (guest onboarding, home features, tabs, explore, and profile):
+
+https://github.com/user-attachments/assets/8186cdb3-1d40-4682-94ca-8678d99daf1e
 
 ## Setup
 
@@ -86,26 +92,32 @@ Please refer to: [Testing Guide](documentation/TESTING.md)
    - User Repositories: `https://api.github.com/users/:username/repos`
 - Endpoint: `users/dinkar1708/repos?per_page=3`
 
-## Latest screen shots
+## Screenshots
 
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 34" src="https://github.com/user-attachments/assets/623a3366-fd6c-4bef-8725-30ef30b53194" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 30" src="https://github.com/user-attachments/assets/f917e2ad-6663-4af7-a6bc-f6ddf2924f59" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 26" src="https://github.com/user-attachments/assets/6cf4b8a6-6b83-4832-b951-c241384cd08e" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 19" src="https://github.com/user-attachments/assets/4d8086dd-cfe4-4ab3-8dfe-77906e0cb4a4" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 16" src="https://github.com/user-attachments/assets/515485c9-0ee8-429a-9ccc-e87b5b4904ff" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 07" src="https://github.com/user-attachments/assets/84e94b20-1482-4b5a-bbfd-e4b8869b39bc" />
-<img width="400" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-10-02 at 18 58 05" src="https://github.com/user-attachments/assets/e44b8fe4-fa85-4658-8c59-30e4f185fc29" />
+Captured automatically via Maestro on the Android emulator (`maestro test maestro/screenshots/capture_app_screenshots.yaml`).
+
+| Screen | Preview |
+|--------|---------|
+| Login | <img width="200" alt="Login" src="documentation/screenshots/01_login.png" /> |
+| Home | <img width="200" alt="Home dashboard" src="documentation/screenshots/02_home.png" /> |
+| Repositories | <img width="200" alt="Repositories" src="documentation/screenshots/03_repositories.png" /> |
+| Search Users | <img width="200" alt="Search Users" src="documentation/screenshots/04_search_users.png" /> |
+| Counter | <img width="200" alt="Counter" src="documentation/screenshots/05_counter.png" /> |
+| Navigation | <img width="200" alt="Auto Route navigation" src="documentation/screenshots/06_navigation.png" /> |
+| Explore | <img width="200" alt="Explore tab" src="documentation/screenshots/07_explore.png" /> |
+| Profile | <img width="200" alt="Profile tab" src="documentation/screenshots/08_profile.png" /> |
+| Settings | <img width="200" alt="Settings" src="documentation/screenshots/09_settings.png" /> |
 
 ## Features
 
 ### Home Page
 - Navigation to feature pages
-- <img width="400" alt="Home Page" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/c1cd0232-ce33-43f9-809a-2b30dc6a5c2a">
+- <img width="400" alt="Home Page" src="documentation/screenshots/02_home.png">
 
 
 ### Feature: Navigation
 - [Auto Route](https://github.com/Milad-Akarie/auto_route_library?tab=readme-ov-file#tab-navigation)
-- <img width="400" alt="Navigation Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/42f49745-0871-45f0-a38b-5cdc86669ba6">
+- <img width="400" alt="Navigation Feature" src="documentation/screenshots/06_navigation.png">
 
 ### Feature: Counter without API
 
@@ -140,7 +152,7 @@ class CounterPage extends HookWidget {
           counterState.value = counterState.value + 1;
         },
 ```
-- <img width="400" alt="Counter Feature" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/7393ac62-fda3-4dfb-9f6c-4694f75c8b98">
+- <img width="400" alt="Counter Feature" src="documentation/screenshots/05_counter.png">
 
 
 ### Feature: User GitHub Repository List
@@ -182,7 +194,7 @@ return switch (repositoryListAsync) {
   _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
 };
 ```
-- <img width="400" alt="Repository List" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/501741e0-1509-4533-bbf6-16be30fdc1a3">
+- <img width="400" alt="Repository List" src="documentation/screenshots/03_repositories.png">
 
 
 ### Feature: Search Users and Handle widget local state
@@ -231,7 +243,7 @@ final isSearchingNotifier = useState(false);
       _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
     };
 ```
-- <img width="400" alt="Search Users" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/545b38ce-4e9f-4085-9f2b-9e338cfbcb35">
+- <img width="400" alt="Search Users" src="documentation/screenshots/04_search_users.png">
 
 
 ### Feature: Login

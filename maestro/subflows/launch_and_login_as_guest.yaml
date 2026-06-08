@@ -1,0 +1,22 @@
+appId: com.example.flutter_rivperpod_template.dev
+---
+# Shared precondition for journeys 2–5 (doc: Journey 1 completed)
+- launchApp:
+    clearState: true
+
+- extendedWaitUntil:
+    visible: "Continue as Guest"
+    timeout: 15000
+
+- tapOn: "Continue as Guest"
+
+- extendedWaitUntil:
+    visible:
+      id: "home_welcome_card"
+    timeout: 15000
+
+# Dismiss snackbar so bottom nav is tappable
+- extendedWaitUntil:
+    notVisible: "Welcome dinkar1708!"
+    timeout: 5000
+    optional: true

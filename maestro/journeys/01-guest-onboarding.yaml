@@ -1,0 +1,37 @@
+# Spec ID: guest_onboarding
+# Doc: documentation/journeys/01-guest-onboarding.md
+# Appium: TestGuestOnboardingJourney::test_guest_user_sees_home_dashboard
+appId: com.example.flutter_rivperpod_template.dev
+---
+- launchApp:
+    clearState: true
+
+# Step 1: Wait for login screen
+- extendedWaitUntil:
+    visible: "Continue as Guest"
+    timeout: 15000
+
+# Step 2: Tap Continue as Guest
+- tapOn: "Continue as Guest"
+
+# Step 3: Wait for home screen
+- extendedWaitUntil:
+    visible:
+      id: "home_welcome_card"
+    timeout: 15000
+
+# Verify (doc checklist)
+- assertVisible:
+    id: "home_welcome_card"
+- assertVisible:
+    id: "home_welcome_subtitle"
+- assertVisible:
+    id: "home_features_header"
+- assertVisible:
+    id: "home_feature_api_integration"
+- assertVisible:
+    id: "home_feature_search_filter"
+- assertVisible:
+    id: "home_feature_state_management"
+- assertVisible:
+    id: "home_feature_auto_route_navigation"

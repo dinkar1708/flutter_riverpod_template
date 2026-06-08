@@ -14,10 +14,15 @@ class ExplorePage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(title),
         actions: [
-          IconButton(
+          Semantics(
+            identifier: 'explore_settings_button',
+            label: 'Settings',
+            button: true,
+            child: IconButton(
             onPressed: () => context.router.push(const SettingsRoute()),
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Settings',
+          ),
           ),
         ],
       ),
@@ -25,7 +30,12 @@ class ExplorePage extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           // Explore Header Card
-          Card(
+          Semantics(
+            identifier: 'explore_discover_header',
+            label: 'Discover More',
+            container: true,
+            explicitChildNodes: true,
+            child: Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -75,11 +85,16 @@ class ExplorePage extends ConsumerWidget {
               ),
             ),
           ),
+          ),
 
           const SizedBox(height: 24),
 
           // Trending Section
-          Padding(
+          Semantics(
+            identifier: 'explore_trending_header',
+            label: 'Trending',
+            header: true,
+            child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
               'Trending',
@@ -88,10 +103,12 @@ class ExplorePage extends ConsumerWidget {
                   ),
             ),
           ),
+          ),
           const SizedBox(height: 12),
 
           _buildTrendingCard(
             context,
+            semanticsId: 'explore_trending_popular_repositories',
             icon: Icons.trending_up_rounded,
             title: 'Popular Repositories',
             description: 'Check out trending GitHub repos',
@@ -104,6 +121,7 @@ class ExplorePage extends ConsumerWidget {
 
           _buildTrendingCard(
             context,
+            semanticsId: 'explore_trending_active_users',
             icon: Icons.people_outline_rounded,
             title: 'Active Users',
             description: 'Discover active community members',
@@ -116,6 +134,7 @@ class ExplorePage extends ConsumerWidget {
 
           _buildTrendingCard(
             context,
+            semanticsId: 'explore_trending_featured_projects',
             icon: Icons.star_outline_rounded,
             title: 'Featured Projects',
             description: 'Handpicked projects to explore',
@@ -131,13 +150,19 @@ class ExplorePage extends ConsumerWidget {
 
   Widget _buildTrendingCard(
     BuildContext context, {
+    required String semanticsId,
     required IconData icon,
     required String title,
     required String description,
     required Color color,
     required VoidCallback onTap,
   }) {
-    return Card(
+    return Semantics(
+      identifier: semanticsId,
+      label: title,
+      button: true,
+      container: true,
+      child: Card(
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -184,6 +209,7 @@ class ExplorePage extends ConsumerWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

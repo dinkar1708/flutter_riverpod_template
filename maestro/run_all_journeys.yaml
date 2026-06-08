@@ -1,0 +1,9 @@
+# Runs all documented journeys in order (documentation/USER_JOURNEYS.md)
+appId: com.example.flutter_rivperpod_template.dev
+---
+- runFlow: journeys/01-guest-onboarding.yaml
+- runFlow: journeys/02-home-features-tour.yaml
+- runFlow: journeys/03-bottom-tabs.yaml
+- runFlow: journeys/04-explore-discovery.yaml
+- runFlow: journeys/05-profile-settings.yaml
+

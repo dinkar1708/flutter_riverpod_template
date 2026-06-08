@@ -1,0 +1,47 @@
+# Spec ID: home_features_tour
+# Doc: documentation/journeys/02-home-features-tour.md
+# Appium: TestHomeFeaturesJourney::test_guest_browses_all_home_features
+appId: com.example.flutter_rivperpod_template.dev
+---
+- runFlow: ../subflows/launch_and_login_as_guest.yaml
+
+# Feature 1: API Integration
+- assertVisible:
+    id: "home_welcome_card"
+- tapOn:
+    id: "home_feature_api_integration"
+- extendedWaitUntil:
+    visible: "Repositories (dinkar1708)"
+    timeout: 30000
+- back
+- runFlow: ../subflows/return_to_home_dashboard.yaml
+
+# Feature 2: Search & Filter
+- tapOn:
+    id: "home_feature_search_filter"
+- extendedWaitUntil:
+    visible: "Search Users"
+    timeout: 10000
+- back
+- runFlow: ../subflows/return_to_home_dashboard.yaml
+
+# Feature 3: State Management
+- tapOn:
+    id: "home_feature_state_management"
+- extendedWaitUntil:
+    visible:
+      id: "counter_hint"
+    timeout: 10000
+- back
+- runFlow: ../subflows/return_to_home_dashboard.yaml
+
+# Feature 4: Auto Route Navigation
+- tapOn:
+    id: "home_feature_auto_route_navigation"
+- extendedWaitUntil:
+    visible: "NavigationChild1Route"
+    timeout: 10000
+- back
+- runFlow: ../subflows/return_to_home_dashboard.yaml
+- assertVisible:
+    id: "home_features_header"

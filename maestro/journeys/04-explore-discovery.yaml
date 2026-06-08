@@ -1,0 +1,53 @@
+# Spec ID: explore_discovery
+# Doc: documentation/journeys/04-explore-discovery.md
+# Appium: TestExploreDiscoveryJourney::test_guest_explores_trending_and_detail_screens
+appId: com.example.flutter_rivperpod_template.dev
+---
+- runFlow: ../subflows/launch_and_login_as_guest.yaml
+
+# Step 1–2: Open Explore tab
+- tapOn:
+    point: "50%, 94%"
+- extendedWaitUntil:
+    visible:
+      id: "explore_discover_header"
+    timeout: 10000
+- assertVisible:
+    id: "explore_discover_header"
+- assertVisible:
+    id: "explore_trending_header"
+
+# Step 3: Popular Repositories → Repositories → back
+- tapOn:
+    id: "explore_trending_popular_repositories"
+- extendedWaitUntil:
+    visible: "Repositories (dinkar1708)"
+    timeout: 30000
+- back
+- runFlow: ../subflows/return_to_explore_tab.yaml
+
+# Step 4: Active Users → Search Users → back
+- tapOn:
+    id: "explore_trending_active_users"
+- extendedWaitUntil:
+    visible: "Search Users"
+    timeout: 10000
+- back
+- runFlow: ../subflows/return_to_explore_tab.yaml
+
+# Step 5: Featured Projects → Featured → back
+- tapOn:
+    id: "explore_trending_featured_projects"
+- extendedWaitUntil:
+    visible: "Featured (dinkar1708)"
+    timeout: 30000
+- back
+- runFlow: ../subflows/return_to_explore_tab.yaml
+
+# Step 6–8: Settings from Explore app bar
+- tapOn:
+    id: "explore_settings_button"
+- assertVisible:
+    id: "settings_appearance_header"
+- back
+- runFlow: ../subflows/return_to_explore_tab.yaml

@@ -22,7 +22,12 @@ class SettingsPage extends ConsumerWidget {
       body: ListView(
         children: [
           // Theme Section
-          _buildSectionHeader(context, 'Appearance'),
+          Semantics(
+            identifier: 'settings_appearance_header',
+            header: true,
+            label: 'Appearance',
+            child: _buildSectionHeader(context, 'Appearance'),
+          ),
           Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Column(
