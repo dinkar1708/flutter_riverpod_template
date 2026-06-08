@@ -78,6 +78,7 @@ ALL_JOURNEYS: Tuple[JourneyMeta, ...] = (
 
 # Journey 1 — verification targets (doc: 01-guest-onboarding.md)
 GUEST_ONBOARDING_WELCOME_SUBTITLE = "Ready to explore? Check out the features below"
+GUEST_ONBOARDING_WELCOME_SUBTITLE_SEMANTICS_ID = "home_welcome_subtitle"
 GUEST_ONBOARDING_FEATURE_SEMANTICS_IDS: Tuple[str, ...] = (
     "home_feature_api_integration",
     "home_feature_search_filter",

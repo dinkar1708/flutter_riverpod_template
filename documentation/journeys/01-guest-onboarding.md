@@ -28,7 +28,7 @@ Guest user (demo mode)
 ## Verify
 
 - [ ] Welcome card is visible (`home_welcome_card`)
-- [ ] Subtitle text: `Ready to explore? Check out the features below`
+- [ ] Subtitle (`home_welcome_subtitle`): `Ready to explore? Check out the features below`
 - [ ] Features section header is visible (`home_features_header`)
 - [ ] All four feature cards are visible:
   - API Integration (`home_feature_api_integration`)
@@ -42,6 +42,7 @@ Guest user (demo mode)
 |---------|------------|-----------------|
 | Continue as Guest | `Continue as Guest` | accessibility id |
 | Welcome card | `home_welcome_card` | `UiSelector().resourceId("home_welcome_card")` |
+| Welcome subtitle | `home_welcome_subtitle` | `UiSelector().resourceId("home_welcome_subtitle")` |
 | Features header | `home_features_header` | `UiSelector().resourceId("home_features_header")` |
 
 ## Success criteria
