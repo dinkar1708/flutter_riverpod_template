@@ -75,8 +75,22 @@ class BasePage:
     def tap_by_semantics_id(self, semantics_id: str) -> None:
         self.wait_until_visible(self.semantics_locator(semantics_id)).click()
 
+    def scroll_to_label(self, label: str) -> None:
+        if self.platform == "ios":
+            return
+        selector = (
+            f'new UiScrollable(new UiSelector().scrollable(true))'
+            f'.scrollIntoView(new UiSelector().descriptionContains("{label}"))'
+        )
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, selector)
+
     def tap_by_label(self, label: str) -> None:
-        self.wait_until_clickable(self.label_locator(label)).click()
+        self.scroll_to_label(label)
+        if self.platform == "ios":
+            self.wait_until_clickable(self.label_locator(label)).click()
+            return
+        selector = f'new UiSelector().descriptionContains("{label}")'
+        self.wait_until_clickable((AppiumBy.ANDROID_UIAUTOMATOR, selector)).click()
 
     def tap_by_tab(self, tab_name: str) -> None:
         self.wait_until_clickable(self.tab_locator(tab_name)).click()
@@ -101,3 +115,20 @@ class BasePage:
             return True
         except Exception:
             return False
+
+    def wait_until_text_visible(self, text: str):
+        if self.platform == "ios":
+            return self.wait_until_visible(self.label_locator(text))
+        selector = f'new UiSelector().descriptionContains("{text}")'
+        return self.wait_until_visible((AppiumBy.ANDROID_UIAUTOMATOR, selector))
+
+    def go_back(self) -> None:
+        self.driver.back()
+
+    def go_back_to_home(self, home: "HomePage", max_attempts: int = 5) -> None:
+        for _ in range(max_attempts):
+            if home.is_present_by_semantics_id("home_welcome_card"):
+                home.wait_for_screen()
+                return
+            self.go_back()
+        home.wait_for_screen()

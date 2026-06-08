@@ -21,14 +21,23 @@ class ExplorePage(BasePage):
     )
 
     def wait_for_screen(self) -> None:
-        self.wait_until_visible(self.tab_locator("Explore"))
-        self.wait_until_visible(self.label_locator(self.DISCOVER_MORE))
-        self.wait_until_visible(self.label_locator(self.TRENDING_HEADER))
+        self.wait_until_text_visible(self.DISCOVER_MORE)
+        self.wait_until_text_visible(self.TRENDING_HEADER)
 
-    def open_from_home(self, home: HomePage) -> None:
-        home.wait_for_screen()
-        home.switch_to_explore_tab()
+    def ensure_visible(self, home: HomePage) -> None:
+        for _ in range(4):
+            if self.is_displayed_by_text(self.DISCOVER_MORE):
+                return
+            if home.is_tab_bar_visible():
+                home.switch_to_explore_tab()
+            else:
+                home.go_back()
         self.wait_for_screen()
+
+    def open_from_home(self, home: "HomePage") -> None:
+        if home.is_tab_bar_visible():
+            home.switch_to_explore_tab()
+        self.ensure_visible(home)
 
     def is_discover_section_visible(self) -> bool:
         return (
