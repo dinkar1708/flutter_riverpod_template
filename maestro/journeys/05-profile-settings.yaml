@@ -1,0 +1,36 @@
+# Spec ID: profile_settings
+# Doc: documentation/journeys/05-profile-settings.md
+# Appium: TestProfileAndSettingsJourney::test_guest_reviews_profile_and_settings
+appId: com.example.flutter_rivperpod_template.dev
+---
+- runFlow: ../subflows/launch_and_login_as_guest.yaml
+
+# Part A: Settings from Home app bar
+- assertVisible:
+    id: "home_welcome_card"
+- tapOn:
+    id: "home_settings_button"
+- assertVisible:
+    id: "settings_appearance_header"
+- back
+- runFlow: ../subflows/return_to_home_dashboard.yaml
+
+# Part B: Profile review
+- tapOn:
+    point: "83%, 94%"
+- extendedWaitUntil:
+    visible:
+      id: "profile_account_header"
+    timeout: 10000
+- assertVisible:
+    id: "profile_account_header"
+- assertVisible:
+    id: "profile_edit_profile"
+- assertVisible:
+    id: "profile_logout"
+
+# Part C: Settings from Profile menu
+- tapOn:
+    id: "profile_settings_menu"
+- assertVisible:
+    id: "settings_appearance_header"

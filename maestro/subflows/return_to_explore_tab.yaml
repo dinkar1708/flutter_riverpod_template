@@ -1,0 +1,24 @@
+appId: com.example.flutter_rivperpod_template.dev
+---
+# Mirrors appium ExplorePage.ensure_visible()
+- repeat:
+    times: 6
+    commands:
+      - runFlow:
+          when:
+            notVisible:
+              id: "explore_discover_header"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible:
+              id: "explore_discover_header"
+          commands:
+            - tapOn:
+                point: "50%, 94%"
+
+- extendedWaitUntil:
+    visible:
+      id: "explore_discover_header"
+    timeout: 10000

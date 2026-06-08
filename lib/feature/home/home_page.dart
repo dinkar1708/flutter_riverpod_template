@@ -37,7 +37,9 @@ class _HomePageState extends ConsumerState<HomePage> {
           // Welcome Card
           Semantics(
             identifier: 'home_welcome_card',
-            label: 'Welcome Back!',
+            label:
+                'Welcome Back! Ready to explore? Check out the features below',
+            explicitChildNodes: true,
             child: Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -75,9 +77,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                            Text(
-                              'Ready to explore? Check out the features below',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            Semantics(
+                              identifier: 'home_welcome_subtitle',
+                              label:
+                                  'Ready to explore? Check out the features below',
+                              child: Text(
+                                'Ready to explore? Check out the features below',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ),
                           ],
                         ),

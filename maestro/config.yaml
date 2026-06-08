@@ -1,5 +1,9 @@
-# Maestro workspace config
-# Run all flows: maestro test maestro/
+# Maestro workspace config — aligned with documentation/USER_JOURNEYS.md
+# Run all 5 journeys: maestro test maestro/
+# Run chained suite: maestro test maestro/run_all_journeys.yaml
 flows:
-  - launch_app.yaml
-  - home_bottom_tabs.yaml
+  - journeys/01-guest-onboarding.yaml
+  - journeys/02-home-features-tour.yaml
+  - journeys/03-bottom-tabs.yaml
+  - journeys/04-explore-discovery.yaml
+  - journeys/05-profile-settings.yaml
