@@ -4,25 +4,42 @@ A new Flutter template project using the Riverpod library for state management.
 
 ## Table of Contents
 1. [Demo](#demo)
-2. [Setup](#setup)
-3. [Guide to Run Code](#guide-to-run-code)
-4. [Testing](#testing)
-5. [API Used](#api-used-in-the-project)
-6. [Features](#features)
-7. [Run Configuration Guide](#run-configuration-guide)
-8. [Coding Guide](#coding-guide)
-9. [Release Guide](#release-guide)
-10. [APIs](#apis)
-11. [Riverpod Library Guide](#riverpod-library-guide)
-12. [FAQ](#faq)
-13. [DO/DON'T](#dodont)
-14. [TODOs](#todos)
+2. [User Journeys](#user-journeys)
+3. [Setup](#setup)
+4. [Guide to Run Code](#guide-to-run-code)
+5. [Testing](#testing)
+6. [API Used](#api-used-in-the-project)
+7. [Features](#features)
+8. [Run Configuration Guide](#run-configuration-guide)
+9. [Coding Guide](#coding-guide)
+10. [Release Guide](#release-guide)
+11. [APIs](#apis)
+12. [Riverpod Library Guide](#riverpod-library-guide)
+13. [FAQ](#faq)
+14. [DO/DON'T](#dodont)
+15. [TODOs](#todos)
 
 ## Demo
 
 Maestro automated test run on the Android emulator (guest onboarding, home features, tabs, explore, and profile):
 
 https://github.com/user-attachments/assets/8186cdb3-1d40-4682-94ca-8678d99daf1e
+
+## User Journeys
+
+**Anyone can read these docs** — no Flutter, Maestro, or Appium setup required. Each journey is a plain step-by-step guide with a verification checklist. Use them to explore the app manually, onboard new teammates, or hand flows to AI testing tools.
+
+**Start here:** [User Journeys index](documentation/USER_JOURNEYS.md)
+
+| # | Journey | What you'll do |
+|---|---------|----------------|
+| 1 | [Guest onboarding](documentation/journeys/01-guest-onboarding.md) | Open the app and continue as guest to reach the home dashboard |
+| 2 | [Home features tour](documentation/journeys/02-home-features-tour.md) | Tap each home feature card and return to the dashboard |
+| 3 | [Bottom tabs round trip](documentation/journeys/03-bottom-tabs.md) | Switch between Home, Explore, and Profile tabs |
+| 4 | [Explore discovery](documentation/journeys/04-explore-discovery.md) | Browse trending items and open detail screens from Explore |
+| 5 | [Profile & settings](documentation/journeys/05-profile-settings.md) | Review profile options and open settings from Home and Profile |
+
+Each doc also links to its matching Maestro and Appium automated tests for developers who want to run them.
 
 ## Setup
 
