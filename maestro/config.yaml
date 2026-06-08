@@ -1,0 +1,5 @@
+# Maestro workspace config
+# Run all flows: maestro test maestro/
+flows:
+  - launch_app.yaml
+  - home_bottom_tabs.yaml

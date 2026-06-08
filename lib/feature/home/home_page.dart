@@ -19,10 +19,15 @@ class _HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          IconButton(
+          Semantics(
+            identifier: 'home_settings_button',
+            label: 'Settings',
+            button: true,
+            child: IconButton(
             onPressed: () => context.router.push(const SettingsRoute()),
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Settings',
+          ),
           ),
         ],
       ),
@@ -30,7 +35,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         padding: const EdgeInsets.all(16),
         children: [
           // Welcome Card
-          Card(
+          Semantics(
+            identifier: 'home_welcome_card',
+            label: 'Welcome Back!',
+            child: Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -80,11 +88,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
             ),
           ),
+          ),
 
           const SizedBox(height: 24),
 
           // Features Section Header
-          Padding(
+          Semantics(
+            identifier: 'home_features_header',
+            header: true,
+            child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
               'Features',
@@ -93,11 +105,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
             ),
           ),
+          ),
           const SizedBox(height: 12),
 
           // Feature Cards
           _buildFeatureCard(
             context,
+            semanticsId: 'home_feature_api_integration',
             icon: Icons.code_rounded,
             title: 'API Integration',
             description: 'Real-time GitHub API with Retrofit & Dio',
@@ -109,6 +123,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
           _buildFeatureCard(
             context,
+            semanticsId: 'home_feature_search_filter',
             icon: Icons.search_rounded,
             title: 'Search & Filter',
             description: 'Dynamic search with Riverpod state management',
@@ -120,6 +135,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
           _buildFeatureCard(
             context,
+            semanticsId: 'home_feature_state_management',
             icon: Icons.add_circle_outline_rounded,
             title: 'State Management',
             description: 'Reactive state with Riverpod providers',
@@ -131,6 +147,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
           _buildFeatureCard(
             context,
+            semanticsId: 'home_feature_auto_route_navigation',
             icon: Icons.navigation_rounded,
             title: 'Auto Route Navigation',
             description: 'Type-safe routing with nested navigation',
@@ -145,12 +162,17 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   Widget _buildFeatureCard(
     BuildContext context, {
+    required String semanticsId,
     required IconData icon,
     required String title,
     required String description,
     required VoidCallback onTap,
   }) {
-    return Card(
+    return Semantics(
+      identifier: semanticsId,
+      label: title,
+      button: true,
+      child: Card(
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -200,6 +222,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
+    ),
     );
   }
 }

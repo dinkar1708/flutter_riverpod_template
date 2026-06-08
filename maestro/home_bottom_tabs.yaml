@@ -1,0 +1,30 @@
+appId: com.example.flutter_rivperpod_template.dev
+---
+- launchApp:
+    clearState: true
+
+- runFlow: subflows/login_as_guest.yaml
+
+# Home tab (default after login)
+- assertVisible:
+    id: "home_welcome_card"
+- assertVisible:
+    id: "home_features_header"
+- assertVisible: "Features"
+
+# Explore tab
+- tapOn: "Explore"
+- assertVisible: "Discover More"
+- assertVisible: "Trending"
+
+# Profile tab
+- tapOn: "Profile"
+- assertVisible: "Account"
+- assertVisible: "Edit Profile"
+- assertVisible: "Logout"
+
+# Back to Home tab
+- tapOn: "Home"
+- assertVisible:
+    id: "home_welcome_card"
+- assertVisible: "API Integration"

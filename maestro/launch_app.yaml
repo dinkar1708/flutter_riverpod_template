@@ -1,0 +1,13 @@
+appId: com.example.flutter_rivperpod_template.dev
+---
+# Verify the app launches and reaches the login screen after splash
+- launchApp:
+    clearState: true
+
+- extendedWaitUntil:
+    visible: "Welcome Back!"
+    timeout: 15000
+
+- assertVisible: "Sign in to continue"
+- assertVisible: "Continue as Guest"
+- assertVisible: "Sign In"

@@ -23,3 +23,15 @@ doc/api/
 *.freezed.dart
 *.gr.dart
 .DS_Store
+
+# Appium / Python E2E tests
+appium/.venv/
+appium/.pytest_cache/
+appium/**/__pycache__/
+appium/**/*.py[cod]
+appium/.coverage
+appium/htmlcov/
+appium/.mypy_cache/
+appium/.ruff_cache/
+appium/reports/
+appium/*.log
