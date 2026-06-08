@@ -48,6 +48,9 @@ maestro test maestro/journeys/03-bottom-tabs.yaml
 
 # Chained suite
 maestro test maestro/run_all_journeys.yaml
+
+# Regenerate README screenshots (saved to documentation/screenshots/)
+maestro test maestro/screenshots/capture_app_screenshots.yaml
 ```
 
 **Note:** Maestro uses `Semantics.identifier` values and coordinate taps for bottom tabs (`50%, 94%` Explore, `83%, 94%` Profile, `17%, 94%` Home).
