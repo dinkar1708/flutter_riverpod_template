@@ -28,6 +28,7 @@ class ApiErrorHandler {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
+      case DioExceptionType.transformTimeout:
         return ApiError(
           type: ApiErrorType.timeout,
           message: 'Request timeout',

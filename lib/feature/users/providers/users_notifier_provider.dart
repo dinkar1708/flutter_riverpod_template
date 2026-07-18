@@ -22,6 +22,7 @@ class UsersNotifierProvider extends _$UsersNotifierProvider {
 }
 
 /// Exposes the filtered users list based on filter parameter notifier
+/// Uses modern Riverpod 3.0 switch pattern for AsyncValue
 @riverpod
 AsyncValue<List<UserModel>> filteredUsers(Ref ref) {
   final filter = ref.watch(usersFilterParameterProvider);
@@ -30,9 +31,14 @@ AsyncValue<List<UserModel>> filteredUsers(Ref ref) {
 
   if (query.isEmpty) return usersAsync;
 
-  return usersAsync.whenData((list) {
-    return list
-        .where((u) => u.name.toLowerCase().contains(query))
-        .toList(growable: false);
-  });
+  // Modern switch pattern for AsyncValue transformation
+  return switch (usersAsync) {
+    AsyncData(:final value) => AsyncData(
+        value
+            .where((u) => u.name.toLowerCase().contains(query))
+            .toList(growable: false),
+      ),
+    AsyncError(:final error, :final stackTrace) => AsyncError(error, stackTrace),
+    AsyncLoading() => const AsyncLoading(),
+  };
 }
