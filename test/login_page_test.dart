@@ -15,6 +15,9 @@ void main() {
         ),
       );
 
+      // Wait for all animations and async operations to complete
+      await tester.pumpAndSettle();
+
       // Verify that the login page renders
       expect(find.text('Welcome Back!'), findsOneWidget);
       expect(find.text('Sign in to continue'), findsOneWidget);
@@ -92,6 +95,9 @@ void main() {
           ),
         ),
       );
+
+      // Wait for all animations and async operations to complete
+      await tester.pumpAndSettle();
 
       // Find the login button
       final loginButton = find.widgetWithText(ElevatedButton, 'Sign In');

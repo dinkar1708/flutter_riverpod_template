@@ -15,14 +15,14 @@ dependencies:
   riverpod_annotation: ^4.0.2
   freezed_annotation: ^3.1.0
   retrofit: ^4.0.1
-  dio: ^5.3.2
+  dio: ^5.10.0
   json_annotation: ^4.11.0
   flutter_hooks: ^0.21.3+1
   auto_route: ^11.1.0
   hooks_riverpod: ^3.3.1
   riverpod: ^3.2.1
-  webview_flutter: ^4.10.0
-  package_info_plus: ^8.1.1
+  webview_flutter: ^4.14.1
+  package_info_plus: ^10.2.1
   url_launcher: ^6.3.1
 
 dev_dependencies:

@@ -1,6 +1,23 @@
 # flutter_riverpod_template
 
-A new Flutter template project using the Riverpod library for state management.
+A modern Flutter template project using **Riverpod 3.0** for state management.
+
+## ⚡ Latest Updates (Riverpod 3.0 Upgrade)
+
+This project has been **fully upgraded** to use the latest Riverpod 3.0 patterns:
+
+✅ **Modern AsyncNotifier** - Replaces old FutureProvider patterns
+✅ **Switch Pattern for AsyncValue** - Modern Dart 3 pattern matching (no more `when`/`whenData`)
+✅ **ref.listen for Side Effects** - Navigation, snackbars, dialogs
+✅ **Code Generation** - All providers use `@riverpod` annotation
+✅ **No Custom State Classes** - Built-in `AsyncValue` handles loading/error/data
+✅ **100% Type Safe** - Full type inference with code generation
+
+**Quick Links:**
+- [Counter Example](#feature-counter-without-api) - Simple Notifier pattern
+- [Repository List Example](#feature-user-github-repository-list) - GET request with AsyncNotifier
+- [Login Example](#feature-login-post-with-asyncnotifier) - POST request with ref.listen
+- [Riverpod 3.0 Guide](#riverpod-library-guide) - Package versions & patterns
 
 ## Table of Contents
 1. [Demo](#demo)
@@ -15,9 +32,10 @@ A new Flutter template project using the Riverpod library for state management.
 10. [Release Guide](#release-guide)
 11. [APIs](#apis)
 12. [Riverpod Library Guide](#riverpod-library-guide)
-13. [FAQ](#faq)
-14. [DO/DON'T](#dodont)
-15. [TODOs](#todos)
+13. [Riverpod 3.0 Migration Guide](#riverpod-30-migration-guide)
+14. [FAQ](#faq)
+15. [DO/DON'T](#dodont)
+16. [TODOs](#todos)
 
 ## Demo
 
@@ -140,35 +158,63 @@ Captured automatically via Maestro on the Android emulator (`maestro test maestr
 
 **API-TYPE: No API**
 
-**Requirement: Maintain widget local state only without network operation**
+**Requirement: Maintain state without network operation**
 
-**How to Use Riverpod in This Case:** Use flutter hooks HookWidget widget
+**How to Use Riverpod in This Case:** Use modern Riverpod 3.0 Notifier pattern with `@riverpod` code generation
 
-1. Define parent class:
+1. **Define Provider** (`lib/feature/counter/providers/counter_provider.dart`):
 
 ```dart
-// see parent class
+import 'package:flutter/foundation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'counter_provider.g.dart';
+
+@riverpod
+class Counter extends _$Counter {
+  @override
+  int build() {
+    // Initialize counter to 0
+    ref.onDispose(() {
+      debugPrint('Counter provider disposed');
+    });
+    return 0;
+  }
+
+  void increment() => state = state + 1;
+  void decrement() => state > 0 ? state = state - 1 : null;
+  void reset() => state = 0;
+}
+```
+
+2. **Use in UI** (Modern Riverpod 3.0 pattern):
+
+```dart
 @RoutePage()
-class CounterPage extends HookWidget {
+class CounterPage extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch the counter - UI rebuilds when counter changes
+    final counter = ref.watch(counterProvider);
+
+    return Scaffold(
+      body: Text('Value $counter'),
+      floatingActionButton: FloatingActionButton(
+        // Mutate state using notifier
+        onPressed: () => ref.read(counterProvider.notifier).increment(),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
 ```
 
-2. Use notifier provider on UI
+**Key Points:**
+- ✅ Uses `ConsumerWidget` instead of `HookWidget`
+- ✅ Uses `@riverpod` annotation for code generation
+- ✅ State management via `Notifier` pattern
+- ✅ Clean separation: provider logic vs UI
 
-```dart
-// define
-    final counterState = useState(0);
-// use variable
- Text(
-              'Value ${counterState.value}',
-              style: AppTextStyle.labelMedium
-                  .copyWith(color: context.color.textPrimary),
-            ),
-// modify variable
- onPressed: () {
-          counterState.value = counterState.value + 1;
-        },
-```
 - <img width="400" alt="Counter Feature" src="documentation/screenshots/05_counter.png">
 
 
@@ -178,39 +224,60 @@ class CounterPage extends HookWidget {
 
 **Requirement: Fetch Data from Network**
 
-**How to Use Riverpod in This Case:** User Future Provider - https://riverpod.dev/docs/providers/future_provider
+**How to Use Riverpod in This Case:** Use modern Riverpod 3.0 `AsyncNotifier` with **switch pattern** for AsyncValue
 
-1. Define a future and perform a network call:
+1. **Define AsyncNotifier** (`lib/feature/repository_list/providers/repository_list_notifier_provider.dart`):
 
 ```dart
 @riverpod
 class RepositoryListNotifier extends _$RepositoryListNotifier {
-// below is the future provider
   @override
-  Future<List<RepositoryListModel>> build() async => await ref
-      .read(userRepositoryProvider)
-      .getRepositories(userName, pageSize);
+  Future<List<RepositoryListModel>> build() async {
+    // AsyncNotifier automatically handles loading/error states
+    return await ref
+        .read(userRepositoryProvider)
+        .getRepositories(userName, pageSize);
+  }
 }
 ```
 
-2. Define parent class:
+2. **Use in UI with Modern Switch Pattern**:
 
 ```dart
-// see parent class 
+@RoutePage()
 class RepositoryListPage extends ConsumerStatefulWidget {
-````
+  @override
+  ConsumerState<RepositoryListPage> createState() => _RepositoryListPageState();
+}
 
-3. Use notifier provider on UI
+class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
+  @override
+  Widget build(BuildContext context) {
+    final repositoryListAsync = ref.watch(repositoryListProvider);
 
-```dart
-final repositoryListAsync = ref.watch(repositoryListNotifierProvider);
-return switch (repositoryListAsync) {
-  AsyncError(:final error) =>
-    SliverToBoxAdapter(child: Text('Error $error')),
-  AsyncData(:final value) => _buildListView(value),
-  _ => const SliverToBoxAdapter(child: Center(child: Text('Loading...'))),
-};
+    // Modern Riverpod 3.0 switch pattern for AsyncValue
+    return switch (repositoryListAsync) {
+      AsyncError(:final error) => SliverFillRemaining(
+          child: ErrorView(
+            error: error,
+            onRetry: () => ref.invalidate(repositoryListProvider),
+          ),
+        ),
+      AsyncData(:final value) => _buildListView(value),
+      _ => const SliverToBoxAdapter(
+          child: Center(child: CircularProgressIndicator())
+        ),
+    };
+  }
+}
 ```
+
+**Key Points:**
+- ✅ `AsyncNotifier` for async operations
+- ✅ Modern **switch pattern** (not `when`/`whenData`)
+- ✅ Pattern matching with destructuring: `AsyncData(:final value)`
+- ✅ Built-in loading/error/data states via `AsyncValue`
+
 - <img width="400" alt="Repository List" src="documentation/screenshots/03_repositories.png">
 
 
@@ -263,78 +330,147 @@ final isSearchingNotifier = useState(false);
 - <img width="400" alt="Search Users" src="documentation/screenshots/04_search_users.png">
 
 
-### Feature: Login
+### Feature: Login (POST with AsyncNotifier)
 
 **API-TYPE: POST**
 
-**Requirement: Send data to network**
+**Requirement: Send data to network and handle loading/error states**
 
-**How to Use Riverpod in This Case:**
+**How to Use Riverpod in This Case:** Use modern Riverpod 3.0 `AsyncNotifier` with **switch pattern** + `ref.listen` for side effects
 
-To use the Flutter Future Notifier Provider, we can follow the guidelines provided in the Riverpod documentation. For a more comprehensive guide on handling side effects, such as showing a spinner and error handling, refer to [this section](https://riverpod.dev/docs/essentials/side_effects#going-further-showing-a-spinner--error-handling) of the Riverpod documentation. 
-However, for simplicity and to maintain clean code, you can handle error messages and loading states using the [FutureProvider](https://riverpod.dev/docs/providers/future_provider) in Riverpod.
-
-1. Define a future and perform a network call:
+1. **Define AsyncNotifier** (`lib/feature/login/providers/login_notifier_provider.dart`):
 
 ```dart
 @riverpod
 class LoginNotifier extends _$LoginNotifier {
   @override
-  Future<LoginStateModel> build() async {
-    debugPrint('login initial state....');
-    return Future.value(const LoginStateModel());
+  Future<LoginResponseModel?> build() async {
+    // Return null initially (not logged in)
+    return null;
   }
+
+  Future<void> login(LoginRequestModel request) async {
+    // Set loading state - AsyncValue handles this automatically
+    state = const AsyncLoading();
+
+    try {
+      // Simulated API call
+      await Future.delayed(const Duration(seconds: 2));
+      final loginResponse = LoginResponseModel(
+        id: 1,
+        userName: request.userName,
+      );
+
+      // Update state with data - AsyncValue wraps it
+      state = AsyncData(loginResponse);
+    } catch (error, stackTrace) {
+      // AsyncValue automatically handles errors
+      state = AsyncError(error, stackTrace);
+    }
+  }
+
+  void logout() => state = const AsyncData(null);
+  void clearError() {
+    if (state.hasError) state = const AsyncData(null);
+  }
+}
 ```
 
-2. Define parent class:
+2. **Use in UI with Modern Patterns**:
 
 ```dart
-// see parent class 
+@RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
 
-````
+class _LoginPageState extends ConsumerState<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    // Listen for success/error using ref.listen for side effects
+    ref.listen<AsyncValue>(loginProvider, (previous, next) {
+      // Modern switch pattern for handling state changes
+      switch (next) {
+        case AsyncData(:final value):
+          if (value != null) {
+            showSnackBar(context, 'Welcome ${value.userName}!');
+            context.router.replaceAll([const HomeRoute()]);
+          }
+        case AsyncError(:final error):
+          showSnackBar(context, 'Login failed: $error');
+        case AsyncLoading():
+          break; // Handled in UI
+      }
+    });
 
-3. Use notifier provider on UI
-// use to handle progress indicator
-```dart
-    // watch all the times
-    final loginState = ref.watch(loginNotifierProvider);
-    // use on UI with condition
-          child: loginState.value?.apiResultState == APIResultState.loading
-          ? const CircularProgressIndicator()
-          : const Text('Login'),
-```
+    return Scaffold(
+      body: Column(
+        children: [
+          // Error display using switch pattern
+          _buildErrorView(),
+          // Login button with loading state
+          _buildLoginButton(),
+        ],
+      ),
+    );
+  }
 
-// use to show error message
-```dart
-      // use error message on UI
-        const SizedBox(
-          height: 100,
+  Widget _buildErrorView() {
+    final loginState = ref.watch(loginProvider);
+
+    if (loginState.hasError) {
+      return Container(
+        child: Row(
+          children: [
+            Text(loginState.error.toString()),
+            IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () => ref.read(loginProvider.notifier).clearError(),
+            ),
+          ],
         ),
-        if (loginState.value?.errorMessage != null)
-          Text(loginState.value!.errorMessage),
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
+  Widget _buildLoginButton() {
+    final loginState = ref.watch(loginProvider);
+
+    // Modern switch pattern for loading state
+    final isLoading = switch (loginState) {
+      AsyncLoading() => true,
+      _ => false,
+    };
+
+    return ElevatedButton(
+      onPressed: isLoading ? null : _handleLogin,
+      child: isLoading
+          ? const CircularProgressIndicator()
+          : const Text('Sign In'),
+    );
+  }
+
+  Future<void> _handleLogin() async {
+    final request = LoginRequestModel(
+      userName: _userNameController.text,
+      password: _passwordController.text,
+    );
+
+    // Call login - state changes handled by ref.listen
+    await ref.read(loginProvider.notifier).login(request);
+  }
+}
 ```
 
-// use to do network request
-```dart
-// call api and handle error such as snack bar or alert etc.
-         loginNotifier.login(loginRequestModel).then((loginStateModel) => {
-              if (loginStateModel.apiResultState == APIResultState.result &&
-                  loginStateModel.loginResponseModel != null)
-                {
-                  showSnackBar(context,
-                      'Login success ${loginStateModel.loginResponseModel!.userName}'),
-                  context.router.replaceAll([HomeRoute(title: 'Home')]),
-                }
-              else
-                {
-                  // show error message as snack bar or dailog anything
-                  showSnackBar(
-                      context, 'Login failed ${loginStateModel.errorMessage}'),
-                }
-            });
-
-```
+**Key Points:**
+- ✅ **No custom `APIResultState`** - uses built-in `AsyncValue`
+- ✅ `AsyncNotifier` for async operations
+- ✅ **`ref.listen`** for side effects (navigation, snackbars)
+- ✅ **Modern switch pattern** for state handling
+- ✅ Clean error handling with `AsyncError`
+- ✅ Loading states with `AsyncLoading`
 
 **Loading State after the button is clicked**
 - <img width="400" alt="Loading State" src="https://github.com/dinkar1708/flutter_riverpod_template/assets/14831652/b1f458c6-b040-469e-8f8f-2a13d330f06c">
@@ -498,21 +634,202 @@ refer to: [GitHub Actions Quickstart](https://docs.github.com/en/actions/quickst
 - Simply copy and paste the `build.yml` file into your repository under `.github/workflows/build.yml`, ensuring to specify the correct version of the Flutter SDK, and it will automatically start building.
 
 # Riverpod Library Guide
-- Main library
-```
-  flutter_riverpod: ^2.2.0
-  riverpod_annotation: ^2.3.3
+
+## Main Packages (Riverpod 3.0)
+
+```yaml
+dependencies:
+  flutter_riverpod: ^3.3.1      # Main Riverpod package
+  riverpod_annotation: ^4.0.2   # Annotations for code generation
+  hooks_riverpod: ^3.3.1        # Riverpod + Flutter Hooks
+  riverpod: ^3.2.1              # Core Riverpod (for pure Dart)
+
+dev_dependencies:
+  riverpod_generator: ^4.0.3    # Code generator
+  build_runner: ^2.4.14         # Build system
 ```
 
-- Use flutter hooks to manage state of variables
-```
-flutter_hooks
+## Key Riverpod 3.0 Features
+
+### 1. **Modern Notifier Pattern** (Recommended!)
+- Use `@riverpod` annotation for code generation
+- `Notifier` for synchronous state
+- `AsyncNotifier` for asynchronous operations
+- No need for manual `StateNotifier` or `ChangeNotifier`
+
+### 2. **AsyncValue Switch Pattern** (Recommended!)
+```dart
+switch (asyncValue) {
+  case AsyncData(:final value):
+    return Text(value);
+  case AsyncError(:final error):
+    return Text('Error: $error');
+  case AsyncLoading():
+    return CircularProgressIndicator();
+}
 ```
 
-- StatefulHookConsumerWidget which offers HookWidget and ConsumerStatefulWidget both features.
+### 3. **ref.listen for Side Effects**
+```dart
+ref.listen(myProvider, (previous, next) {
+  // Navigate, show snackbar, etc.
+});
 ```
-hooks_riverpod
+
+### 4. **ConsumerWidget vs HookWidget**
+- **ConsumerWidget**: For Riverpod state (Recommended)
+- **HookWidget**: For widget-local state (use sparingly)
+- **StatefulHookConsumerWidget**: Combines both (when you need both)
+
+# Riverpod 3.0 Migration Guide
+
+## Old Pattern ❌ → New Pattern ✅
+
+### 1. AsyncValue Handling
+
+**OLD (Riverpod 2.0):**
+```dart
+// Using when/whenData/maybeWhen
+asyncValue.when(
+  data: (value) => Text(value),
+  loading: () => CircularProgressIndicator(),
+  error: (error, stack) => Text('Error: $error'),
+);
+
+// Or
+asyncValue.whenData((data) => Text(data));
 ```
+
+**NEW (Riverpod 3.0 - Switch Pattern):**
+```dart
+// Modern Dart 3 switch pattern with destructuring
+switch (asyncValue) {
+  case AsyncData(:final value):
+    return Text(value);
+  case AsyncError(:final error):
+    return Text('Error: $error');
+  case AsyncLoading():
+    return CircularProgressIndicator();
+}
+```
+
+### 2. Provider Definition
+
+**OLD (Manual Provider):**
+```dart
+final counterProvider = StateProvider<int>((ref) => 0);
+```
+
+**NEW (Code Generation):**
+```dart
+@riverpod
+class Counter extends _$Counter {
+  @override
+  int build() => 0;
+
+  void increment() => state = state + 1;
+}
+```
+
+### 3. Async Operations
+
+**OLD (FutureProvider):**
+```dart
+final userProvider = FutureProvider<User>((ref) async {
+  return await fetchUser();
+});
+```
+
+**NEW (AsyncNotifier):**
+```dart
+@riverpod
+class UserNotifier extends _$UserNotifier {
+  @override
+  Future<User> build() async {
+    return await fetchUser();
+  }
+
+  Future<void> refresh() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() => fetchUser());
+  }
+}
+```
+
+### 4. Side Effects (Navigation, Snackbars)
+
+**OLD (Manual state checking):**
+```dart
+final loginState = ref.watch(loginProvider);
+if (loginState.hasValue && loginState.value != null) {
+  // Navigate manually
+}
+```
+
+**NEW (ref.listen):**
+```dart
+ref.listen(loginProvider, (previous, next) {
+  switch (next) {
+    case AsyncData(:final value):
+      if (value != null) {
+        showSnackBar(context, 'Success!');
+        context.router.push(HomeRoute());
+      }
+    case AsyncError(:final error):
+      showSnackBar(context, 'Error: $error');
+  }
+});
+```
+
+### 5. Custom State Models
+
+**OLD (Custom state classes):**
+```dart
+class LoginStateModel {
+  final APIResultState apiResultState;
+  final String errorMessage;
+  final User? user;
+}
+
+// In provider
+state = LoginStateModel(
+  apiResultState: APIResultState.loading,
+  errorMessage: '',
+);
+```
+
+**NEW (Use AsyncValue):**
+```dart
+// No custom state class needed!
+@riverpod
+class LoginNotifier extends _$LoginNotifier {
+  @override
+  Future<User?> build() async => null;
+
+  Future<void> login() async {
+    state = const AsyncLoading();
+    try {
+      final user = await api.login();
+      state = AsyncData(user);
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
+  }
+}
+```
+
+## Migration Checklist
+
+- [ ] Update dependencies to Riverpod 3.0+
+- [ ] Add `riverpod_generator` to dev_dependencies
+- [ ] Replace `when`/`whenData` with `switch` pattern
+- [ ] Convert manual providers to `@riverpod` annotation
+- [ ] Replace `StateProvider` with `Notifier`
+- [ ] Replace `FutureProvider` with `AsyncNotifier`
+- [ ] Remove custom state classes, use `AsyncValue`
+- [ ] Use `ref.listen` for side effects
+- [ ] Run `dart run build_runner build`
+- [ ] Run `flutter analyze` to verify
 
 # APIs
 For example API usage, refer to the list below:
@@ -531,13 +848,142 @@ Wrong - HomeView, HomeWidget, HomeStatefullWidget
 3. Fix compile issues (except for generated syntax) before running build runner commands again.
 
 # DO/DON'T
-1. Use hooks for storing widget local state
+
+## ✅ DO (Riverpod 3.0 Best Practices)
+
+1. **DO use `@riverpod` annotation** for all providers
+   ```dart
+   @riverpod
+   class MyNotifier extends _$MyNotifier { ... }
+   ```
+
+2. **DO use switch pattern** for AsyncValue
+   ```dart
+   switch (asyncValue) {
+     case AsyncData(:final value): ...
+     case AsyncError(:final error): ...
+     case AsyncLoading(): ...
+   }
+   ```
+
+3. **DO use `ref.listen`** for side effects (navigation, snackbars)
+   ```dart
+   ref.listen(provider, (prev, next) {
+     // Handle side effects
+   });
+   ```
+
+4. **DO use `ConsumerWidget`** for Riverpod state
+   ```dart
+   class MyWidget extends ConsumerWidget {
+     Widget build(BuildContext context, WidgetRef ref) { ... }
+   }
+   ```
+
+5. **DO use `AsyncNotifier`** for async operations
+   ```dart
+   @riverpod
+   class UserNotifier extends _$UserNotifier {
+     Future<User> build() async => fetchUser();
+   }
+   ```
+
+6. **DO use `ref.watch`** in build method
+7. **DO use `ref.read`** in event handlers (onPressed, etc.)
+8. **DO run code generation** after changing providers
+   ```bash
+   dart run build_runner build
+   ```
+
+## ❌ DON'T (Avoid These Patterns)
+
+1. **DON'T use `when`/`whenData`** - Use switch pattern instead
+   ```dart
+   // ❌ OLD
+   asyncValue.when(data: ..., loading: ..., error: ...);
+
+   // ✅ NEW
+   switch (asyncValue) { ... }
+   ```
+
+2. **DON'T create custom state classes** for loading/error
+   ```dart
+   // ❌ DON'T
+   class MyState {
+     final bool isLoading;
+     final String? error;
+   }
+
+   // ✅ DO - Use AsyncValue
+   AsyncNotifier<MyData>
+   ```
+
+3. **DON'T use `ref.read` in build method**
+   ```dart
+   // ❌ DON'T
+   Widget build(context, ref) {
+     final value = ref.read(provider); // Wrong!
+   }
+
+   // ✅ DO
+   Widget build(context, ref) {
+     final value = ref.watch(provider); // Correct!
+   }
+   ```
+
+4. **DON'T use StateNotifier/ChangeNotifier** - Use Notifier/AsyncNotifier
+5. **DON'T forget to run build_runner** after modifying providers
+6. **DON'T use HookWidget for Riverpod state** - Use ConsumerWidget
+
+## Resources
 -  [Essential Do/Don't](https://riverpod.dev/docs/essentials/do_dont)
 -  [About Hooks](https://riverpod.dev/docs/concepts/about_hooks)
 
-# TODOs
-- Fix command line run -> `flutter run --flavor development` 
-   - Target file "lib/main.dart" not found.
-- Run using Android Studio configurations
-   - Able to run using Android Studio
-- Implement GitHub APIs using different Riverpod library usages
+# Gap Analysis - What's Missing
+
+**Reference:** [MASTER_FEATURE_SPECIFICATION.md](https://github.com/dinkar1708/github-cruise-android/blob/main/docs/master/MASTER_FEATURE_SPECIFICATION.md) - Complete feature inventory across all platforms.
+
+## Priority 1 - Core Features Missing
+
+| Feature ID | Feature | Priority | Status |
+|------------|---------|----------|--------|
+| 1.3 | User Profile Screen | P1 | TODO |
+| 1.4 | Repository Details Screen | P1 | TODO |
+| 2.1 | Repository Search Screen | P1 | TODO |
+| 2.2 | Repository Details Screen | P1 | TODO |
+
+**APIs Needed:**
+- API-2: Get User Profile
+- API-4: Search Repositories
+
+---
+
+## Priority 2 - Advanced Features Missing
+
+| Feature ID | Feature | Priority | Status |
+|------------|---------|----------|--------|
+| 3.0 | Favorites Screen | P2 | TODO |
+
+---
+
+## Already Implemented (Flutter Complete)
+
+| Feature ID | Feature | Status |
+|------------|---------|--------|
+| 1.1 | Splash Screen | Done |
+| 1.2 | User Search Screen | Done |
+| 1.5 | User Repository List Screen | Done |
+| 4.0 | Settings Screen | Done |
+
+**APIs Implemented:**
+- API-1: Search Users
+- API-3: Get User Repositories
+
+---
+
+## Additional TODOs
+
+- [ ] Fix command line run: `flutter run --flavor development`
+- [ ] Implement comprehensive unit tests (coverage goal: 70%+)
+- [ ] Implement UI tests (Maestro for all journeys)
+- [ ] Add CI/CD pipeline (GitHub Actions)

@@ -1,11 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// Commented for demo - uncomment for real implementation:
-// import 'package:flutter_riverpod_template/data/remote/api/api_result_state.dart';
-// import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
-// import 'package:flutter_riverpod_template/feature/login/models/login_state_model.dart';
-// import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
+import 'package:flutter_riverpod_template/feature/login/models/login_request_model.dart';
+import 'package:flutter_riverpod_template/feature/login/providers/login_notifier_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
 import 'package:flutter_riverpod_template/feature/shared/providers/user_session_provider.dart';
 import 'package:flutter_riverpod_template/feature/shared/utils/ui_utils.dart';
@@ -27,9 +24,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
-  // Commented for demo - uncomment for real implementation:
-  // LoginNotifier get loginNotifier => ref.read(loginProvider.notifier);
-
   @override
   void dispose() {
     _userNameController.dispose();
@@ -39,9 +33,34 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Commented for demo - uncomment for real implementation:
-    // final loginState = ref.watch(loginProvider);
     final colors = Theme.of(context).colorScheme;
+
+    // Listen for login success/error using ref.listen
+    ref.listen<AsyncValue>(loginProvider, (previous, next) {
+      // Using modern switch pattern to handle AsyncValue states
+      switch (next) {
+        case AsyncData(:final value):
+          if (value != null) {
+            // Login successful - navigate to home
+            showSnackBar(
+              context,
+              'Welcome ${value.userName}!',
+              type: SnackBarType.success,
+            );
+            context.router.replaceAll([const HomeWithTabsRoute()]);
+          }
+        case AsyncError(:final error):
+          // Show error message
+          showSnackBar(
+            context,
+            'Login failed: ${error.toString()}',
+            type: SnackBarType.error,
+          );
+        case AsyncLoading():
+          // Loading state - handled in UI below
+          break;
+      }
+    });
 
     return Scaffold(
       body: SafeArea(
@@ -126,39 +145,47 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildLoginFormView() {
+    final loginState = ref.watch(loginProvider);
+
     return Column(
       children: [
-        // Error Message (commented for demo - uncomment for real implementation)
-        // if (loginState.value?.errorMessage != null &&
-        //     loginState.value!.errorMessage.isNotEmpty)
-        //   Container(
-        //     padding: const EdgeInsets.all(12),
-        //     margin: const EdgeInsets.only(bottom: 16),
-        //     decoration: BoxDecoration(
-        //       color: Theme.of(context).colorScheme.error.withValues(alpha: 0.1),
-        //       borderRadius: BorderRadius.circular(12),
-        //       border: Border.all(
-        //         color: Theme.of(context).colorScheme.error,
-        //       ),
-        //     ),
-        //     child: Row(
-        //       children: [
-        //         Icon(
-        //           Icons.error_outline,
-        //           color: Theme.of(context).colorScheme.error,
-        //         ),
-        //         const SizedBox(width: 12),
-        //         Expanded(
-        //           child: Text(
-        //             loginState.value!.errorMessage,
-        //             style: TextStyle(
-        //               color: Theme.of(context).colorScheme.error,
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
+        // Error Message using modern AsyncValue switch pattern
+        if (loginState.hasError)
+          Container(
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.error.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    loginState.error.toString(),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close, size: 20),
+                  onPressed: () {
+                    ref.read(loginProvider.notifier).clearError();
+                  },
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ],
+            ),
+          ),
 
         // Username Field
         CommonTextField(
@@ -345,89 +372,65 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildLoginButtonView() {
-    // Commented for demo - uncomment for real implementation:
-    // final isLoading =
-    //     loginState.value?.apiResultState == APIResultState.loading;
+    final loginState = ref.watch(loginProvider);
+
+    // Using modern switch pattern to check loading state
+    final isLoading = switch (loginState) {
+      AsyncLoading() => true,
+      _ => false,
+    };
 
     return SizedBox(
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: _handleLogin,
-        child: const Text('Sign In'),
-        // For real implementation with loading state:
-        // onPressed: isLoading ? null : _handleLogin,
-        // child: isLoading
-        //     ? const SizedBox(
-        //         width: 24,
-        //         height: 24,
-        //         child: CircularProgressIndicator(
-        //           strokeWidth: 2,
-        //           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        //         ),
-        //       )
-        //     : const Text('Sign In'),
+        onPressed: isLoading ? null : _handleLogin,
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : const Text('Sign In'),
       ),
     );
   }
 
   Future<void> _handleLogin() async {
-    // TODO: Implement real login validation
-    // TODO: Validate username and password fields
-    // TODO: Call actual login API
-
-    // For demo: Store user session and navigate to home
-    // Default to 'dinkar1708' if no username entered (valid GitHub username for demo)
-    final username = _userNameController.text.isNotEmpty
-        ? _userNameController.text
-        : 'dinkar1708';
-
-    ref.read(userSessionProvider.notifier).login(
-      username: username,
-      email: '${username.toLowerCase().replaceAll(' ', '')}@example.com',
-      loginMethod: 'email',
-    );
-
-    showSnackBar(
-      context,
-      'Welcome $username!',
-      type: SnackBarType.success,
-    );
-    context.router.replaceAll([const HomeWithTabsRoute()]);
-
-    /* Real implementation (commented for demo):
-    final loginState = ref.read(loginProvider);
-    if (loginState.value?.apiResultState == APIResultState.loading) {
-      debugPrint('Previous click is still in progress...ignoring clicks...');
+    // Validate input fields
+    if (_userNameController.text.isEmpty) {
+      showSnackBar(
+        context,
+        'Please enter a username',
+        type: SnackBarType.error,
+      );
       return;
     }
 
+    // Create login request model
     final loginRequestModel = LoginRequestModel(
       userName: _userNameController.text,
       password: _passwordController.text,
     );
 
-    final loginStateModel = await loginNotifier.login(loginRequestModel);
-    if (!mounted) return;
+    // Call login using modern AsyncNotifier pattern
+    // The provider handles loading/error/success states automatically
+    // UI updates are handled by ref.listen in build method
+    await ref.read(loginProvider.notifier).login(loginRequestModel);
 
-    if (loginStateModel.apiResultState == APIResultState.result &&
-        loginStateModel.loginResponseModel != null) {
-      showSnackBar(
-        context,
-        'Welcome ${loginStateModel.loginResponseModel!.userName}!',
-        type: SnackBarType.success,
-      );
-      context.router.replaceAll([const HomeWithTabsRoute()]);
-    } else {
-      showSnackBar(
-        context,
-        loginStateModel.errorMessage.isNotEmpty
-            ? loginStateModel.errorMessage
-            : 'Login failed. Please try again.',
-        type: SnackBarType.error,
+    // Also update user session provider (for demo purposes)
+    if (!mounted) return;
+    final loginState = ref.read(loginProvider);
+    if (loginState.hasValue && loginState.value != null) {
+      ref.read(userSessionProvider.notifier).login(
+        username: loginState.value!.userName,
+        email: '${loginState.value!.userName.toLowerCase().replaceAll(' ', '')}@example.com',
+        loginMethod: 'email',
       );
     }
-    */
   }
 
   void _handleGuestLogin() {
