@@ -6,10 +6,16 @@ appId: com.example.flutter_rivperpod_template.dev
 - launchApp:
     clearState: true
 
-# Step 1: Wait for login screen
+# Step 1: Wait for login screen to load
 - extendedWaitUntil:
-    visible: "Continue as Guest"
+    visible: "Welcome Back!"
     timeout: 15000
+
+# Scroll down to reveal the Continue as Guest button
+- scrollUntilVisible:
+    element: "Continue as Guest"
+    direction: DOWN
+    timeout: 10000
 
 # Step 2: Tap Continue as Guest
 - tapOn: "Continue as Guest"
