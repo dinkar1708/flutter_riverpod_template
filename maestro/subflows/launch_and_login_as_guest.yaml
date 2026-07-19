@@ -5,8 +5,13 @@ appId: com.example.flutter_rivperpod_template.dev
     clearState: true
 
 - extendedWaitUntil:
-    visible: "Continue as Guest"
+    visible: "Welcome Back!"
     timeout: 15000
+
+- scrollUntilVisible:
+    element: "Continue as Guest"
+    direction: DOWN
+    timeout: 10000
 
 - tapOn: "Continue as Guest"
 
