@@ -20,7 +20,7 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController(text: 'dinkar1708');
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 

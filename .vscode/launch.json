@@ -10,7 +10,10 @@
             "type": "dart",
             "program": "lib/main/main_dev.dart",
             "flutterMode": "debug",
-            "args": ["--flavor", "dev", "--target", "lib/main/main_dev.dart" ]
+            "args": [
+                "--flavor", "dev",
+                "--target", "lib/main/main_dev.dart"
+            ]
         },
         {
             "name": "mock_flutter_riverpod",
@@ -18,7 +21,10 @@
             "type": "dart",
             "program": "lib/main/main_mock_development.dart",
             "flutterMode": "debug",
-            "args": ["--flavor", "dev", "--target", "lib/main/main_mock_development.dart" ]
+            "args": [
+                "--flavor", "dev",
+                "--target", "lib/main/main_mock_development.dart"
+            ]
         },
         {
             "name": "prod_flutter_riverpod",
@@ -26,7 +32,10 @@
             "type": "dart",
             "program": "lib/main/main_prod.dart",
             "flutterMode": "release",
-            "args": ["--flavor", "prod", "--target", "lib/main/main_prod.dart" ]
-        },
+            "args": [
+                "--flavor", "prod",
+                "--target", "lib/main/main_prod.dart"
+            ]
+        }
     ]
 }

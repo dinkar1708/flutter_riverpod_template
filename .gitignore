@@ -6,6 +6,8 @@
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
@@ -35,3 +37,16 @@ appium/.mypy_cache/
 appium/.ruff_cache/
 appium/reports/
 appium/*.log
+
+# Output files
+outputs/
+
+# Coverage reports
+coverage/
+
+# Environment variables (envied)
+.env
+.env.*
+!.env.example
+# Generated envied files
+**/env.g.dart

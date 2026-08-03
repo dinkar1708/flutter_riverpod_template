@@ -13,7 +13,7 @@ class RepositoryListNotifier extends _$RepositoryListNotifier {
   Future<List<RepositoryListModel>> build() async {
     // Watch user session so it refreshes when user logs in/out
     final userSession = ref.watch(userSessionProvider);
-    final userName = userSession?.username ?? 'google'; // Default to 'google' if not logged in
+    final userName = userSession.value?.username ?? 'google'; // Default to 'google' if not logged in
 
     return await ref
         .read(userRepositoryProvider)
