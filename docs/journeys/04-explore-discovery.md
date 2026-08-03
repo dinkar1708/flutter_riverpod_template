@@ -1,7 +1,7 @@
 # Journey 4: Explore discovery
 
 **Spec ID:** `explore_discovery`  
-**Doc file:** `documentation/journeys/04-explore-discovery.md`  
+**Doc file:** `docs/journeys/04-explore-discovery.md`  
 **Maestro flow:** `maestro/journeys/04-explore-discovery.yaml`  
 **Appium test:** `TestExploreDiscoveryJourney::test_guest_explores_trending_and_detail_screens`
 

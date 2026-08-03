@@ -1,8 +1,8 @@
 # Journey 1: Guest onboarding
 
-**Spec ID:** `guest_onboarding`  
-**Doc file:** `documentation/journeys/01-guest-onboarding.md`  
-**Maestro flow:** `maestro/journeys/01-guest-onboarding.yaml`  
+**Spec ID:** `guest_onboarding`
+**Doc file:** `docs/journeys/01-guest-onboarding.md`
+**Maestro flow:** `maestro/journeys/01-guest-onboarding.yaml`
 **Appium test:** `TestGuestOnboardingJourney::test_guest_user_sees_home_dashboard`
 
 ## Summary

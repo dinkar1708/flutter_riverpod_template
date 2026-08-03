@@ -1,7 +1,7 @@
 # Journey 3: Bottom tabs round trip
 
 **Spec ID:** `bottom_tabs`  
-**Doc file:** `documentation/journeys/03-bottom-tabs.md`  
+**Doc file:** `docs/journeys/03-bottom-tabs.md`  
 **Maestro flow:** `maestro/journeys/03-bottom-tabs.yaml`  
 **Appium test:** `TestBottomTabsJourney::test_guest_navigates_bottom_tabs_round_trip`
 

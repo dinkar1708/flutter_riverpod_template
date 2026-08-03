@@ -1,7 +1,7 @@
 # Journey 2: Home features tour
 
 **Spec ID:** `home_features_tour`  
-**Doc file:** `documentation/journeys/02-home-features-tour.md`  
+**Doc file:** `docs/journeys/02-home-features-tour.md`  
 **Maestro flow:** `maestro/journeys/02-home-features-tour.yaml`  
 **Appium test:** `TestHomeFeaturesJourney::test_guest_browses_all_home_features`
 

@@ -1,7 +1,7 @@
 # Journey 5: Profile & settings
 
 **Spec ID:** `profile_settings`  
-**Doc file:** `documentation/journeys/05-profile-settings.md`  
+**Doc file:** `docs/journeys/05-profile-settings.md`  
 **Maestro flow:** `maestro/journeys/05-profile-settings.yaml`  
 **Appium test:** `TestProfileAndSettingsJourney::test_guest_reviews_profile_and_settings`
 
