@@ -72,14 +72,14 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    userSession?.username ?? 'Guest User',
+                    userSession.value?.username ?? 'Guest User',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    userSession?.email ?? 'guest@example.com',
+                    userSession.value?.email ?? 'guest@example.com',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context)
                               .colorScheme

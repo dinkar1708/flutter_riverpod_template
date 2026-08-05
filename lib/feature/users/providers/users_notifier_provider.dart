@@ -11,7 +11,7 @@ class UsersNotifierProvider extends _$UsersNotifierProvider {
   Future<List<UserModel>> build() async {
     // Watch user session so it refreshes when user logs in/out
     final userSession = ref.watch(userSessionProvider);
-    final loggedInUser = userSession?.username ?? 'google';
+    final loggedInUser = userSession.value?.username ?? 'google';
 
     // TODO read from api later
     return Future.value([

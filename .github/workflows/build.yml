@@ -19,11 +19,27 @@ jobs:
           channel: stable
           version: 3.44.1
 
+      - name: Create environment files
+        # TODO: Replace dummy values with GitHub Secrets
+        # Add DEV_API_KEY and PROD_API_KEY to repository secrets
+        # Then use: ${{ secrets.DEV_API_KEY }}
+        run: |
+          cat > .env.dev <<EOF
+          API_BASE_URL=https://api.github.com/
+          API_KEY=dummy_dev_api_key_for_ci
+          ENVIRONMENT=dev
+          EOF
+          cat > .env.prod <<EOF
+          API_BASE_URL=https://api.github.com/
+          API_KEY=dummy_prod_api_key_for_ci
+          ENVIRONMENT=prod
+          EOF
+
       - name: Install dependencies
         run: flutter pub get
 
       - name: Generate code
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: dart run build_runner build
 
       - name: Analyze project source
         run: dart analyze

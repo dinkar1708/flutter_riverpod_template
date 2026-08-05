@@ -26,7 +26,7 @@ class _RepositoryListPageState extends ConsumerState<RepositoryListPage> {
   @override
   Widget build(BuildContext context) {
     final userSession = ref.watch(userSessionProvider);
-    final userName = userSession?.username ?? 'google';
+    final userName = userSession.value?.username ?? 'google';
 
     return Scaffold(
       body: CustomScrollView(

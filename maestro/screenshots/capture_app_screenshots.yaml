@@ -9,7 +9,7 @@ appId: com.example.flutter_rivperpod_template.dev
     visible: "Continue as Guest"
     timeout: 15000
 - takeScreenshot:
-    path: documentation/screenshots/01_login
+    path: docs/screenshots/01_login
 
 - tapOn: "Continue as Guest"
 - extendedWaitUntil:
@@ -17,7 +17,7 @@ appId: com.example.flutter_rivperpod_template.dev
       id: "home_welcome_card"
     timeout: 15000
 - takeScreenshot:
-    path: documentation/screenshots/02_home
+    path: docs/screenshots/02_home
 
 - tapOn:
     id: "home_feature_api_integration"
@@ -25,7 +25,7 @@ appId: com.example.flutter_rivperpod_template.dev
     visible: "Repositories (dinkar1708)"
     timeout: 30000
 - takeScreenshot:
-    path: documentation/screenshots/03_repositories
+    path: docs/screenshots/03_repositories
 - back
 - runFlow: ../subflows/return_to_home_dashboard.yaml
 
@@ -35,7 +35,7 @@ appId: com.example.flutter_rivperpod_template.dev
     visible: "Search Users"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/04_search_users
+    path: docs/screenshots/04_search_users
 - back
 - runFlow: ../subflows/return_to_home_dashboard.yaml
 
@@ -46,7 +46,7 @@ appId: com.example.flutter_rivperpod_template.dev
       id: "counter_hint"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/05_counter
+    path: docs/screenshots/05_counter
 - back
 - runFlow: ../subflows/return_to_home_dashboard.yaml
 
@@ -56,7 +56,7 @@ appId: com.example.flutter_rivperpod_template.dev
     visible: "NavigationChild1Route"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/06_navigation
+    path: docs/screenshots/06_navigation
 - back
 - runFlow: ../subflows/return_to_home_dashboard.yaml
 
@@ -67,7 +67,7 @@ appId: com.example.flutter_rivperpod_template.dev
       id: "explore_discover_header"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/07_explore
+    path: docs/screenshots/07_explore
 
 - tapOn:
     point: "83%, 94%"
@@ -76,7 +76,7 @@ appId: com.example.flutter_rivperpod_template.dev
       id: "profile_account_header"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/08_profile
+    path: docs/screenshots/08_profile
 
 - tapOn:
     id: "profile_settings_menu"
@@ -85,4 +85,4 @@ appId: com.example.flutter_rivperpod_template.dev
       id: "settings_appearance_header"
     timeout: 10000
 - takeScreenshot:
-    path: documentation/screenshots/09_settings
+    path: docs/screenshots/09_settings
