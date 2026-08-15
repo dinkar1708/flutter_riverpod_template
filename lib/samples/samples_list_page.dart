@@ -12,6 +12,9 @@ import 'package:flutter_riverpod_template/samples/beginner/keyboard_handling_exa
 // Intermediate examples
 import 'package:flutter_riverpod_template/samples/intermediate/animation_controller_example.dart';
 import 'package:flutter_riverpod_template/samples/intermediate/memory_leak_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/performance/ui_thread_blocking_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/performance/widget_rebuild_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/network/network_error_example.dart';
 
 // Advanced examples
 import 'package:flutter_riverpod_template/samples/advanced/custom_painter_example.dart';
@@ -247,6 +250,54 @@ class SamplesListPage extends StatelessWidget {
               ),
             ),
             codeReference: 'lib/samples/intermediate/memory_leak_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'UI Thread Blocking',
+            description: 'Use isolates to prevent UI freezing (Performance tab)',
+            icon: Icons.speed,
+            color: Colors.pink,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const UiThreadBlockingExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/performance/ui_thread_blocking_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Widget Rebuilds',
+            description: 'Optimize rebuilds with const widgets (Performance tab)',
+            icon: Icons.refresh,
+            color: Colors.lightGreen,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const WidgetRebuildExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/performance/widget_rebuild_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Network Error Handling',
+            description: 'Handle timeouts, no internet, server errors (Network tab)',
+            icon: Icons.cloud_off,
+            color: Colors.brown,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const NetworkErrorExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/network/network_error_example.dart',
           ),
           const SizedBox(height: 8),
 
