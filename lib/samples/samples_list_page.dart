@@ -7,6 +7,7 @@ import 'package:flutter_riverpod_template/samples/beginner/mediaquery_example.da
 import 'package:flutter_riverpod_template/samples/beginner/lifecycle_methods_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/textfield_common_mistakes_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/expanded_listview_mistake_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/keyboard_handling_example.dart';
 
 // Intermediate examples
 import 'package:flutter_riverpod_template/samples/intermediate/animation_controller_example.dart';
@@ -176,6 +177,22 @@ class SamplesListPage extends StatelessWidget {
               ),
             ),
             codeReference: 'lib/samples/beginner/expanded_listview_mistake_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Keyboard Handling',
+            description: 'TextField scrolls into view when keyboard appears',
+            icon: Icons.keyboard,
+            color: Colors.indigo,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const KeyboardHandlingExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/keyboard_handling_example.dart',
           ),
           const SizedBox(height: 8),
 
