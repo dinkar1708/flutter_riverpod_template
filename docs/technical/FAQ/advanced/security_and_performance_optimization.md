@@ -141,39 +141,39 @@ Memory leaks in Flutter are silent killers - they don't throw errors but consume
 
 **Leak 1: TextEditingController Not Disposed (SILENT - No Error!)**
 ```
-🔴 Opening WRONG example - will cause memory leak
-🔴 [LEAK] TextEditingController created - ID: 324656447
-⚠️ [LEAK] This controller will NEVER be disposed!
+Opening WRONG example - will cause memory leak
+[LEAK] TextEditingController created - ID: 324656447
+[LEAK] This controller will NEVER be disposed!
 [User navigates back]
-⚠️ [LEAK] Widget is being removed but controller is NOT disposed!
-💀 [LEAK] Controller 324656447 will stay in memory FOREVER!
+[LEAK] Widget is being removed but controller is NOT disposed!
+[LEAK] Controller 324656447 will stay in memory FOREVER!
 ```
 **Notice:** No error thrown! Controller just stays in memory consuming resources.
 
 **Leak 1 FIXED: Properly Disposed**
 ```
-✅ Opening RIGHT example - properly disposes
-✅ [GOOD] TextEditingController created - ID: 416208355
+Opening RIGHT example - properly disposes
+[GOOD] TextEditingController created - ID: 416208355
 [User navigates back]
-✅ [GOOD] Disposing TextEditingController - ID: 416208355
+[GOOD] Disposing TextEditingController - ID: 416208355
 ```
 
 ---
 
 **Leak 2: Timer Not Cancelled (SILENT - Keeps Running!)**
 ```
-🔴 Opening WRONG example - timer never stops
-🔴 [LEAK] Starting timer that will NEVER stop!
-🔴 [LEAK] Timer tick #1 - Counter: 0 (Widget might be disposed!)
-🔴 [LEAK] Timer tick #2 - Counter: 1 (Widget might be disposed!)
+Opening WRONG example - timer never stops
+[LEAK] Starting timer that will NEVER stop!
+[LEAK] Timer tick #1 - Counter: 0 (Widget might be disposed!)
+[LEAK] Timer tick #2 - Counter: 1 (Widget might be disposed!)
 [User navigates back]
-⚠️ [LEAK] Widget is being removed but timer is STILL RUNNING!
-💀 [LEAK] Timer will continue ticking in the background FOREVER!
-💀 [LEAK] Watch the console - timer will keep printing even after widget is gone!
-🔴 [LEAK] Timer tick #3 - Counter: 2 (Widget might be disposed!)  ← Widget is GONE!
-🔴 [LEAK] Timer tick #4 - Counter: 2 (Widget might be disposed!)
-🔴 [LEAK] Timer tick #5 - Counter: 2 (Widget might be disposed!)
-🔴 [LEAK] Timer tick #6 - Counter: 2 (Widget might be disposed!)
+[LEAK] Widget is being removed but timer is STILL RUNNING!
+[LEAK] Timer will continue ticking in the background FOREVER!
+[LEAK] Watch the console - timer will keep printing even after widget is gone!
+[LEAK] Timer tick #3 - Counter: 2 (Widget might be disposed!)  ← Widget is GONE!
+[LEAK] Timer tick #4 - Counter: 2 (Widget might be disposed!)
+[LEAK] Timer tick #5 - Counter: 2 (Widget might be disposed!)
+[LEAK] Timer tick #6 - Counter: 2 (Widget might be disposed!)
 ... continues forever ...
 ```
 **Notice:** Timer keeps running even after widget is removed! This is a memory leak.
@@ -182,15 +182,15 @@ Memory leaks in Flutter are silent killers - they don't throw errors but consume
 
 **Leak 3: setState After Dispose (THROWS ERROR!)**
 ```
-🔴 Opening WRONG example - setState after dispose
-🔴 [LEAK] Starting async task...
+Opening WRONG example - setState after dispose
+[LEAK] Starting async task...
 [User navigates back before async task completes]
-⚠️ [LEAK] Widget disposed but async task is still running!
-⚠️ [LEAK] When task completes, setState will be called on disposed widget!
+[LEAK] Widget disposed but async task is still running!
+[LEAK] When task completes, setState will be called on disposed widget!
 [3 seconds later...]
-🔴 [LEAK] Async task done, calling setState (might be disposed!)
-💀 [ERROR] setState FAILED! Widget was disposed!
-💀 [ERROR] setState() called after dispose(): _SetStateAfterDisposeExampleState#638ef
+[LEAK] Async task done, calling setState (might be disposed!)
+[ERROR] setState FAILED! Widget was disposed!
+[ERROR] setState() called after dispose(): _SetStateAfterDisposeExampleState#638ef
          (lifecycle state: defunct, not mounted)
 
 This error happens if you call setState() on a State object for a widget
@@ -216,12 +216,12 @@ breaking the reference to this object during dispose().
 Out of 6 common memory leak patterns, only **setState after dispose** throws a visible error!
 
 **5 out of 6 leaks are SILENT:**
-1. TextEditingController ❌ Silent
-2. Timer ❌ Silent
-3. StreamSubscription ❌ Silent
-4. Listener ❌ Silent
-5. FocusNode ❌ Silent
-6. setState after dispose ✅ Throws error
+1. TextEditingController Silent
+2. Timer Silent
+3. StreamSubscription Silent
+4. Listener Silent
+5. FocusNode Silent
+6. setState after dispose Throws error
 
 You won't know about silent leaks until the app crashes from OOM (Out of Memory)!
 
@@ -231,19 +231,19 @@ You won't know about silent leaks until the app crashes from OOM (Out of Memory)
 
 **Leak 4: StreamSubscription Not Cancelled (SILENT - Keeps Running!)**
 ```
-🔴 Opening WRONG example - stream never cancelled
-🔴 [LEAK] Creating stream subscription
-⚠️ [LEAK] Subscription created but will NEVER be cancelled!
-🔴 [LEAK] Stream event received: 0 (Widget might be disposed!)
-🔴 [LEAK] Stream event received: 1 (Widget might be disposed!)
-🔴 [LEAK] Stream event received: 2 (Widget might be disposed!)
-🔴 [LEAK] Stream event received: 3 (Widget might be disposed!)
+Opening WRONG example - stream never cancelled
+[LEAK] Creating stream subscription
+[LEAK] Subscription created but will NEVER be cancelled!
+[LEAK] Stream event received: 0 (Widget might be disposed!)
+[LEAK] Stream event received: 1 (Widget might be disposed!)
+[LEAK] Stream event received: 2 (Widget might be disposed!)
+[LEAK] Stream event received: 3 (Widget might be disposed!)
 [User navigates back]
-⚠️ [LEAK] Widget is being removed but stream is STILL LISTENING!
-💀 [LEAK] Stream will continue processing events FOREVER!
-🔴 [LEAK] Stream event received: 4 (Widget might be disposed!)
-🔴 [LEAK] Stream event received: 5 (Widget might be disposed!)
-🔴 [LEAK] Stream event received: 6 (Widget might be disposed!)
+[LEAK] Widget is being removed but stream is STILL LISTENING!
+[LEAK] Stream will continue processing events FOREVER!
+[LEAK] Stream event received: 4 (Widget might be disposed!)
+[LEAK] Stream event received: 5 (Widget might be disposed!)
+[LEAK] Stream event received: 6 (Widget might be disposed!)
 ... continues forever ...
 ```
 **Notice:** Stream keeps emitting events even after widget is removed! Memory leak + wasted CPU cycles.
@@ -252,16 +252,16 @@ You won't know about silent leaks until the app crashes from OOM (Out of Memory)
 
 **Leak 5: Listener Not Removed (SILENT - Keeps State in Memory!)**
 ```
-🔴 Opening WRONG example - listener not removed
-🔴 [LEAK] TextEditingController created - ID: 940485227
-🔴 [LEAK] Adding listener to controller...
-⚠️ [LEAK] Listener added but will NEVER be removed!
-🔴 [LEAK] Listener triggered - Text: ""
-🔴 [LEAK] Listener triggered - Text: "g"
-🔴 [LEAK] Listener triggered - Text: "gg"
+Opening WRONG example - listener not removed
+[LEAK] TextEditingController created - ID: 940485227
+[LEAK] Adding listener to controller...
+[LEAK] Listener added but will NEVER be removed!
+[LEAK] Listener triggered - Text: ""
+[LEAK] Listener triggered - Text: "g"
+[LEAK] Listener triggered - Text: "gg"
 [User navigates back]
-⚠️ [LEAK] Widget is being removed but listener is STILL ATTACHED!
-💀 [LEAK] Listener will keep the State object in memory FOREVER!
+[LEAK] Widget is being removed but listener is STILL ATTACHED!
+[LEAK] Listener will keep the State object in memory FOREVER!
 ```
 **Notice:** Listener holds a reference to the State object, preventing garbage collection!
 
@@ -269,13 +269,13 @@ You won't know about silent leaks until the app crashes from OOM (Out of Memory)
 
 **Leak 6: FocusNode Not Disposed (SILENT - No Error!)**
 ```
-🔴 Opening WRONG example - FocusNode not disposed
-🔴 [LEAK] FocusNode created - ID: 803954814
-⚠️ [LEAK] This FocusNode will NEVER be disposed!
-🔴 [LEAK] Focus requested
+Opening WRONG example - FocusNode not disposed
+[LEAK] FocusNode created - ID: 803954814
+[LEAK] This FocusNode will NEVER be disposed!
+[LEAK] Focus requested
 [User navigates back]
-⚠️ [LEAK] Widget is being removed but FocusNode is NOT disposed!
-💀 [LEAK] FocusNode 803954814 will stay in memory FOREVER!
+[LEAK] Widget is being removed but FocusNode is NOT disposed!
+[LEAK] FocusNode 803954814 will stay in memory FOREVER!
 ```
 **Notice:** FocusNode is just like any controller - MUST be disposed!
 
@@ -301,14 +301,14 @@ Instead of listing every controller separately, here are the **unique patterns**
 
 **The Pattern:**
 ```dart
-// ❌ WRONG - Memory Leak
+// WRONG - Memory Leak
 class _MyWidgetState extends State<MyWidget> {
   final _anyController = TextEditingController();  // or AnimationController, ScrollController, etc.
 
-  // ❌ Missing dispose()!
+  // Missing dispose()!
 }
 
-// ✅ RIGHT - Always dispose() in dispose()
+// RIGHT - Always dispose() in dispose()
 @override
 void dispose() {
   _anyController.dispose();  // ← MUST call for ALL controllers
@@ -323,7 +323,7 @@ void dispose() {
 #### Pattern 2: Timers (Call `cancel()`)
 
 ```dart
-// ❌ WRONG - Timer keeps running after widget is disposed
+// WRONG - Timer keeps running after widget is disposed
 class _MyWidgetState extends State<MyWidget> {
   late Timer _timer;
 
@@ -335,10 +335,10 @@ class _MyWidgetState extends State<MyWidget> {
     });
   }
 
-  // ❌ Missing timer.cancel()!
+  // Missing timer.cancel()!
 }
 
-// ✅ RIGHT - Cancel in dispose()
+// RIGHT - Cancel in dispose()
 @override
 void dispose() {
   _timer.cancel();
@@ -351,7 +351,7 @@ void dispose() {
 #### Pattern 3: StreamSubscriptions (Call `cancel()`)
 
 ```dart
-// ❌ WRONG - Stream keeps listening after widget is disposed
+// WRONG - Stream keeps listening after widget is disposed
 class _MyWidgetState extends State<MyWidget> {
   late StreamSubscription _subscription;
 
@@ -363,10 +363,10 @@ class _MyWidgetState extends State<MyWidget> {
     });
   }
 
-  // ❌ Missing cancel()!
+  // Missing cancel()!
 }
 
-// ✅ RIGHT - Cancel in dispose()
+// RIGHT - Cancel in dispose()
 @override
 void dispose() {
   _subscription.cancel();
@@ -379,7 +379,7 @@ void dispose() {
 #### Pattern 4: Listeners (Call `removeListener()`)
 
 ```dart
-// ❌ WRONG - Listener not removed
+// WRONG - Listener not removed
 class _MyWidgetState extends State<MyWidget> {
   final _controller = TextEditingController();
 
@@ -393,10 +393,10 @@ class _MyWidgetState extends State<MyWidget> {
     print('Text: ${_controller.text}');
   }
 
-  // ❌ Missing removeListener()!
+  // Missing removeListener()!
 }
 
-// ✅ RIGHT - Remove listener before dispose
+// RIGHT - Remove listener before dispose
 @override
 void dispose() {
   _controller.removeListener(_onTextChanged);  // ← Remove first
@@ -412,7 +412,7 @@ void dispose() {
 #### Pattern 5: Platform Channels (Set to `null`)
 
 ```dart
-// ❌ WRONG - Handler not removed
+// WRONG - Handler not removed
 class _MyWidgetState extends State<MyWidget> {
   static const platform = MethodChannel('com.example/battery');
 
@@ -424,10 +424,10 @@ class _MyWidgetState extends State<MyWidget> {
 
   Future<dynamic> _handleMethod(MethodCall call) async { /* ... */ }
 
-  // ❌ Missing cleanup!
+  // Missing cleanup!
 }
 
-// ✅ RIGHT - Remove handler in dispose
+// RIGHT - Remove handler in dispose
 @override
 void dispose() {
   platform.setMethodCallHandler(null);  // ← Set to null
@@ -440,19 +440,19 @@ void dispose() {
 #### Pattern 6: Async Callbacks (Check `mounted`)
 
 ```dart
-// ❌ WRONG - setState after widget is disposed
+// WRONG - setState after widget is disposed
 class _MyWidgetState extends State<MyWidget> {
   void loadData() {
     Future.delayed(Duration(seconds: 3), () {
-      setState(() { /* ... */ });  // ❌ Widget might be disposed!
+      setState(() { /* ... */ });  // Widget might be disposed!
     });
   }
 }
 
-// ✅ RIGHT - Check mounted before setState
+// RIGHT - Check mounted before setState
 void loadData() {
   Future.delayed(Duration(seconds: 3), () {
-    if (mounted) {  // ✅ Check if still in tree
+    if (mounted) {  // Check if still in tree
       setState(() { /* ... */ });
     }
   });
@@ -467,31 +467,31 @@ void loadData() {
 
 When creating a `StatefulWidget`, always ask:
 
-✅ **Pattern 1: Controllers**
+**Pattern 1: Controllers**
 - [ ] Do I have any controllers? (TextEditingController, AnimationController, ScrollController, PageController, TabController, VideoPlayerController, TransformationController, FocusNode)
 - [ ] Did I call `.dispose()` on ALL of them?
 
-✅ **Pattern 2: Timers**
+**Pattern 2: Timers**
 - [ ] Do I have any `Timer.periodic()` or `Timer()`?
 - [ ] Did I call `_timer.cancel()` in dispose()?
 
-✅ **Pattern 3: Streams**
+**Pattern 3: Streams**
 - [ ] Do I have any `StreamSubscription`?
 - [ ] Did I call `_subscription.cancel()` in dispose()?
 
-✅ **Pattern 4: Listeners**
+**Pattern 4: Listeners**
 - [ ] Did I call `.addListener()` anywhere?
 - [ ] Did I call `.removeListener()` in dispose()?
 
-✅ **Pattern 5: Platform Channels**
+**Pattern 5: Platform Channels**
 - [ ] Did I set a `MethodChannel` handler?
 - [ ] Did I set it to `null` in dispose()?
 
-✅ **Pattern 6: Async Callbacks**
+**Pattern 6: Async Callbacks**
 - [ ] Do I have async operations that call `setState()`?
 - [ ] Did I check `if (mounted)` before calling setState()?
 
-✅ **Testing**
+**Testing**
 - [ ] Did I test navigating back multiple times?
 - [ ] Did I verify with DevTools Memory tab?
 
@@ -533,9 +533,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Why is my button not aligned properly?" → Use Select Widget mode
-✅ "Which widget is causing overflow?" → Check Layout Explorer
-✅ "What's the actual size of this container?" → Inspect widget properties
+"Why is my button not aligned properly?" → Use Select Widget mode
+"Which widget is causing overflow?" → Check Layout Explorer
+"What's the actual size of this container?" → Inspect widget properties
 ```
 
 **Pro Tip:** Enable "Show Guidelines" to see widget boundaries on screen
@@ -557,9 +557,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Why is my list scrolling slowly?" → Profile scroll performance
-✅ "Which function is taking too long?" → Check flame chart
-✅ "Is my code blocking the UI thread?" → Look for long synchronous calls
+"Why is my list scrolling slowly?" → Profile scroll performance
+"Which function is taking too long?" → Check flame chart
+"Is my code blocking the UI thread?" → Look for long synchronous calls
 ```
 
 **Red Flags:**
@@ -585,9 +585,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Is my app leaking memory?" → Take snapshots before/after navigation
-✅ "Why does memory keep growing?" → Check for undisposed controllers
-✅ "What's holding this object?" → View retaining path
+"Is my app leaking memory?" → Take snapshots before/after navigation
+"Why does memory keep growing?" → Check for undisposed controllers
+"What's holding this object?" → View retaining path
 ```
 
 **How to Use:**
@@ -617,9 +617,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Why are frames dropping during animation?" → Check frame timeline
-✅ "Is the problem UI or raster thread?" → Compare thread activity
-✅ "Shader jank on first run?" → Track shader compilation
+"Why are frames dropping during animation?" → Check frame timeline
+"Is the problem UI or raster thread?" → Compare thread activity
+"Shader jank on first run?" → Track shader compilation
 ```
 
 **Performance Metrics:**
@@ -645,10 +645,10 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Is my API call failing?" → Check status codes
-✅ "What data is being sent?" → Inspect request body
-✅ "Why is this request slow?" → Check timing breakdown
-✅ "Are headers correct?" → View request headers
+"Is my API call failing?" → Check status codes
+"What data is being sent?" → Inspect request body
+"Why is this request slow?" → Check timing breakdown
+"Are headers correct?" → View request headers
 ```
 
 **Pro Tip:** Only works with `dart:io` HttpClient and `package:http`. Third-party clients (Dio) need interceptors.
@@ -670,9 +670,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Too many terminal logs?" → Use DevTools Logging for cleaner view
-✅ "Need to filter error logs only?" → Apply log level filter
-✅ "Want to see GC activity?" → Enable GC logging
+"Too many terminal logs?" → Use DevTools Logging for cleaner view
+"Need to filter error logs only?" → Apply log level filter
+"Want to see GC activity?" → Enable GC logging
 ```
 
 **Log Levels:**
@@ -697,9 +697,9 @@ flutter run --profile  # Or --debug
 
 **Common Use Cases:**
 ```
-✅ "Does my deep link work?" → Test URL directly
-✅ "Is my route handling correct?" → Verify navigation
-✅ "Testing app from notification?" → Simulate deep link
+"Does my deep link work?" → Test URL directly
+"Is my route handling correct?" → Verify navigation
+"Testing app from notification?" → Simulate deep link
 ```
 
 ---
@@ -708,13 +708,13 @@ flutter run --profile  # Or --debug
 
 | Tool | Primary Use | When UI is Slow | When Memory Growing | When API Failing |
 |------|-------------|-----------------|---------------------|------------------|
-| **Widget Inspector** | Layout debugging | ❌ | ❌ | ❌ |
-| **CPU Profiler** | Performance analysis | ✅ | ❌ | ❌ |
-| **Memory** | Memory leak detection | ❌ | ✅ | ❌ |
-| **Performance** | Frame drops / jank | ✅ | ❌ | ❌ |
-| **Network** | API debugging | ❌ | ❌ | ✅ |
-| **Logging** | General debugging | ✅ | ✅ | ✅ |
-| **Deep Links** | URL navigation | ❌ | ❌ | ❌ |
+| **Widget Inspector** | Layout debugging | | | |
+| **CPU Profiler** | Performance analysis | | | |
+| **Memory** | Memory leak detection | | | |
+| **Performance** | Frame drops / jank | | | |
+| **Network** | API debugging | | | |
+| **Logging** | General debugging | | | |
+| **Deep Links** | URL navigation | | | |
 
 ### Debugging Workflow
 

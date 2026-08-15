@@ -134,31 +134,31 @@ Future<void> fetchData() async {
 
 Success scenario:
 ```
-🔴 [WRONG] Fetching data WITHOUT error handling...
-🔴 [WRONG] Got data: {"status": "success", "data": "Hello World"}
-💀 [WRONG] If network failed, app would have crashed here!
+[WRONG] Fetching data WITHOUT error handling...
+[WRONG] Got data: {"status": "success", "data": "Hello World"}
+[WRONG] If network failed, app would have crashed here!
 ```
 
 Error scenarios (no internet, server error, etc.):
 ```
-🔴 [WRONG] Fetching data WITHOUT error handling...
-💀 [WRONG] Simulating no internet - app will crash!
-💀 [WRONG] APP CRASHED! Error: SocketException: No internet connection
-💀 [WRONG] In real code without try-catch, user sees crash screen!
+[WRONG] Fetching data WITHOUT error handling...
+[WRONG] Simulating no internet - app will crash!
+[WRONG] APP CRASHED! Error: SocketException: No internet connection
+[WRONG] In real code without try-catch, user sees crash screen!
 ```
 
 **GOOD example (with error handling):**
 
 Success scenario:
 ```
-✅ [GOOD] Fetching data WITH proper error handling...
-✅ [GOOD] Got data successfully: {"status": "success"...}
+[GOOD] Fetching data WITH proper error handling...
+[GOOD] Got data successfully: {"status": "success"...}
 ```
 
 Error scenarios (handled gracefully):
 ```
-✅ [GOOD] Fetching data WITH proper error handling...
-✅ [GOOD] Simulating no internet - will be caught!
-✅ [GOOD] Caught SocketException: SocketException: No internet connection
-✅ [GOOD] Showing user-friendly error: No internet connection. Please check your network.
+[GOOD] Fetching data WITH proper error handling...
+[GOOD] Simulating no internet - will be caught!
+[GOOD] Caught SocketException: SocketException: No internet connection
+[GOOD] Showing user-friendly error: No internet connection. Please check your network.
 ```

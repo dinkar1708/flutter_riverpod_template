@@ -245,7 +245,7 @@ Container(
 
 ---
 
-## Interview Tips
+## Common Questions
 
 **Q: When should I use Container vs Padding?**
 - Use **Padding** when you only need spacing (simpler, more performant)

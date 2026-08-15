@@ -57,28 +57,28 @@ This guide covers fundamental Flutter UI building blocks, widget lifecycles, and
 **Real Execution Output (Tested):**
 ```
 📱 [LifecycleExample] createState() called (before this)
-✅ [LifecycleExample] initState() - Called ONCE when widget is inserted into tree
+[LifecycleExample] initState() - Called ONCE when widget is inserted into tree
    └─ Good for: Controllers, listeners, initial data fetch
 🔄 [LifecycleExample] didChangeDependencies() - Called after initState and when InheritedWidget changes
    └─ Call count: 1
 🎨 [LifecycleExample] build() - Building UI (call #1)
-🔵 [User Action] setState() called - Counter: 1
+[User Action] setState() called - Counter: 1
    └─ This will trigger build() to re-render UI
 🎨 [LifecycleExample] build() - Building UI (call #2)
 🟢 [ChildWidget] initState() called
 🎨 [ChildWidget] build() called
 ⬅️ [ChildWidget] Popping back to parent
-❌ [ChildWidget] dispose() - Child widget cleanup
+[ChildWidget] dispose() - Child widget cleanup
 ⬅️ [User Action] Navigator.pop() called
    └─ This will trigger deactivate() then dispose()
-⚠️ [LifecycleExample] deactivate() - Widget being removed from tree
+[LifecycleExample] deactivate() - Widget being removed from tree
    └─ Called before dispose() during navigation pop
-❌ [LifecycleExample] dispose() - CLEANUP TIME!
+[LifecycleExample] dispose() - CLEANUP TIME!
    └─ Dispose controllers, cancel streams, remove listeners here
    └─ Widget will never be used again after this
 ```
 
-**⚠️ Memory Leak Warning:**
+**Memory Leak Warning:**
 Forgetting to dispose controllers, timers, or streams causes memory leaks! These are **silent** - no error is thrown, but memory keeps growing until the app crashes.
 
 **How to Detect Memory Leaks:**

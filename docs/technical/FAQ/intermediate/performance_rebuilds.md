@@ -130,20 +130,20 @@ Column(
 
 **BAD example (all widgets rebuild):**
 ```
-🔴 [WRONG] Calling setState - ALL widgets will rebuild!
-🔴 [WRONG] Building entire widget tree...
-🔴 [WRONG] Static header rebuilt 2 times (should be 1!)
-🔴 [WRONG] Static footer rebuilt 2 times (should be 1!)
-🔴 [WRONG] Static widgets rebuilt unnecessarily!
-💀 [WRONG] Wasted CPU cycles rebuilding widgets that never change!
+[WRONG] Calling setState - ALL widgets will rebuild!
+[WRONG] Building entire widget tree...
+[WRONG] Static header rebuilt 2 times (should be 1!)
+[WRONG] Static footer rebuilt 2 times (should be 1!)
+[WRONG] Static widgets rebuilt unnecessarily!
+[WRONG] Wasted CPU cycles rebuilding widgets that never change!
 ```
 
 **GOOD example (only counter rebuilds):**
 ```
-✅ [GOOD] Calling setState - only counter widget rebuilds!
-✅ [GOOD] Building widget tree (const widgets skip rebuild)...
-✅ [GOOD] const header rebuilt 1 times (should stay 1!)
-✅ [GOOD] const footer rebuilt 1 times (should stay 1!)
-✅ [GOOD] const widgets skipped rebuild!
-✅ [GOOD] CPU saved by not rebuilding static widgets!
+[GOOD] Calling setState - only counter widget rebuilds!
+[GOOD] Building widget tree (const widgets skip rebuild)...
+[GOOD] const header rebuilt 1 times (should stay 1!)
+[GOOD] const footer rebuilt 1 times (should stay 1!)
+[GOOD] const widgets skipped rebuild!
+[GOOD] CPU saved by not rebuilding static widgets!
 ```

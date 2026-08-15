@@ -90,10 +90,10 @@ Dart Isolates have **independent heaps of memory**. No Isolate can access memory
 
 **Example 1: compute() - Ephemeral Isolate**
 ```
-🔵 [Main Thread] Starting compute() for factorial calculation
-🔵 [Isolate - compute] Starting factorial calculation for 20
-🔵 [Isolate - compute] Calculation complete in 0ms
-✅ [Main Thread] compute() completed in 279ms
+[Main Thread] Starting compute() for factorial calculation
+[Isolate - compute] Starting factorial calculation for 20
+[Isolate - compute] Calculation complete in 0ms
+[Main Thread] compute() completed in 279ms
    Result: 2432902008176640000
    📌 Isolate was automatically destroyed after completion
 ```
@@ -101,7 +101,7 @@ Dart Isolates have **independent heaps of memory**. No Isolate can access memory
 **Example 2: Isolate.spawn - Persistent Worker**
 ```
 🟢 [Main Thread] Spawning persistent worker isolate...
-✅ [Main Thread] Isolate spawned successfully
+[Main Thread] Isolate spawned successfully
 🟢 [Worker Isolate] Started! Creating ReceivePort...
 🟢 [Worker Isolate] Sent SendPort to main thread (handshake)
 🤝 [Main Thread] Handshake complete - received SendPort from isolate
@@ -113,8 +113,8 @@ Dart Isolates have **independent heaps of memory**. No Isolate can access memory
 🟢 [Worker Isolate] Result sent back to main thread
 📬 [Main Thread] Received result from isolate: 355687428096000 (0ms)
 
-🔴 [Main Thread] Killing persistent isolate...
-✅ [Main Thread] Isolate terminated
+[Main Thread] Killing persistent isolate...
+[Main Thread] Isolate terminated
 ```
 
 **Key Differences Observed:**

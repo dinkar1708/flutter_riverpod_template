@@ -110,18 +110,18 @@ Future<void> parseData() async {
 
 **BAD example (UI frozen):**
 ```
-🔴 [WRONG] Starting heavy task on UI thread...
-🔴 [WRONG] UI will FREEZE for ~2 seconds!
-🔴 [WRONG] Task completed in 262ms
-🔴 [WRONG] UI was FROZEN during this time!
-💀 [WRONG] User could not interact with app!
+[WRONG] Starting heavy task on UI thread...
+[WRONG] UI will FREEZE for ~2 seconds!
+[WRONG] Task completed in 262ms
+[WRONG] UI was FROZEN during this time!
+[WRONG] User could not interact with app!
 ```
 
 **GOOD example (UI smooth):**
 ```
-✅ [GOOD] Starting heavy task on separate isolate...
-✅ [GOOD] UI will stay RESPONSIVE!
-✅ [GOOD] Task completed in 260ms
-✅ [GOOD] UI remained SMOOTH during calculation!
-✅ [GOOD] User could still interact with app!
+[GOOD] Starting heavy task on separate isolate...
+[GOOD] UI will stay RESPONSIVE!
+[GOOD] Task completed in 260ms
+[GOOD] UI remained SMOOTH during calculation!
+[GOOD] User could still interact with app!
 ```

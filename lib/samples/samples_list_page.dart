@@ -9,6 +9,8 @@ import 'package:flutter_riverpod_template/samples/beginner/textfield_mistakes/te
 import 'package:flutter_riverpod_template/samples/beginner/listview_mistakes/listview_mistakes_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/keyboard_handling_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/root_widgets_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/buildcontext_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/const_vs_final_example.dart';
 
 // Intermediate examples
 import 'package:flutter_riverpod_template/samples/intermediate/animation_controller_example.dart';
@@ -16,6 +18,7 @@ import 'package:flutter_riverpod_template/samples/intermediate/memory_leak_examp
 import 'package:flutter_riverpod_template/samples/intermediate/performance/ui_thread_blocking_example.dart';
 import 'package:flutter_riverpod_template/samples/intermediate/performance/widget_rebuild_example.dart';
 import 'package:flutter_riverpod_template/samples/intermediate/network/network_error_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/future_vs_stream_example.dart';
 
 // Advanced examples
 import 'package:flutter_riverpod_template/samples/advanced/custom_painter_example.dart';
@@ -218,10 +221,42 @@ class SamplesListPage extends StatelessWidget {
 
           _buildExampleCard(
             context,
+            title: 'BuildContext Deep Dive',
+            description: 'What it is, how to use, common errors',
+            icon: Icons.location_searching,
+            color: Colors.deepPurple,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BuildContextExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/buildcontext_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Const vs Final',
+            description: 'Understand difference, widget rebuild optimization',
+            icon: Icons.lock,
+            color: Colors.teal,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const ConstVsFinalExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/const_vs_final_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
             title: 'Riverpod State Management',
             description: 'Counter with Riverpod Notifier pattern',
             icon: Icons.add_circle,
-            color: Colors.teal,
+            color: Colors.blueGrey,
             isFromCodebase: true,
             onTap: () => Navigator.push(
               context,
@@ -320,10 +355,26 @@ class SamplesListPage extends StatelessWidget {
 
           _buildExampleCard(
             context,
+            title: 'Future vs Stream',
+            description: 'Single value vs multiple values over time',
+            icon: Icons.compare_arrows,
+            color: Colors.indigo,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const FutureVsStreamExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/future_vs_stream_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
             title: 'Dio + Retrofit API',
             description: 'Real GitHub API with AsyncNotifier',
             icon: Icons.cloud,
-            color: Colors.indigo,
+            color: Colors.deepPurple,
             isFromCodebase: true,
             onTap: () => Navigator.push(
               context,

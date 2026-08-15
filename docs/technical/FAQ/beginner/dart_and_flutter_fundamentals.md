@@ -198,10 +198,10 @@ Flutter has three build modes, each optimized for different development stages:
 | Feature | Debug | Profile | Release |
 |---------|-------|---------|---------|
 | Compilation | JIT | AOT | AOT |
-| Hot Reload | ✅ Yes | ❌ No | ❌ No |
-| Assertions | ✅ Enabled | ❌ Disabled | ❌ Disabled |
-| DevTools | ✅ Full Access | ✅ Performance Only | ❌ Disabled |
-| Optimization | ❌ None | ⚠️ Partial | ✅ Maximum |
+| Hot Reload | Yes | No | No |
+| Assertions | Enabled | Disabled | Disabled |
+| DevTools | Full Access | Performance Only | Disabled |
+| Optimization | None | Partial | Maximum |
 | Binary Size | Large | Medium | Small |
 | Performance | Slow | Fast | Fastest |
 
@@ -328,12 +328,12 @@ final client = ref.read(apiClientProvider);
 ```
 
 **When to Use Singletons:**
-- ✅ Database connections
-- ✅ API clients (Dio instance)
-- ✅ App configuration
-- ✅ Analytics/logging services
-- ✅ Shared preferences wrapper
-- ❌ **Avoid for**: UI state, user data, session-specific data
+- Database connections
+- API clients (Dio instance)
+- App configuration
+- Analytics/logging services
+- Shared preferences wrapper
+- **Avoid for**: UI state, user data, session-specific data
 
 **Thread Safety Note:**
 Dart is single-threaded (event loop), so the above implementations are thread-safe within the main isolate. For multi-isolate apps, each isolate gets its own singleton instance.
