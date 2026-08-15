@@ -11,6 +11,10 @@ import 'package:flutter_riverpod_template/samples/beginner/keyboard_handling_exa
 import 'package:flutter_riverpod_template/samples/beginner/root_widgets_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/buildcontext_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/const_vs_final_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/hot_reload_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/parameters_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/null_safety_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/texteditingcontroller_example.dart';
 
 // Intermediate examples
 import 'package:flutter_riverpod_template/samples/intermediate/animation_controller_example.dart';
@@ -19,6 +23,8 @@ import 'package:flutter_riverpod_template/samples/intermediate/performance/ui_th
 import 'package:flutter_riverpod_template/samples/intermediate/performance/widget_rebuild_example.dart';
 import 'package:flutter_riverpod_template/samples/intermediate/network/network_error_example.dart';
 import 'package:flutter_riverpod_template/samples/intermediate/future_vs_stream_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/didupdate_widget_example.dart';
+import 'package:flutter_riverpod_template/samples/intermediate/inherited_widget_example.dart';
 
 // Advanced examples
 import 'package:flutter_riverpod_template/samples/advanced/custom_painter_example.dart';
@@ -253,6 +259,70 @@ class SamplesListPage extends StatelessWidget {
 
           _buildExampleCard(
             context,
+            title: 'Hot Reload vs Hot Restart',
+            description: 'Preserve state vs reset, when to use each',
+            icon: Icons.replay,
+            color: Colors.amber,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const HotReloadExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/hot_reload_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Named vs Positional Parameters',
+            description: 'Order matters vs flexible, required vs optional',
+            icon: Icons.sort,
+            color: Colors.cyan,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const ParametersExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/parameters_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Null Safety Operators',
+            description: '?, ?., ??, ! - handle nullable values safely',
+            icon: Icons.security,
+            color: Colors.orange,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const NullSafetyExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/null_safety_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'TextEditingController',
+            description: 'Manage TextField state, read/set/clear text',
+            icon: Icons.edit_note,
+            color: Colors.green,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const TextEditingControllerExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/texteditingcontroller_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
             title: 'Riverpod State Management',
             description: 'Counter with Riverpod Notifier pattern',
             icon: Icons.add_circle,
@@ -366,6 +436,38 @@ class SamplesListPage extends StatelessWidget {
               ),
             ),
             codeReference: 'lib/samples/intermediate/future_vs_stream_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'didUpdateWidget Lifecycle',
+            description: 'React to parent widget changes, update internal state',
+            icon: Icons.update,
+            color: Colors.purple,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const DidUpdateWidgetExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/didupdate_widget_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'InheritedWidget',
+            description: 'Share state down widget tree, foundation for Provider',
+            icon: Icons.account_tree,
+            color: Colors.indigo,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const InheritedWidgetExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/intermediate/inherited_widget_example.dart',
           ),
           const SizedBox(height: 8),
 
