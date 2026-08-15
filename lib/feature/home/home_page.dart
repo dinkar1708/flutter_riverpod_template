@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_template/feature/shared/navigation/app_router.gr.dart';
+import 'package:flutter_riverpod_template/samples/samples_list_page.dart';
 
 @RoutePage()
 class HomePage extends ConsumerStatefulWidget {
@@ -115,6 +116,21 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           const SizedBox(height: 12),
 
+          // Explore Samples Card (Featured)
+          _buildFeatureCard(
+            context,
+            semanticsId: 'home_feature_explore_samples',
+            icon: Icons.lightbulb_outline_rounded,
+            title: 'Explore Code Samples',
+            description: 'Interactive examples from Flutter FAQ documentation',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SamplesListPage()),
+            ),
+            isHighlighted: true,
+          ),
+          const SizedBox(height: 12),
+
           // Feature Cards
           _buildFeatureCard(
             context,
@@ -174,12 +190,17 @@ class _HomePageState extends ConsumerState<HomePage> {
     required String title,
     required String description,
     required VoidCallback onTap,
+    bool isHighlighted = false,
   }) {
     return Semantics(
       identifier: semanticsId,
       label: title,
       button: true,
       child: Card(
+      elevation: isHighlighted ? 4 : null,
+      color: isHighlighted
+          ? Theme.of(context).colorScheme.primaryContainer
+          : null,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -190,10 +211,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primary
-                      .withValues(alpha: 0.1),
+                  color: isHighlighted
+                      ? Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.2)
+                      : Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(

@@ -32,6 +32,31 @@ For detailed setup instructions, see [Environment Setup Guide](docs/technical/EN
 - **Testing**: Unit, widget, E2E (Maestro + Appium)
 - **Environment**: Obfuscated variables with envied
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/10_samples.png" width="300" alt="Home - Explore Code Samples Button"/>
+  <img src="docs/screenshots/11_samples_list.png" width="300" alt="Samples List Page"/>
+</p>
+
+## Learning Resources & Training
+
+This template includes comprehensive training materials for Flutter developers of all levels.
+
+**Training Sample Examples:** [lib/samples/](lib/samples/)
+- 15+ standalone, runnable examples covering beginner to advanced topics
+- Examples include lifecycle methods, state management, animations, isolates, memory leak prevention, and ANR handling
+- Each example is fully documented with console logging for learning
+- Can be copied to any Flutter project - no dependencies required
+
+**Technical Documentation:** [docs/technical/FAQ/](docs/technical/FAQ/)
+- Beginner topics: Widgets, layout, lifecycle, common mistakes
+- Intermediate topics: Animations, state management, Riverpod patterns, API integration
+- Advanced topics: Isolates, concurrency, platform channels, performance optimization
+- All docs cross-reference working code examples from the samples folder
+
+Access samples by tapping "Explore Code Samples" on the home screen.
+
 ## Documentation
 
 See [docs/](docs/) for comprehensive guides on architecture, security, testing, and more.
@@ -62,9 +87,14 @@ lib/
 ├── core/          # Utilities, routing, theme
 ├── data/          # API clients, storage, repositories
 ├── feature/       # Feature modules (login, home, etc)
+├── samples/       # Interactive training examples (beginner/intermediate/advanced)
 └── main/          # App entry points (dev/prod)
 
-docs/              # Documentation
+docs/
+├── technical/
+│   └── FAQ/       # Technical documentation and learning guides
+└── testing/       # Testing guides
+
 test/              # Unit and widget tests
 maestro/           # Maestro E2E tests
 appium/            # Appium E2E tests

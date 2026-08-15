@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "dev_flutter_riverpod (Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main/main_dev.dart",
+            "flutterMode": "profile",
+            "args": [
+                "--flavor", "dev",
+                "--target", "lib/main/main_dev.dart"
+            ]
+        },
+        {
             "name": "dev_flutter_riverpod",
             "request": "launch",
             "type": "dart",
@@ -21,6 +32,17 @@
             "type": "dart",
             "program": "lib/main/main_mock_development.dart",
             "flutterMode": "debug",
+            "args": [
+                "--flavor", "dev",
+                "--target", "lib/main/main_mock_development.dart"
+            ]
+        },
+        {
+            "name": "mock_flutter_riverpod (Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main/main_mock_development.dart",
+            "flutterMode": "profile",
             "args": [
                 "--flavor", "dev",
                 "--target", "lib/main/main_mock_development.dart"

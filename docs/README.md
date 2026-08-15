@@ -38,7 +38,11 @@ docs/
 │   ├── ARCHITECTURE.md                 # Clean Architecture + Riverpod
 │   ├── CODE_STYLE.md                   # Code style & best practices
 │   ├── SECURITY.md                     # Security implementation
-│   └── ENVIRONMENT_SETUP.md            # envied setup & usage
+│   ├── ENVIRONMENT_SETUP.md            # envied setup & usage
+│   └── FAQ/                            # Learning materials & training guides
+│       ├── beginner/                   # Tier 1: Fundamentals (Dart, Widgets, Lifecycle)
+│       ├── intermediate/               # Tier 2: Core Engineering (Riverpod, Dio, AutoRoute)
+│       └── advanced/                   # Tier 3: System Design (Impeller, Isolates, Security)
 │
 └── testing/                            # Testing guides
     ├── UNIT_TESTING_GUIDE.md          # Unit test patterns
@@ -56,6 +60,11 @@ docs/
 - [Architecture](technical/ARCHITECTURE.md) - Clean Architecture, project structure
 - [Code Style](technical/CODE_STYLE.md) - Code conventions & best practices
 - [Security](technical/SECURITY.md) - Secure storage, token management
+
+### Technical Knowledge Base (Mentorship & Training Guides)
+- **Tier 1 (Fundamentals)**: [Dart & Flutter Basics](technical/FAQ/beginner/dart_and_flutter_fundamentals.md) • [Widgets & Layouts](technical/FAQ/beginner/widgets_and_layout_basics.md)
+- **Tier 2 (Core Engineering)**: [Riverpod 3.0 Guide](technical/FAQ/intermediate/state_management_and_riverpod.md) • [Networking & Storage](technical/FAQ/intermediate/networking_and_persistence.md) • [Navigation & Lifecycle](technical/FAQ/intermediate/navigation_and_lifecycle.md) • [Animations](technical/FAQ/intermediate/animation_basics.md)
+- **Tier 3 (System Design)**: [Rendering & Impeller](technical/FAQ/advanced/engine_and_rendering_internals.md) • [Concurrency & Isolates](technical/FAQ/advanced/concurrency_and_isolates.md) • [Security & Performance](technical/FAQ/advanced/security_and_performance_optimization.md) • [Enterprise Scenarios](technical/FAQ/advanced/enterprise_system_design_scenarios.md)
 
 ### Features
 - [Feature Overview](features/README.md) - Complete list of all app features
@@ -87,8 +96,9 @@ docs/
 ## Documentation Standards
 
 ### File Naming
-- Use `SCREAMING_SNAKE_CASE.md` for top-level technical docs
-- Use `kebab-case.md` for product/business docs
+- Use `SCREAMING_SNAKE_CASE.md` for top-level technical docs (ARCHITECTURE.md, SECURITY.md)
+- Use `snake_case.md` for FAQ and learning materials (widgets_and_layout_basics.md)
+- Use `kebab-case.md` for product/business docs (user journeys, features)
 - Use descriptive names that clearly indicate content
 
 ### Content Structure

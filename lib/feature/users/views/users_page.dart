@@ -37,6 +37,14 @@ class _UsersPage extends ConsumerState<UsersPage> {
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    _searchFocus.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(

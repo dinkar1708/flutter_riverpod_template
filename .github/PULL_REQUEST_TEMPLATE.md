@@ -21,7 +21,7 @@
 - [ ] Attach the UI if applicable
 - [ ] Ensure your code follows the style guidelines of this project
 - [ ] Perform a self-review of your own code
-- [ ] Confirm that you have checked and followed the [documentation](https://github.com/dinkar1708/flutter_riverpod_template/tree/master/documentation).
+- [ ] Confirm that you have checked and followed the [documentation](https://github.com/dinkar1708/flutter_riverpod_template/tree/master/docs).
 
 ### New Feature
 
