@@ -5,9 +5,10 @@ import 'package:flutter_riverpod_template/samples/beginner/keys_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/futurebuilder_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/mediaquery_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/lifecycle_methods_example.dart';
-import 'package:flutter_riverpod_template/samples/beginner/textfield_common_mistakes_example.dart';
-import 'package:flutter_riverpod_template/samples/beginner/expanded_listview_mistake_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/textfield_mistakes/textfield_mistakes_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/listview_mistakes/listview_mistakes_example.dart';
 import 'package:flutter_riverpod_template/samples/beginner/keyboard_handling_example.dart';
+import 'package:flutter_riverpod_template/samples/beginner/root_widgets_example.dart';
 
 // Intermediate examples
 import 'package:flutter_riverpod_template/samples/intermediate/animation_controller_example.dart';
@@ -160,26 +161,26 @@ class SamplesListPage extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const TextFieldCommonMistakesExample(),
+                builder: (_) => const TextFieldMistakesExample(),
               ),
             ),
-            codeReference: 'lib/samples/beginner/textfield_common_mistakes_example.dart',
+            codeReference: 'lib/samples/beginner/textfield_mistakes/',
           ),
           const SizedBox(height: 8),
 
           _buildExampleCard(
             context,
             title: 'ListView Unbounded Height',
-            description: 'ListView in Column/Expanded - Wrong vs Right way',
+            description: 'ListView in Column/Expanded - 3 solutions',
             icon: Icons.list_alt,
             color: Colors.deepOrange,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const ExpandedListViewMistakeExample(),
+                builder: (_) => const ListViewMistakesExample(),
               ),
             ),
-            codeReference: 'lib/samples/beginner/expanded_listview_mistake_example.dart',
+            codeReference: 'lib/samples/beginner/listview_mistakes/',
           ),
           const SizedBox(height: 8),
 
@@ -196,6 +197,22 @@ class SamplesListPage extends StatelessWidget {
               ),
             ),
             codeReference: 'lib/samples/beginner/keyboard_handling_example.dart',
+          ),
+          const SizedBox(height: 8),
+
+          _buildExampleCard(
+            context,
+            title: 'Root/Wrapper Widgets',
+            description: 'Scaffold, SafeArea, MaterialApp, Padding, Center, Container',
+            icon: Icons.widgets,
+            color: Colors.deepPurple,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const RootWidgetsExample(),
+              ),
+            ),
+            codeReference: 'lib/samples/beginner/root_widgets_example.dart',
           ),
           const SizedBox(height: 8),
 
