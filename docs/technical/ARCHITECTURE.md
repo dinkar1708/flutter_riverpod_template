@@ -45,28 +45,24 @@ This Flutter application follows **Clean Architecture** principles with a **feat
 ### Layer Responsibilities
 
 **1. Presentation Layer** (`lib/feature/*/views/`)
-- UI components (pages, widgets)
-- User interaction handling
-- Consumes state from providers
-- No business logic
+- **Pages/Screens** (`lib/feature/*/views/*_page.dart`): Top-level `@RoutePage()` destinations with `Scaffold`, coordinating layout and state.
+- **Feature Widgets** (`lib/feature/*/views/widgets/`): Child sub-widgets used specifically by that feature (e.g. cards, list headers, badges).
+- Consumes state from providers; contains no business or data fetching logic.
 
 **2. Application Layer** (`lib/feature/*/providers/`)
-- State management (Riverpod)
-- Orchestrates data flow
-- Business logic coordination
-- No UI dependencies
+- State management via Riverpod code generation (`@riverpod`).
+- Orchestrates data flow between repositories and UI.
+- No direct UI widget dependencies.
 
 **3. Domain Layer** (`lib/feature/*/models/`)
-- Data models (immutable)
-- Business entities
-- Validation rules
-- Platform-independent
+- Immutable data models (`@freezed` or `json_serializable`).
+- Business entities, validation rules, and helper methods.
+- Framework/platform-independent.
 
 **4. Data Layer** (`lib/data/`)
-- API clients (Retrofit/Dio)
-- Repositories (data sources)
-- Local storage (Secure Storage)
-- External service integration
+- API clients (Retrofit/Dio) and remote data sources.
+- Repositories exposing clean Future/Stream contracts to providers.
+- Local storage (`flutter_secure_storage`).
 
 ---
 
@@ -74,47 +70,68 @@ This Flutter application follows **Clean Architecture** principles with a **feat
 
 ```
 lib/
-├── core/                           # Core utilities
-│   ├── router/                    # AutoRoute navigation
-│   ├── theme/                     # Material3 theming
-│   └── utils/                     # Helpers, validators
+├── core/                           # Core infrastructure & platform services
+│   ├── native/                    # MethodChannel / Platform bridge
+│   ├── router/                    # AutoRoute configuration & guards
+│   ├── theme/                     # Material 3 typography & theme tokens
+│   └── utils/                     # Global helpers, extensions, validators
 │
-├── data/                          # Data layer
-│   ├── local/                     # Local storage
+├── data/                          # Shared data layer
+│   ├── local/                     # Local secure storage & caching
 │   │   └── secure_storage_service.dart
-│   └── remote/                    # API integration
+│   └── remote/                    # API integration & networking
 │       ├── api/
-│       │   ├── client/           # Dio/Retrofit setup
-│       │   ├── error/            # Error handling
-│       │   └── providers/        # API client providers
+│       │   ├── client/           # Dio & Retrofit API client
+│       │   ├── error/            # Network exceptions & error parsing
+│       │   └── providers/        # API client & repository providers
 │       └── api_url_configuration.dart
 │
-├── feature/                       # Features (modular)
-│   ├── counter/                   # Example feature
+├── feature/                       # Feature modules (Feature-First Architecture)
+│   ├── <feature_name>/
+│   │   ├── models/               # Domain data models
+│   │   │   └── <feature>_model.dart
+│   │   ├── providers/            # Riverpod state notifiers & controllers
+│   │   │   └── <feature>_notifier_provider.dart
+│   │   └── views/                # Screen entry points & child widgets
+│   │       ├── <feature>_page.dart       # Main @RoutePage() screen
+│   │       └── widgets/                  # Feature-specific child widgets
+│   │           ├── <feature>_header.dart
+│   │           └── <feature>_item_card.dart
+│   │
+│   ├── repository_list/          # GitHub repository list feature
+│   │   ├── models/
+│   │   │   └── repository_list_model.dart
+│   │   ├── providers/
+│   │   │   └── repository_list_notifier_provider.dart
+│   │   └── views/
+│   │       ├── repository_list_page.dart
+│   │       └── widgets/
+│   │           └── sticky_search_header_delegate.dart
+│   │
+│   ├── login/                     # Authentication feature
 │   │   ├── models/
 │   │   ├── providers/
 │   │   └── views/
 │   │
-│   ├── login/                     # Authentication
-│   │   ├── models/
-│   │   ├── providers/
-│   │   └── views/
-│   │
-│   ├── home/                      # Home/Profile
-│   ├── repository_list/          # GitHub repositories
-│   ├── users/                     # User management
-│   ├── settings/                  # App settings
-│   │
-│   └── shared/                    # Shared across features
-│       ├── app_flavour/          # Environment config
-│       ├── providers/            # Global providers
-│       └── widgets/              # Reusable widgets
+│   └── shared/                    # App-wide shared presentation resources
+│       ├── app_flavour/          # Flavor configurations & environment entry
+│       ├── providers/            # Global providers (e.g. userSessionProvider)
+│       ├── utils/                # Presentation styles (AppTextStyle, AppColor)
+│       └── widgets/              # Reusable global widgets (ErrorView, SharedSliverAppBar)
 │
-└── main/                          # Entry points
+└── main/                          # Flavor entry points
     ├── main_dev.dart
     ├── main_prod.dart
     └── main_mock_development.dart
 ```
+
+### Widget Placement Guide
+
+| Widget Type | Destination Folder | Examples |
+| :--- | :--- | :--- |
+| **Top-Level Screen** | `lib/feature/<feature>/views/` | `repository_list_page.dart`, `login_page.dart` |
+| **Feature Child Widget** | `lib/feature/<feature>/views/widgets/` | `sticky_search_header_delegate.dart`, `repository_card.dart` |
+| **Shared Global Widget** | `lib/feature/shared/widgets/` | `shared_sliver_app_bar.dart`, `error_view.dart` |
 
 ---
 

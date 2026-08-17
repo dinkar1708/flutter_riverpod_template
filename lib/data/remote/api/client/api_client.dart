@@ -13,6 +13,7 @@ abstract class ApiClient {
   @GET("${ApiPath.users}/{username}/repos")
   Future<List<RepositoryListModel>> getRepositories(
     @Path("username") String username,
+    @Query("page") int page,
     @Query("per_page") int pageSize,
   );
 }
