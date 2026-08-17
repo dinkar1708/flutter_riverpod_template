@@ -58,13 +58,14 @@ docs/
 ### Getting Started
 - [Environment Setup](technical/ENVIRONMENT_SETUP.md) - envied setup, installation
 - [Architecture](technical/ARCHITECTURE.md) - Clean Architecture, project structure
+- [CI/CD Pipeline](technical/CI_CD_PIPELINE.md) - GitHub Actions automation, secrets, building
 - [Code Style](technical/CODE_STYLE.md) - Code conventions & best practices
 - [Security](technical/SECURITY.md) - Secure storage, token management
 
 ### Technical Knowledge Base (Mentorship & Training Guides)
-- **Tier 1 (Fundamentals)**: [Dart & Flutter Basics](technical/FAQ/beginner/dart_and_flutter_fundamentals.md) • [Widgets & Layouts](technical/FAQ/beginner/widgets_and_layout_basics.md)
-- **Tier 2 (Core Engineering)**: [Riverpod 3.0 Guide](technical/FAQ/intermediate/state_management_and_riverpod.md) • [Networking & Storage](technical/FAQ/intermediate/networking_and_persistence.md) • [Navigation & Lifecycle](technical/FAQ/intermediate/navigation_and_lifecycle.md) • [Animations](technical/FAQ/intermediate/animation_basics.md)
-- **Tier 3 (System Design)**: [Rendering & Impeller](technical/FAQ/advanced/engine_and_rendering_internals.md) • [Concurrency & Isolates](technical/FAQ/advanced/concurrency_and_isolates.md) • [Security & Performance](technical/FAQ/advanced/security_and_performance_optimization.md) • [Enterprise Scenarios](technical/FAQ/advanced/enterprise_system_design_scenarios.md)
+- **Tier 1 (Fundamentals)**: [Dart & Flutter Basics](technical/FAQ/beginner/dart_and_flutter_fundamentals.md) • [Widgets & Layouts](technical/FAQ/beginner/widgets_and_layout_basics.md) • [The Three Trees](technical/FAQ/beginner/three_trees.md) • [Flutter Keys](technical/FAQ/beginner/keys.md)
+- **Tier 2 (Core Engineering)**: [Riverpod 3.0 Guide](technical/FAQ/intermediate/state_management_and_riverpod.md) • [Networking & Storage](technical/FAQ/intermediate/networking_and_persistence.md) • [Pagination & Infinite Scroll](technical/FAQ/intermediate/pagination.md) • [Navigation & Lifecycle](technical/FAQ/intermediate/navigation_and_lifecycle.md) • [Animations](technical/FAQ/intermediate/animation_basics.md) • [CI/CD Automation](technical/FAQ/intermediate/cicd.md)
+- **Tier 3 (System Design)**: [App Launch Lifecycle](technical/FAQ/advanced/app_launch_lifecycle.md) • [Rendering & Impeller](technical/FAQ/advanced/engine_and_rendering_internals.md) • [Concurrency & Isolates](technical/FAQ/advanced/concurrency_and_isolates.md) • [Security & Performance](technical/FAQ/advanced/security_and_performance_optimization.md) • [Enterprise Scenarios](technical/FAQ/advanced/enterprise_system_design_scenarios.md)
 
 ### Features
 - [Feature Overview](features/README.md) - Complete list of all app features
