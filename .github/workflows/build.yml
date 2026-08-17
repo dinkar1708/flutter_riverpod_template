@@ -21,18 +21,20 @@ jobs:
 
       - name: Create environment files
         # TODO: Replace dummy values with GitHub Secrets
-        # Add DEV_API_KEY and PROD_API_KEY to repository secrets
+        # Add DEV_API_KEY, PROD_API_KEY, and MAPS_API_KEY to repository secrets
         # Then use: ${{ secrets.DEV_API_KEY }}
         run: |
           cat > .env.dev <<EOF
           API_BASE_URL=https://api.github.com/
           API_KEY=dummy_dev_api_key_for_ci
           ENVIRONMENT=dev
+          GOOGLE_MAPS_API_KEY=dummy_dev_maps_key_for_ci
           EOF
           cat > .env.prod <<EOF
           API_BASE_URL=https://api.github.com/
           API_KEY=dummy_prod_api_key_for_ci
           ENVIRONMENT=prod
+          GOOGLE_MAPS_API_KEY=dummy_prod_maps_key_for_ci
           EOF
 
       - name: Install dependencies

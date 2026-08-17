@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_template/core/native/native_bridge.dart';
 import 'package:flutter_riverpod_template/data/app_providers/app_provider.dart';
 import 'package:flutter_riverpod_template/data/remote/api/client/api_config.dart';
 import 'package:flutter_riverpod_template/feature/shared/app_flavour/app_config.dart';
@@ -27,13 +28,19 @@ void sharedMain(
   );
 }
 
-Future<void> init(AppConfig appConfig) {
+Future<void> init(AppConfig appConfig) async {
   debugPrint('sharedMain launch title  ${appConfig.launchTitle}');
   debugPrint('sharedMain environment  ${appConfig.environment}');
   debugPrint('sharedMain base url ${appConfig.apiBaseUrl}');
+
+  // Securely pass Google Maps API Key to native layer (iOS)
+  if (appConfig.googleMapsApiKey.isNotEmpty) {
+    await NativeBridge.initializeGoogleMaps(appConfig.googleMapsApiKey);
+  }
+
   // TODO initialize others here
   // eg. crashlitics
   // orientation
   // etc.
-  return Future.value();
 }
+
