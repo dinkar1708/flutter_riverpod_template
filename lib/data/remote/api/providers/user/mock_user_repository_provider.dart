@@ -8,9 +8,15 @@ class MockUserRepository extends UserRepository {
   @override
   Future<List<RepositoryListModel>> getRepositories(
     String userName,
+    int page,
     int pageSize,
   ) async {
-    return hardCodedData;
+    final startIndex = (page - 1) * pageSize;
+    if (startIndex >= hardCodedData.length) {
+      return [];
+    }
+    final endIndex = (startIndex + pageSize).clamp(0, hardCodedData.length);
+    return hardCodedData.sublist(startIndex, endIndex);
   }
 }
 

@@ -7,6 +7,8 @@ class UserRepository {
 
   Future<List<RepositoryListModel>> getRepositories(
     String userName,
+    int page,
     int pageSize,
-  ) => apiClient.getRepositories(userName, pageSize);
+  ) =>
+      apiClient.getRepositories(userName, page, pageSize);
 }
