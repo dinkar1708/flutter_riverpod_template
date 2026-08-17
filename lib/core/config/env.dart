@@ -15,6 +15,9 @@ abstract class EnvDev {
 
   @EnviedField(varName: 'ENVIRONMENT', obfuscate: false)
   static final String environment = _EnvDev.environment;
+
+  @EnviedField(varName: 'GOOGLE_MAPS_API_KEY', obfuscate: true)
+  static final String googleMapsApiKey = _EnvDev.googleMapsApiKey;
 }
 
 /// Production environment configuration
@@ -30,6 +33,9 @@ abstract class EnvProd {
 
   @EnviedField(varName: 'ENVIRONMENT', obfuscate: false)
   static final String environment = _EnvProd.environment;
+
+  @EnviedField(varName: 'GOOGLE_MAPS_API_KEY', obfuscate: true)
+  static final String googleMapsApiKey = _EnvProd.googleMapsApiKey;
 }
 
 /// Convenience class - use EnvDev or EnvProd directly
@@ -38,4 +44,6 @@ abstract class Env {
   static String get apiBaseUrl => EnvDev.apiBaseUrl;
   static String get apiKey => EnvDev.apiKey;
   static String get environment => EnvDev.environment;
+  static String get googleMapsApiKey => EnvDev.googleMapsApiKey;
 }
+

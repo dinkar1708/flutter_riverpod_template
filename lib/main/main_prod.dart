@@ -11,6 +11,7 @@ void main() {
     environment: AppEnvironment.prod,
     apiBaseUrl: EnvProd.apiBaseUrl,
     appApiKey: EnvProd.apiKey,
+    googleMapsApiKey: EnvProd.googleMapsApiKey,
     launchTitle: 'Prod',
     initializeCrashlytics: true,
   );

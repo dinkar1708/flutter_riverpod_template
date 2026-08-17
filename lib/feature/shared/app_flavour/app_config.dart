@@ -11,6 +11,7 @@ class AppConfig {
     required this.environment,
     required this.apiBaseUrl,
     required this.appApiKey,
+    this.googleMapsApiKey = '',
     this.initializeCrashlytics = true,
   });
 
@@ -18,6 +19,7 @@ class AppConfig {
   final AppEnvironment environment;
   final String apiBaseUrl;
   final String appApiKey;
+  final String googleMapsApiKey;
   final bool initializeCrashlytics;
 }
 

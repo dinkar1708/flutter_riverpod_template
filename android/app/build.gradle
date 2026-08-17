@@ -22,6 +22,24 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def loadEnvProperties(String envFileName) {
+    def envProps = new Properties()
+    def envFile = rootProject.file("../${envFileName}")
+    if (envFile.exists()) {
+        envFile.withReader('UTF-8') { reader ->
+            envProps.load(reader)
+        }
+    }
+    return envProps
+}
+
+def devEnv = loadEnvProperties(".env.dev")
+def prodEnv = loadEnvProperties(".env.prod")
+
+println("🗺️ [Gradle Build] Loaded Dev Google Maps Key: ${devEnv.getProperty('GOOGLE_MAPS_API_KEY', '')} (For debug and testing only)")
+println("🗺️ [Gradle Build] Loaded Prod Google Maps Key: ${prodEnv.getProperty('GOOGLE_MAPS_API_KEY', '')} (For debug and testing only)")
+
+
 android {
     namespace "com.example.flutter_rivperpod_template"
     compileSdkVersion flutter.compileSdkVersion
@@ -49,15 +67,27 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // Manifest placeholders
+        manifestPlaceholders += [
+            applicationName: "android.app.Application",
+            mapsApiKey: devEnv.getProperty('GOOGLE_MAPS_API_KEY', '')
+        ]
     }
     flavorDimensions "default"
     productFlavors {
-    dev {
+        dev {
             resValue 'string', 'app_name', 'DevRiverpodTemplate'
             applicationIdSuffix ".dev"
+            manifestPlaceholders += [
+                mapsApiKey: devEnv.getProperty('GOOGLE_MAPS_API_KEY', '')
+            ]
         }
-    prod {
+        prod {
             resValue 'string', 'app_name', 'RiverpodTemplate'
+            manifestPlaceholders += [
+                mapsApiKey: prodEnv.getProperty('GOOGLE_MAPS_API_KEY', '')
+            ]
         }
     }
 

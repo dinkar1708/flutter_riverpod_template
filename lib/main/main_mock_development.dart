@@ -14,6 +14,7 @@ void main() {
     environment: AppEnvironment.dev,
     apiBaseUrl: EnvDev.apiBaseUrl,
     appApiKey: EnvDev.apiKey,
+    googleMapsApiKey: EnvDev.googleMapsApiKey,
     launchTitle: 'Mock',
     initializeCrashlytics: false,
   );

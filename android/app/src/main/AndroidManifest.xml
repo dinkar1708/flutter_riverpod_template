@@ -30,5 +30,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <!-- Google Maps API Key dynamically injected via Gradle manifestPlaceholders from .env -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${mapsApiKey}" />
     </application>
 </manifest>
